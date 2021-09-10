@@ -88,6 +88,7 @@ sap.ui.define([
                 })
                     .then(resp => resp.json())
                     .then(data => {
+                        
                         console.log(data);
 
                         this.getModel("consultaMareas").setProperty("/items", data.s_marea);
