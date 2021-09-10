@@ -1,0 +1,57 @@
+_schema-version: "3.2"
+ID: zreportepesca
+version: 0.0.1
+modules:
+- name: zreportepesca-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: zreportepesca-destination-service
+    parameters:
+      content-target: true
+  - name: zreportepesca_html_repo_host
+    parameters:
+      service-key:
+        name: zreportepesca_html_repo_host-key
+  - name: uaa_zreportepesca
+    parameters:
+      service-key:
+        name: uaa_zreportepesca-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: rp_zreportepesca_html_repo_host
+          ServiceInstanceName: zreportepesca-html5-app-host-service
+          ServiceKeyName: zreportepesca_html_repo_host-key
+          sap.cloud.service: rp
+        - Authentication: OAuth2UserTokenExchange
+          Name: rp_uaa_zreportepesca
+          ServiceInstanceName: zreportepesca-xsuaa-service
+          ServiceKeyName: uaa_zreportepesca-key
+          sap.cloud.service: rp
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+resources:
+- name: zreportepesca-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      version: 1.0.0
+    service: destination
+    service-name: zreportepesca-destination-service
+    service-plan: lite
+- name: zreportepesca_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: zreportepesca-html5-app-host-service
+    service-plan: app-host
+- name: uaa_zreportepesca
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: zreportepesca-xsuaa-service
+    service-plan: application
