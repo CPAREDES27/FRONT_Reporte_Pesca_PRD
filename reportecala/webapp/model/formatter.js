@@ -6,6 +6,9 @@ sap.ui.define([], function () {
             var oDateFormat = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
 
             return oDateFormat.format(date);
+        },
+        generateCommand: function (value1, value2) {
+
         }
     };
 });

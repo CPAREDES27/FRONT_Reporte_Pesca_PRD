@@ -2,16 +2,18 @@ sap.ui.define([
     "./BaseController",
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
+    "../model/formatter"
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-    function (BaseController, Controller, JSONModel) {
+    function (BaseController, Controller, JSONModel, formatter) {
         "use strict";
 
         const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/';
 
         return BaseController.extend("com.tasa.consultamareas.controller.View1", {
+            formatter: formatter,
             onInit: function () {
                 let oViewModel = new JSONModel({});
 
@@ -51,10 +53,14 @@ sap.ui.define([
             },
             searchData: function (event) {
                 let options = [];
+                let options2 = [];
                 let commands = [];
-                let marea = this.byId("marea").getValue();
-                let planta = this.byId("planta").getValue();
-                let embarcacion = this.byId("embarcacion").getValue();
+                let mareaLow = parseInt(this.byId("mareaLow").getValue());
+                let mareaHigh = parseInt(this.byId("mareaHigh").getValue());
+                let plantaLow = this.byId("plantaLow").getValue();
+                let plantaHigh = this.byId("plantaHigh").getValue();
+                let embarcacionLow = this.byId("embarcacionLow").getValue();
+                let embarcacionHigh = this.byId("embarcacionHigh").getValue();
                 let propiedad = this.byId("propiedad").getSelectedKey();
                 let motivoIni = this.byId("motivoIni").getSelectedKey();
                 let motivoFin = this.byId("motivoFin").getSelectedKey();
@@ -62,24 +68,95 @@ sap.ui.define([
                 let fechaFin = this.byId("fechaFin").getValue();
                 let numRegistros = this.byId("numRegistros").getValue();
 
-                if (marea) {
-                    commands.push(`()`)
+                /*
+                options2.push({
+                    cantidad: "10",
+                    control:"MULTIINPUT",
+                    key:"NRMAR",
+                    valueHigh: mareaHigh,
+                    valueLow: mareaLow
+                });
+
+                options2.push({
+                    cantidad: "10",
+                    control:"MULTIINPUT",
+                    key:"WERKS",
+                    valueHigh: plantaHigh,
+                    valueLow: plantaLow
+                });
+
+                options2.push({
+                    cantidad: "10",
+                    control:"MULTIINPUT",
+                    key:"CDEMB",
+                    valueHigh: embarcacionHigh,
+                    valueLow: embarcacionLow
+                });
+
+                options2.push({
+                    cantidad: "10",
+                    control:"INPUT",
+                    key:"INPRP",
+                    valueHigh: propiedad,
+                    valueLow: ""
+                });
+
+                options2.push({
+                    cantidad: "10",
+                    control:"MULTIINPUT",
+                    key:"CDMMA",
+                    valueHigh: motivoFin,
+                    valueLow: motivoIni
+                });
+
+                options2.push({
+                    cantidad: "10",
+                    control:"MULTIINPUT",
+                    key:"FIMAR",
+                    valueHigh: fechaFin,
+                    valueLow: fechaInicio
+                });*/
+
+
+                if ((mareaLow || mareaLow === 0) || (mareaHigh || mareaHigh === 0)) {
+                    commands.push(formatter.generateCommand("NRMAR", mareaLow, mareaHigh));
                 }
 
+                if (motivoIni || motivoFin) {
+                    commands.push(formatter.generateCommand("CDMMA", motivoIni, motivoFin));
+                }
+
+                if (plantaLow || plantaHigh) {
+                    commands.push(formatter.generateCommand("WERKS", plantaLow, plantaHigh));
+                }
+
+                if (embarcacionLow || embarcacionHigh) {
+                    commands.push(formatter.generateCommand("CDEMB", embarcacionLow, embarcacionHigh));
+                }
+
+                if (propiedad) {
+                    commands.push(formatter.generateCommand("INPRP", propiedad));
+                }
+
+                if (fechaInicio || fechaFin) {
+                    commands.push(formatter.generateCommand("FIMAR", fechaInicio, fechaFin));
+                }
+
+                options = commands.map((c, i) => {
+                    const option = {
+                        wa: i > 0 ? `AND ${c}` : c
+                    };
+
+                    return option;
+                });
+
+                console.log(options);
+                console.log(numRegistros);
+
                 let body = {
-                    "options": [
-                        {
-                            "wa": "(CDMMA LIKE '2')"
-                        },
-                        {
-                            "wa": "AND (WERKS LIKE 'TCHI')"
-                        },
-                        {
-                            "wa": "AND (FIMAR BETWEEN '20210101' AND '20210804')"
-                        }
-                    ],
-                    "p_user": "FGARCIA",
-                    "rowcount": "1"
+                    options: options,
+                    p_user: "FGARCIA",
+                    rowcount: numRegistros
                 }
 
                 fetch(`${mainUrlServices}reportepesca/ConsultarMareas`, {
@@ -88,7 +165,7 @@ sap.ui.define([
                 })
                     .then(resp => resp.json())
                     .then(data => {
-                        
+
                         console.log(data);
 
                         this.getModel("consultaMareas").setProperty("/items", data.s_marea);
