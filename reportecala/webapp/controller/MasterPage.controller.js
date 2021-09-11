@@ -45,60 +45,21 @@ sap.ui.define([
                 let zdoTipoMareaDom = null;
 
                 const bodyDominio = {
-                    "dominios": [
+                    dominios: [
                         {
-                            "domname": "ZINPRP",
-                            "status": "A"
+                            domname: "UBICPLANTA",
+                            status: "A"
                         },
                         {
-                            "domname": "ZDO_TIPOMAREA",
-                            "status": "A"
+                            domname: "ZINPRP",
+                            status: "A"
+                        },
+                        {
+                            domname: "ZDO_TIPOMAREA",
+                            status: "A"
                         }
                     ]
-                }
-
-                const bodyUbicaciones = {
-                    "delimitador": "|",
-                    "fields": [
-                        "CDUPT", "DSUPT"
-
-                    ],
-                    "no_data": "",
-                    "option": [
-                        {
-                            "wa": "ESREG = 'S'"
-                        }
-                    ],
-                    "options": [
-                        {
-                            "cantidad": "",
-                            "control": "",
-                            "key": "",
-                            "valueHigh": "",
-                            "valueLow": ""
-                        }
-                    ],
-                    "order": "",
-                    "p_user": "FGARCIA",
-                    "rowcount": 0,
-                    "rowskips": 0,
-                    "tabla": "ZFLUPT"
                 };
-
-                fetch(`${mainUrlServices}General/Read_Table/`,
-                    {
-                        method: 'POST',
-                        body: JSON.stringify(bodyUbicaciones)
-                    }).then(resp => resp.json())
-                    .then(data => {
-                        console.log(data.data)
-                        ubicaciones = data.data;
-                        this.getModel("reporteCala").setProperty("/ubicaciones", ubicaciones)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        return null
-                    });
 
                 fetch(`${mainUrlServices}dominios/Listar`,
                     {
@@ -107,12 +68,13 @@ sap.ui.define([
                     })
                     .then(resp => resp.json()).then(data => {
                         console.log(data);
+                        ubicaciones = data.data.find(d => d.dominio == "UBICPLANTA").data;
                         zdoZinprpDom = data.data.find(d => d.dominio == "ZINPRP").data;
                         zdoTipoMareaDom = data.data.find(d => d.dominio == "ZDO_TIPOMAREA").data;
                         this.getModel("reporteCala").setProperty("/zdoZinprpDom", zdoZinprpDom);
                         this.getModel("reporteCala").setProperty("/zdoTipoMareaDom", zdoTipoMareaDom);
-                    }).catch(error => console.log(error)
-                    );
+                        this.getModel("reporteCala").setProperty("/ubicaciones", ubicaciones);
+                    }).catch(error => console.log(error));
             },
             loadReporteCalas: function (event) {
                 let options = [];

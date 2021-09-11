@@ -51,7 +51,7 @@
                                             <form:fields>
                                                 <ComboBox id="cbUbicaciones" items="{reporteCala>/ubicaciones}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
                                                     <items>
-                                                        <core:Item text="{reporteCala>DSUPT}" enabled="true" key="{reporteCala>CDUPT}"/>
+                                                        <core:Item text="{reporteCala>descripcion}" enabled="true" key="{reporteCala>id}"/>
                                                     </items>
                                                 </ComboBox>
                                             </form:fields>
