@@ -182,6 +182,67 @@
       "env": {
         "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/zreportepesca/consultamareas\"}"
       }
+    },
+    {
+      "name": "Start consultapescadescargada",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "cwd": "${workspaceFolder}/consultapescadescargada",
+      "windows": {
+        "runtimeExecutable": "npm.cmd"
+      },
+      "runtimeArgs": [
+        "run-script",
+        "start"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229,
+      "env": {
+        "DEBUG": "--inspect",
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/zreportepesca/consultapescadescargada\"}"
+      }
+    },
+    {
+      "name": "Start consultapescadescargada Mock",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/consultapescadescargada",
+      "runtimeExecutable": "npm",
+      "windows": {
+        "runtimeExecutable": "npm.cmd"
+      },
+      "runtimeArgs": [
+        "run-script",
+        "start-mock"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229,
+      "env": {
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/zreportepesca/consultapescadescargada\"}"
+      }
+    },
+    {
+      "name": "Start consultapescadescargada Local",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/consultapescadescargada",
+      "runtimeExecutable": "npm",
+      "windows": {
+        "runtimeExecutable": "npm.cmd"
+      },
+      "runtimeArgs": [
+        "run-script",
+        "start-local"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229,
+      "env": {
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/zreportepesca/consultapescadescargada\"}"
+      }
     }
   ],
   "compounds": [],
