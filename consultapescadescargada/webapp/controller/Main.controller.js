@@ -61,10 +61,10 @@ sap.ui.define([
                 let options = [];
                 let commands = [];
                 let planta = this.byId("planta").getValue();
-                let ubicacionPlanta = this.byId("ubicacionPlanta").getValue();
+                let ubicacionPlanta = this.byId("ubicacionPlanta").getSelectedKey();
                 let embarcacion = this.byId("embarcacion").getValue();
-                let indicadorPropiedad = this.byId("indicadorPropiedad").getValue();
-                let tipoMarea = this.byId("tipoMarea").getValue();
+                let indicadorPropiedad = this.byId("indicadorPropiedad").getSelectedKey();
+                let tipoMarea = this.byId("tipoMarea").getSelectedKey();
                 let fechaProdIni = this.byId("fechaProdIni").getValue();
                 let fechaProdFin = this.byId("fechaProdFin").getValue();
                 let numRegistros = this.byId("numRegistros").getValue();
