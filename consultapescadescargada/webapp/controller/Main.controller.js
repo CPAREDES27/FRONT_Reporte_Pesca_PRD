@@ -70,27 +70,27 @@ sap.ui.define([
                 let numRegistros = this.byId("numRegistros").getValue();
 
                 if (planta) {
-                    commands.push(formatter.generateCommand("NRMAR", planta));
+                    commands.push(formatter.generateCommand("WERKS", planta));
                 }
 
                 if (ubicacionPlanta) {
-                    commands.push(formatter.generateCommand("NRMAR", ubicacionPlanta));
+                    commands.push(formatter.generateCommand("CDUPT", ubicacionPlanta));
                 }
 
                 if (embarcacion) {
-                    commands.push(formatter.generateCommand("NRMAR", embarcacion));
+                    commands.push(formatter.generateCommand("CDEMB", embarcacion));
                 }
 
                 if (indicadorPropiedad) {
-                    commands.push(formatter.generateCommand("", indicadorPropiedad));
+                    commands.push(formatter.generateCommand("INPRP", indicadorPropiedad));
                 }
 
                 if (tipoMarea) {
-                    commands.push(formatter.generateCommand("", tipoMarea));
+                    commands.push(formatter.generateCommand("CDMMA", tipoMarea));
                 }
 
                 if (fechaProdIni || fechaProdFin) {
-                    commands.push(formatter.generateCommand("", fechaProdIni, fechaProdFin));
+                    commands.push(formatter.generateCommand("FECCONMOV", fechaProdIni, fechaProdFin));
                 }
 
                 options = commands.map((c, i) => {
@@ -102,17 +102,7 @@ sap.ui.define([
                 });
 
                 const body = {
-                    "p_options": [
-                        {
-                            "data": "(FECCONMOV BETWEEN '20210101' AND '20210803')"
-                        },
-                        {
-                            "data": "AND (WERKS LIKE 'TCHI')"
-                        },
-                        {
-                            "data": "AND (CDMMA LIKE '2')"
-                        }
-                    ],
+                    "p_options": options,
                     "p_rows": numRegistros,
                     "p_user": "FGARCIA"
                 };
@@ -120,7 +110,8 @@ sap.ui.define([
                 fetch(`${mainUrlServices}reportepesca/ConsultarPescaDescargada`, {
                     method: 'POST',
                     body: JSON.stringify(body)
-                }).then(resp => resp.json())
+                })
+                    .then(resp => resp.json())
                     .then(data => {
                         this.getModel("consultaPescaDescargada").setProperty("/items", data.str_des);
                     }).catch(error => console.error(error));

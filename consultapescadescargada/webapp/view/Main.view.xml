@@ -104,7 +104,9 @@
                                 <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
                             </form:layout>
                         </form:Form>
-                        <Table width="100rem" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
+                        <Table items="{
+                            path: 'consultaPescaDescargada>/items'
+                        }" width="100rem" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
                             <infoToolbar>
                                 <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
                                     <content>
@@ -240,34 +242,24 @@
                             <items>
                                 <ColumnListItem type="Active">
                                     <cells>
-                                        <Text text="TCNO" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <layout:HorizontalLayout>
-                                            <layout:content/>
-                                        </layout:HorizontalLayout>
-                                        <Text text="Pesca CHI" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <layout:HorizontalLayout>
-                                            <layout:content/>
-                                        </layout:HorizontalLayout>
-                                        <Text text="19/02/2009" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="21:30" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="20/02/2009" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="17:00" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="CO-22326-PM" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="TASA 55" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="513.000" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <layout:HorizontalLayout>
-                                            <layout:content/>
-                                        </layout:HorizontalLayout>
-                                        <Text text=".000" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text=".000" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="JUREL Y CABALLA" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="Propia" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <layout:HorizontalLayout>
-                                            <layout:content/>
-                                        </layout:HorizontalLayout>
-                                        <layout:HorizontalLayout>
-                                            <layout:content/>
-                                        </layout:HorizontalLayout>
+                                        <Text text="{consultaPescaDescargada>WERKS}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{ path: 'consultaPescaDescargada>FECCONMOV', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{consultaPescaDescargada>CDMMA}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{consultaPescaDescargada>NRDES}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{ path: 'consultaPescaDescargada>FCZAR', formatter: '.formatter.formatDate' }" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{consultaPescaDescargada>HOZAR}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{ path: 'consultaPescaDescargada>FCARR', formatter: '.formatter.formatDate' }" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{consultaPescaDescargada>HOARR}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{consultaPescaDescargada>MREMB}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{consultaPescaDescargada>NMEMB}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{consultaPescaDescargada>CPPMS}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{consultaPescaDescargada>DSEMP}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{consultaPescaDescargada>CNPCM}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{consultaPescaDescargada>CNPDS}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{consultaPescaDescargada>DSSPC}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{consultaPescaDescargada>INPRP}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="Cambiar" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="{consultaPescaDescargada>NMPER}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                         <Button text="Ver marea" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                                     </cells>
                                 </ColumnListItem>
