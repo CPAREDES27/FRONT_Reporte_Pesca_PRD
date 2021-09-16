@@ -10,7 +10,8 @@ sap.ui.define([
     function (BaseController, Controller, JSONModel, formatter) {
         "use strict";
 
-        const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'
+        const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/';
+        let reporteCalas = [];
 
         return BaseController.extend("com.tasa.reportecala.controller.MasterPage", {
             formatter: formatter,
@@ -38,7 +39,6 @@ sap.ui.define([
 
                 this.loadData()
             },
-
             loadData: function () {
                 let ubicaciones = null;
                 let zdoZinprpDom = null;
@@ -148,12 +148,38 @@ sap.ui.define([
                     .then((resp) => resp.json())
                     .then((data) => {
                         console.log(data);
-                        this.getModel("reporteCala").setProperty("/items", data.s_cala);
+                        reporteCalas = data.s_cala;
+                        this.getModel("reporteCala").setProperty("/items", reporteCalas);
                         this.getModel("reporteCala").setProperty("/numCalas", data.s_cala.length);
                     })
                     .catch((error) => {
                         console.error('Error found: ' + error);
                     });
+            },
+            exportBiometriaToExcel: function (event) {
+                if (reporteCalas.length > 0) {
+                    let tipoMarea = this.byId("cbTipoMarea").getSelectedKey();
+                    const listNumMareas = reporteCalas.map(n => {
+                        return {
+                            NRMAR: n.NRMAR
+                        };
+                    });
+
+                    const body = {
+                        ip_cdmma: tipoMarea,
+                        ip_oper: '',
+                        it_marea: listNumMareas
+                    };
+
+                    fetch(`${mainUrlServices}reportepesca/ReporteBiometria`, {
+                        method: 'POST',
+                        body: JSON.stringify(body)
+                    })
+                        .then(resp => resp.json())
+                        .then(data => data)
+                        .catch(error => console.error(error))
+                }
+
             }
         });
     });

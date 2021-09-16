@@ -154,10 +154,11 @@ sap.ui.define([
                 console.log(numRegistros);
 
                 let body = {
-                    options: options,
+                    option: options,
+                    options: [],
                     p_user: "FGARCIA",
                     rowcount: numRegistros
-                }
+                };
 
                 fetch(`${mainUrlServices}reportepesca/ConsultarMareas`, {
                     method: 'POST',

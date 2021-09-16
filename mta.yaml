@@ -55,3 +55,5 @@ resources:
     service: xsuaa
     service-name: zreportepesca-xsuaa-service
     service-plan: application
+parameters:
+  deploy_mode: html5-repo
