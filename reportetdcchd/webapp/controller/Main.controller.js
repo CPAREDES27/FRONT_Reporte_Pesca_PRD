@@ -15,10 +15,13 @@ sap.ui.define([
             onInit: function () {
                 let oViewModel = new JSONModel();
 
-                this.setModel(oViewModel, "reportetdcchd");
+                this.setModel(oViewModel, "listMareas");
 
-
+                // this.router = this.getRouter().getTarget("TargetMain").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
+                this.router = sap.ui.core.UIComponent.getRouterFor(this);
+                this.router.getRoute("RouteMain").attachPatternMatched(this.handleRouteMatched, this)
             },
+            handleRouteMatched: function () { },
             searchData: function () {
                 let option = [];
                 let commands = [];
@@ -67,9 +70,19 @@ sap.ui.define([
                 })
                     .then(resp => resp.json())
                     .then(data => {
-                        this.getModel("reportetdcchd").setProperty("/items", data.s_marea);
+                        this.getModel("listMareas").setProperty("/items", data.s_marea);
                     });
 
+            },
+            showDetalle: async function (event) {
+                let index = event.getSource().getBindingContext("listMareas").getPath().split("/")[2];
+                // let oContext = event.getSource().getBindingContext("listMareas");
+                // let reporteTdcCdhSelected = oContext.getObject();
+                // console.log(reporteTdcCdhSelected);
+
+                //Abrir reporte TDC CHD idCdmar
+                const nrmar = this.getModel("listMareas").getProperty("/items")[index].NRMAR
+                this.router.navTo("RouteDetail", { idCdmar: nrmar });
             }
         });
     });

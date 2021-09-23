@@ -1,13 +1,15 @@
 sap.ui.define([
     "./BaseController",
-    "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "../model/formatter"
+    "sap/ui/core/Fragment",
+    "../model/formatter",
+    "sap/ui/core/BusyIndicator",
+    "sap/m/MessageBox",
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-    function (BaseController, Controller, JSONModel, formatter) {
+    function (BaseController, JSONModel, Fragment, formatter, BusyIndicator, MessageBox) {
         "use strict";
 
         const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/';
@@ -58,6 +60,7 @@ sap.ui.define([
                     }).catch(error => console.log(error));
             },
             searchData: function (event) {
+                BusyIndicator.show(0);
                 let options = [];
                 let commands = [];
                 let planta = this.byId("planta").getValue();
@@ -114,7 +117,80 @@ sap.ui.define([
                     .then(resp => resp.json())
                     .then(data => {
                         this.getModel("consultaPescaDescargada").setProperty("/items", data.str_des);
+                        BusyIndicator.hide();
+                    }).catch(error => {
+                        console.error(error);
+                        BusyIndicator.hide();
+                    });
+            },
+
+            openCambiarInterlocutor: async function (event) {
+                let oContext = event.getSource().getBindingContext("consultaPescaDescargada");
+                let mareaSelected = oContext.getObject();
+                mareaSelected.armador = null;
+                this.getModel("consultaPescaDescargada").setProperty("/mareaSelected", mareaSelected);
+
+                //Asignar la descripción del motivo de marea
+                await fetch(`${mainUrlServices}dominios/Listar`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        "dominios": [
+                            {
+                                "domname": "ZCDMMA",
+                                "status": "A"
+                            }
+                        ]
+                    })
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        const dominio = data.data.find(d => d.dominio == "ZCDMMA");
+                        const descripcionMarea = dominio.data.find(d => d.id == mareaSelected.CDMMA).descripcion;
+                        mareaSelected.descMotivoMarea = descripcionMarea;
+                    });
+
+
+                // Abrir dialog de cambiar interlocutor
+                let oView = this.getView();
+
+                if (!this.cambiarInterlocutorDialog) {
+                    this.cambiarInterlocutorDialog = await Fragment.load({
+                        name: 'com.tasa.consultapescadescargada.view.CambiarInterlocutor',
+                        controller: this
+                    }).then(dialog => {
+                        oView.addDependent(dialog);
+                        dialog.open();
+                        return dialog;
+                    });
+                }
+                this.cambiarInterlocutorDialog.open();
+            },
+            cambiarInterlocutor: function (event) {
+                let mareaSelected = this.getModel("consultaPescaDescargada").getProperty("/mareaSelected");
+                let armador = mareaSelected.armador;
+                console.log(armador)
+
+                const body = {
+                    p_user: 'FGARCIA',
+                    p_nrmar: mareaSelected.NRMAR.toString(),
+                    p_lifnr: armador
+                };
+
+                console.log(body);
+
+
+                fetch(`${mainUrlServices}reportepesca/AgregarInterlocutor`, {
+                    method: 'POST',
+                    body: JSON.stringify(body)
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        this.cambiarInterlocutorDialog.close();
+                        MessageBox.success("La marea fue editada correctamente");
                     }).catch(error => console.error(error));
+            },
+            closeDialog: function (event) {
+                this.cambiarInterlocutorDialog.close();
             }
         });
     });

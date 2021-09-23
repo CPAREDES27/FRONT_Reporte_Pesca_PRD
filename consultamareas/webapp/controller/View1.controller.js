@@ -174,6 +174,9 @@ sap.ui.define([
 
                     })
                     .catch(error => console.error(error))
+            },
+            detalleMarea: function (event) {
+                console.log(event);
             }
         });
     });

@@ -113,177 +113,189 @@
                                 <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
                             </form:layout>
                         </form:Form>
-                        <Table id="tableData" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin"
-                            items="{
-                                path: 'consultaMareas>/items'
-                            }">
-                            <infoToolbar>
-                                <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
-                                    <content>
-                                        <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </content>
-                                </Toolbar>
-                            </infoToolbar>
-                            <headerToolbar>
-                                <OverflowToolbar width="auto" height="auto" design="Transparent" visible="true" enabled="true">
-                                    <content>
-                                        <Title text="Lista de mareas" titleStyle="Auto" width="auto" textAlign="Begin" visible="true" wrapping="false"/>
-                                        <ToolbarSpacer width=""/>
-                                        <SearchField placeholder="Búsqueda rápida" showSearchButton="true" visible="true" width="auto"/>
-                                        <OverflowToolbarButton text="Sort" type="Transparent" icon="sap-icon://sort" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-                                        <OverflowToolbarButton text="Filter" type="Transparent" icon="sap-icon://filter" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-                                    </content>
-                                </OverflowToolbar>
-                            </headerToolbar>
-                            <columns>
-                                <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Marea" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="4rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Centro" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="4rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Planta" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="8rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Empresa" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Nombre Embarcación" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="4rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Inicio Envase" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="4rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Fin Envase" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Sistema Pesca" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Propiedad" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Motivo" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Apertura Marea" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Cierre Marea" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Fecha Zarpe" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Llega Zona" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Salida Zona" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Arriba Puerto" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Inicio Descarga" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Fin Descarga" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Descarga" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Declaración" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                            </columns>
-                            <items>
-                                <ColumnListItem type="Active">
-                                    <cells>
-                                        <Text text="{consultaMareas>NRMAR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{consultaMareas>WERKS}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{consultaMareas>DESCR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{consultaMareas>DSEMP}" width="auto" maxLines="3" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{consultaMareas>NMEMB}" width="auto" maxLines="3" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{ path: 'consultaMareas>FICAL', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{ path: 'consultaMareas>FFCAL', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{consultaMareas>DSSPE}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{consultaMareas>INPRP}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{consultaMareas>CDMMA}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{consultaMareas>FEMAR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{ path: 'consultaMareas>FXMAR', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{ path: 'consultaMareas>FHZAR', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{ path: 'consultaMareas>FHLLE', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{ path: 'consultaMareas>FCSAZ', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{ path: 'consultaMareas>FCARP', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{ path: 'consultaMareas>FIDES', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{ path: 'consultaMareas>FFDES', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{consultaMareas>CNTDS}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{consultaMareas>CNPDC}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </cells>
-                                </ColumnListItem>
-                            </items>
-                        </Table>
+                        <ScrollContainer >
+                            <content>
+                                <Table id="tableData" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin"
+                                    items="{
+                                        path: 'consultaMareas>/items'
+                                    }">
+                                    <infoToolbar>
+                                        <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                            <content>
+                                                <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </content>
+                                        </Toolbar>
+                                    </infoToolbar>
+                                    <headerToolbar>
+                                        <OverflowToolbar width="auto" height="auto" design="Transparent" visible="true" enabled="true">
+                                            <content>
+                                                <Title text="Lista de mareas" titleStyle="Auto" width="auto" textAlign="Begin" visible="true" wrapping="false"/>
+                                                <ToolbarSpacer width=""/>
+                                                <SearchField placeholder="Búsqueda rápida" showSearchButton="true" visible="true" width="auto"/>
+                                                <OverflowToolbarButton text="Sort" type="Transparent" icon="sap-icon://sort" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                                <OverflowToolbarButton text="Filter" type="Transparent" icon="sap-icon://filter" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                            </content>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Marea" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="4rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Centro" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="4rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Planta" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="8rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Empresa" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Nombre Embarcación" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="4rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Inicio Envase" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="4rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Fin Envase" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Sistema Pesca" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Propiedad" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Motivo" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Apertura Marea" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Cierre Marea" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Fecha Zarpe" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Llega Zona" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Salida Zona" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Arriba Puerto" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Inicio Descarga" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Fin Descarga" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Descarga" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Declaración" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                        <Column width="6rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <header>
+                                                <Text text="Opción" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </header>
+                                            <footer/>
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem type="Active">
+                                            <cells>
+                                                <Text text="{consultaMareas>NRMAR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>WERKS}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>DESCR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>DSEMP}" width="auto" maxLines="3" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>NMEMB}" width="auto" maxLines="3" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{ path: 'consultaMareas>FICAL', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{ path: 'consultaMareas>FFCAL', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>DSSPE}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>INPRP}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>CDMMA}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>FEMAR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{ path: 'consultaMareas>FXMAR', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{ path: 'consultaMareas>FHZAR', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{ path: 'consultaMareas>FHLLE', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{ path: 'consultaMareas>FCSAZ', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{ path: 'consultaMareas>FCARP', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{ path: 'consultaMareas>FIDES', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{ path: 'consultaMareas>FFDES', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>CNTDS}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>CNPDC}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Button press=".detalleMarea" text="Detalle" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </content>
+                        </ScrollContainer>
+
                         <layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L3 M6 S12" position="Left" width="100%" containerQuery="false" hSpacing="1" vSpacing="1" visible="true">
                             <layout:content/>
                         </layout:Grid>

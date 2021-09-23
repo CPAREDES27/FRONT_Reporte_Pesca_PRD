@@ -86,7 +86,8 @@
                 "viewPath": "com.tasa.reportetdcchd.view",
                 "controlAggregation": "pages",
                 "controlId": "app",
-                "clearControlAggregation": false
+                "clearControlAggregation": false,
+                "clearTarget":false
             },
             "routes": [
                 {
@@ -94,6 +95,13 @@
                     "pattern": "RouteMain",
                     "target": [
                         "TargetMain"
+                    ]
+                },
+                {
+                    "name": "RouteDetail",
+                    "pattern": "detail/{idCdmar}",
+                    "target": [
+                        "TargetDetail"
                     ]
                 }
             ],
@@ -104,6 +112,12 @@
                     "clearControlAggregation": false,
                     "viewId": "Main",
                     "viewName": "Main"
+                },
+                "TargetDetail": {
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "ReporteTDCCHR",
+                    "viewName": "ReporteTDCCHR"
                 }
             }
         }
