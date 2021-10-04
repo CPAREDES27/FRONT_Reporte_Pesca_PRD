@@ -1,0 +1,473 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.tasa.reportetdcchd.controller.ReporteTDCCHR" xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+    <Page showHeader="true" title="Reporte TDC CHD" showFooter="true" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L6 M6 S12" position="Left" width="100%" containerQuery="false" hSpacing="1" vSpacing="1" visible="true">
+                <layout:content>
+                    <form:Form width="auto" editable="true" visible="true">
+                        <form:title/>
+                        <form:formContainers>
+                            <form:FormContainer visible="true">
+                                <form:formElements>
+                                    <form:FormElement visible="true">
+                                        <form:label>
+                                            <Label text="Embarcación" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:label>
+                                        <form:fields>
+                                            <Text text="{reporte>/mchpm/NMEMB}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement visible="true">
+                                        <form:label>
+                                            <Label text="Marea" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:label>
+                                        <form:fields>
+                                            <Text text="{reporte>/mchpm/NRMAR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement visible="true">
+                                        <form:label>
+                                            <Label text="Zarpe" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:label>
+                                        <form:fields>
+                                            <Text text="{reporte>/mchpm/FIZAR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="{reporte>/mchpm/HIZAR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="{reporte>/mchpm/DSZPT}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement visible="true">
+                                        <form:label>
+                                            <Label text="Arribo estimado" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:label>
+                                        <form:fields>
+                                            <Text text="{reporte>/mchpm/FEARR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="{reporte>/mchpm/HEARR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="{reporte>/mchpm/DSAPT}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement visible="true">
+                                        <form:label>
+                                            <Label text="1ra Cala" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:label>
+                                        <form:fields>
+                                            <Text text="{reporte>/mchpm/FICAL}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="{reporte>/mchpm/HICAL}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement visible="true">
+                                        <form:label>
+                                            <Label text="Zona de pesca" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:label>
+                                        <form:fields>
+                                            <Text text="{reporte>/mchpm/DSZPC}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement visible="true">
+                                        <form:label>
+                                            <Label text="Coordenadas" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:label>
+                                        <form:fields>
+                                            <Text text="{reporte>/mchpm/LTGEO} - {reporte>/mchpm/LNGEO}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                                <form:title/>
+                            </form:FormContainer>
+                        </form:formContainers>
+                        <form:layout>
+                            <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+                        </form:layout>
+                    </form:Form>
+                    <VBox visible="true" alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" displayInline="false">
+                        <items>
+                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Center" renderType="Div" visible="true" displayInline="false">
+                                <items>
+                                    <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                        <items>
+                                            <Text class="title-content-1" text="{reporte>/mchpm/NMEMB}" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                            <Text text="TN ( {reporte>/mchpm/SUMTO} )" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                            <Text text="PROA" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                        </items>
+                                        <layoutData/>
+                                    </VBox>
+                                </items>
+                                <layoutData/>
+                            </HBox>
+                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Center" renderType="Div" visible="true" displayInline="false">
+                                <items>
+                                    <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Center" renderType="Div" visible="true" displayInline="false">
+                                        <items>
+                                            <Text text="BABOR" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                        </items>
+                                        <layoutData/>
+                                    </VBox>
+                                    <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                        <items>
+                                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                <items>
+                                                    <Text class="title-content-2" text="{reporte>/t_bodeg1/CDBOD}({reporte>/t_bodeg1/CAPES})" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-2" text="{reporte>/t_bodeg5/CDBOD}({reporte>/t_bodeg5/CAPES})" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-2" text="{reporte>/t_bodeg2/CDBOD}({reporte>/t_bodeg2/CAPES})" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                </items>
+                                                <layoutData/>
+                                            </HBox>
+                                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                <items>
+                                                    <Text class="title-content-4" text="{reporte>/mchpm/SBRPR}" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-4" text="{reporte>/mchpm/SCNPR}" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-4" text="{reporte>/mchpm/SESPR}" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                </items>
+                                                <layoutData/>
+                                            </HBox>
+                                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                <items>
+                                                    <Text class="title-content-3" text="{reporte>/mchpm/CBRPR}" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-3" text="{reporte>/mchpm/CCNPR}" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-3" text="{reporte>/mchpm/CESPR}" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                </items>
+                                                <layoutData/>
+                                            </HBox>
+                                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                <items>
+                                                    <Text class="title-content-3" text="Cala" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-3" text="Cala" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-3" text="Cala" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                </items>
+                                                <layoutData/>
+                                            </HBox>
+                                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                <items>
+                                                    <Text class="title-content-4" text="{reporte>/mchpm/SBRPP}" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-4" text="{reporte>/mchpm/SCNPP}" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-4" text="{reporte>/mchpm/SESPP}" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                </items>
+                                                <layoutData/>
+                                            </HBox>
+                                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                <items>
+                                                    <Text class="title-content-3" text="{reporte>/mchpm/CBRPP}" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-3" text="{reporte>/mchpm/CCNPP}" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-3" text="{reporte>/mchpm/CESPP}" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                </items>
+                                                <layoutData/>
+                                            </HBox>
+                                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                <items>
+                                                    <Text class="title-content-3" text="Cala" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-3" text="Cala" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-3" text="Cala" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                </items>
+                                                <layoutData/>
+                                            </HBox>
+                                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                <items>
+                                                    <Text class="title-content-2" text="{reporte>/t_bodeg3/CDBOD}({reporte>/t_bodeg3/CAPES})" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-2" text="{reporte>/t_bodeg6/CDBOD}({reporte>/t_bodeg6/CAPES})" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    <Text class="title-content-2" text="{reporte>/t_bodeg4/CDBOD}({reporte>/t_bodeg4/CAPES})" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                </items>
+                                                <layoutData/>
+                                            </HBox>
+                                        </items>
+                                        <layoutData/>
+                                    </VBox>
+                                    <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Center" renderType="Div" visible="true" displayInline="false">
+                                        <items>
+                                            <Text text="ESTRIBOR" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                        </items>
+                                        <layoutData/>
+                                    </VBox>
+                                </items>
+                                <layoutData/>
+                            </HBox>
+                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Center" renderType="Div" visible="true" displayInline="false">
+                                <items>
+                                    <Text text="POPA" width="65px" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                </items>
+                                <layoutData/>
+                            </HBox>
+                        </items>
+                        <layoutData/>
+                    </VBox>
+                </layout:content>
+            </layout:Grid>
+            <ScrollContainer
+                focusable="false"
+                height="auto"
+                horizontal="true"
+                vertical="false"
+                width="auto"
+            >
+                <content>
+                    <Table width="150rem" fixedLayout="false" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin"
+                        items="{
+                            path: 'reporte>/t_dchpm'
+                        }">
+                        <infoToolbar>
+                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                <content>
+                                    <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </content>
+                            </Toolbar>
+                        </infoToolbar>
+                        <headerToolbar/>
+                        <columns>
+                            <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Zarpe" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer/>
+                            </Column>
+                            <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Hora Cala" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer/>
+                            </Column>
+                            <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Zona Cala" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer/>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Captura" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="PrBr 1(75)" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="PrEs 2(75)" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="PpBr 3(75)" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="PpEs 4(75)" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="CentPr 5(85)" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="CentPp 6(85)" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Porcentaje (%) Ju." width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0,0%" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Porcentaje (%) Ca." width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0,0%" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Porcentaje (%) Bo." width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0,0%" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Porcentaje (%) Otr." width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0,0%" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Toneladas (TN) Ju." width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Toneladas (TN) Ca." width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Toneladas (TN) Bo." width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Toneladas (TN) Otr." width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Moda Ju." width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Moda Ca." width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Moda Bo." width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Hora Actual" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer/>
+                            </Column>
+                            <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Arribo" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="TDC Ponderado" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Tdc Arribo" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer>
+                                    <Text text="0,00" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </footer>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Tdc Actual" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer/>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Navegación" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer/>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Marea" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer/>
+                            </Column>
+                            <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Observación" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem type="Active">
+                                <cells>
+                                    <Text text="{reporte>NREVN}" width="auto" maxLines="3" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>FIEVN} {reporte>HIEVN}" width="auto" maxLines="3" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>DSZPC}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>SPSCA}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>PBRPR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>PESPR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>PBRPP}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>PESPP}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>PCNPR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>PCNPP}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>PORJU}%" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>PORCA}%" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>PORBO}%" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>POROT}%" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>CNPJU}%" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>CNPCA}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>CNPBO}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>CNPOT}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>ZMOJU}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>ZMOCA}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>ZMOBO}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{ path: 'reporte>/fechaActual', formatter: '.formatter.formatDateTime'}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>/mchpm/FEARR} {reporte>/mchpm/HEARR}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{ parts: [{ path: 'reporte>FIEVN' }, { path: 'reporte>HIEVN' }, { path: 'reporte>/mchpm/FEARR' }, { path: 'reporte>/mchpm/HEARR' }], formatter: '.formatter.calcularHoras'}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{ parts: [{ path: 'reporte>FIEVN' }, { path: 'reporte>HIEVN' }], formatter: '.formatter.calcularHoras'}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{ parts: [{ path: 'reporte>/mchpm/FIZAR' }, { path: 'reporte>/mchpm/HIZAR' }], formatter: '.formatter.calcularHoras'}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{ parts: [{ path: 'reporte>/mchpm/FIZAR' }, { path: 'reporte>/mchpm/HIZAR' }], formatter: '.formatter.calcularMinutos'}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Text text="{reporte>KMEVN}" width="auto" maxLines="3" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </content>
+            </ScrollContainer>
+            
+        </content>
+        <footer>
+            <OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
+                <content>
+                    <ToolbarSpacer width=""/>
+                </content>
+            </OverflowToolbar>
+        </footer>
+        <headerContent/>
+        <subHeader/>
+        <customHeader/>
+    </Page>
+</mvc:View>

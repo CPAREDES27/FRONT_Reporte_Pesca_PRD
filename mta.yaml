@@ -1,0 +1,135 @@
+_schema-version: "3.2"
+ID: reporte_pesca
+description: Fiori elements app
+version: 0.0.1
+modules:
+- name: reporte_pesca-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: reporte_pesca-dest-srv
+    parameters:
+      content-target: true
+  - name: reporte_pesca-repo-host
+    parameters:
+      service-key:
+        name: reporte_pesca-repo-host-key
+  - name: reporte_pesca-uaa
+    parameters:
+      service-key:
+        name: reporte_pesca-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: reporte_pesca_repo_host
+          ServiceInstanceName: reporte_pesca-html5-srv
+          ServiceKeyName: reporte_pesca-repo-host-key
+          sap.cloud.service: reporte_pesca
+        - Authentication: OAuth2UserTokenExchange
+          Name: reporte_pesca_uaa
+          ServiceInstanceName: reporte_pesca-xsuaa-srv
+          ServiceKeyName: reporte_pesca-uaa-key
+          sap.cloud.service: reporte_pesca
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+- name: reporte_pesca-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: reporte_pesca-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comtasaconsultamareas.zip
+      name: comtasaconsultamareas
+      target-path: resources/
+    - artifacts:
+      - comtasaconsultapescadescargada.zip
+      name: comtasaconsultapescadescargada
+      target-path: resources/
+    - artifacts:
+      - comtasareportecala.zip
+      name: comtasareportecala
+      target-path: resources/
+    - artifacts:
+      - comtasareportetdcchd.zip
+      name: comtasareportetdcchd
+      target-path: resources/
+- name: comtasaconsultamareas
+  type: html5
+  path: consultamareas
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comtasaconsultapescadescargada
+  type: html5
+  path: consultapescadescargada
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comtasareportecala
+  type: html5
+  path: reportecala
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comtasareportetdcchd
+  type: html5
+  path: reportetdcchd
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: reporte_pesca-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: reporte_pesca-xsuaa-srv
+    service-plan: application
+- name: reporte_pesca-dest-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: reporte_pesca-dest-srv
+    service-plan: lite
+- name: reporte_pesca-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: reporte_pesca-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo

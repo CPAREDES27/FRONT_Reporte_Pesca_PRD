@@ -1,0 +1,31 @@
+sap.ui.define([], function () {
+    "use strict";
+    return {
+        formatDate: function (d) {
+            const date = new Date(d);
+            var oDateFormat = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
+
+            return oDateFormat.format(date);
+        },
+        generateCommand: function (param, value1, value2) {
+            const isRange = value1 && value2;
+            const valueSelected = !isRange ? value1 ? value1 : value2 : null;
+            const valuesType = typeof value1;
+            let quot = ""
+            switch (valuesType) {
+                case "string":
+                    quot = "'"
+                    break;
+                case "number":
+                    quot = "";
+                    break;
+                default:
+                    quot = "";
+                    break;
+            }
+            const operator = isRange ? `BETWEEN ${quot}${value1}${quot} AND ${quot}${value2}${quot}` : `LIKE ${quot}${valueSelected}${quot}`;
+
+            return `(${param} ${operator})`;
+        }
+    };
+});
