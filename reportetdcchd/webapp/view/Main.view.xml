@@ -78,7 +78,7 @@
                                 </form:Form>
                             </content>
                         </Panel>
-                        <Table items="{ path: 'listMareas>/items' }" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
+                        <Table id="tableData" items="{ path: 'listMareas>/items' }" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
                             <infoToolbar>
                                 <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
                                     <content>
@@ -91,7 +91,7 @@
                                     <content>
                                         <Title text="Lista de reportes (1)" titleStyle="Auto" width="auto" textAlign="Begin" visible="true" wrapping="false"/>
                                         <ToolbarSpacer width=""/>
-                                        <SearchField placeholder="Búsqueda rápida" showSearchButton="true" visible="true" width="auto"/>
+                                        <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
                                         <OverflowToolbarButton text="Sort" type="Transparent" icon="sap-icon://sort" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                                         <OverflowToolbarButton text="Filter" type="Transparent" icon="sap-icon://filter" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                                     </content>
@@ -184,7 +184,7 @@
                                 </Column>
                                 <Column width="6rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                                     <header>
-                                        <Text text="Declaración" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <Text text="Opción" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                     </header>
                                     <footer/>
                                 </Column>
@@ -215,6 +215,7 @@
                     <footer>
                         <OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
                             <content>
+                                <Button text="Exportar Excel" press=".exportarExcel" type="Emphasized" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                                 <ToolbarSpacer width=""/>
                             </content>
                         </OverflowToolbar>

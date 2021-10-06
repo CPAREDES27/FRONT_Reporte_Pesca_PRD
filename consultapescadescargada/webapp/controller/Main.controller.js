@@ -4,23 +4,47 @@ sap.ui.define([
 	"sap/ui/core/Fragment",
 	"../model/formatter",
 	"sap/ui/core/BusyIndicator",
-	"sap/m/MessageBox"
+	"sap/m/MessageBox",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
+	'sap/ui/export/library',
+	'sap/ui/export/Spreadsheet'
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (BaseController, JSONModel, Fragment, formatter, BusyIndicator, MessageBox) {
+	function (BaseController, JSONModel, Fragment, formatter, BusyIndicator, MessageBox, Filter, FilterOperator, exportLibrary, Spreadsheet) {
 		"use strict";
+
+		var EdmType = exportLibrary.EdmType;
 
 		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/';
 
 		return BaseController.extend("com.tasa.consultapescadescargada.controller.Main", {
 			formatter: formatter,
+			dataTableKeys: [
+				'WERKS',
+				'FECCONMOV',
+				'CDMMA',
+				'NRDES',
+				'FCZAR',
+				'HOZAR',
+				'FCARR',
+				'HOARR',
+				'MREMB',
+				'NMEMB',
+				'CPPMS',
+				'DSEMP',
+				'CNPCM',
+				'CNPDS',
+				'DSSPC',
+				'INPRP',
+				'NMPER'
+			],
 			onInit: function () {
 				let oViewModel = new JSONModel({});
 
 				this.setModel(oViewModel, "consultaPescaDescargada");
-
 				this.loadData();
 			},
 			loadData: function () {
@@ -259,6 +283,119 @@ sap.ui.define([
 			},
 			closeDialog: function (event) {
 				this.cambiarInterlocutorDialog.close();
+			},
+			filterGlobally: function (oEvent) {
+				let sQuery = oEvent.getSource().getValue();
+				const table = this.byId('tableData');
+				const tableItemsBinding = table.getBinding('items');
+				const dataTable = tableItemsBinding.oList;
+				let filters = [];
+
+				this.dataTableKeys.forEach(k => {
+					const typeValue = typeof dataTable[0][k];
+					let vOperator = null;
+
+					switch (typeValue) {
+						case 'string':
+							vOperator = FilterOperator.Contains;
+							break;
+						case 'number':
+							vOperator = FilterOperator.EQ;
+							break;
+					}
+
+					const filter = new Filter(k, vOperator, sQuery);
+					filters.push(filter);
+				});
+
+				const oFilters = new Filter({
+					filters: filters
+				});
+
+				/**
+				 * Actualizar tabla
+				 */
+				tableItemsBinding.filter(oFilters, "Application");
+			},
+			createColumnConfig: function () {
+				var aCols = [];
+				const title = [];
+				const table = this.byId('tableData');
+				let tableColumns = table.getColumns();
+				const dataTable = table.getBinding('items').oList;
+
+				/**
+				 * Obtener solo las opciones que se exportarán
+				 */
+				for (let i = 0; i < tableColumns.length; i++) {
+					let header = tableColumns[i].getAggregation('header');
+					if (header) {
+						let headerColId = header.getId();
+						let headerCol = sap.ui.getCore().byId(headerColId);
+						let headerColValue = headerCol.getText();
+
+						title.push(headerColValue);
+					}
+
+				}
+				title.splice(title.length - 2, 1);
+				title.pop();
+
+				/**
+				 * Combinar los títulos y los campos de la cabecera
+				 */
+				const properties = title.map((t, i) => {
+					return {
+						column: t,
+						key: this.dataTableKeys[i]
+					}
+				});
+
+				properties.forEach(p => {
+					const typeValue = typeof dataTable[0][p.key];
+					let propCol = {
+						label: p.column,
+						property: p.key
+					};
+
+					switch (typeValue) {
+						case 'number':
+							propCol.type = EdmType.Number;
+							propCol.scale = 0;
+							break;
+						case 'string':
+							propCol.type = EdmType.String;
+							propCol.wrap = true;
+							break;
+					}
+
+					aCols.push(propCol);
+				});
+
+				return aCols;
+			},
+			exportarExcel: function (event) {
+				var aCols, oRowBinding, oSettings, oSheet, oTable;
+
+				if (!this._oTable) {
+					this._oTable = this.byId('tableData');
+				}
+
+				oTable = this._oTable;
+				oRowBinding = oTable.getBinding('items');
+				aCols = this.createColumnConfig();
+
+				oSettings = {
+					workbook: { columns: aCols },
+					dataSource: oRowBinding,
+					fileName: 'Consulta de pesca descargada.xlsx',
+					worker: false // We need to disable worker because we are using a Mockserver as OData Service
+				};
+
+				oSheet = new Spreadsheet(oSettings);
+				oSheet.build().finally(function () {
+					oSheet.destroy();
+				});
 			}
 		});
 	});

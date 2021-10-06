@@ -2,17 +2,46 @@ sap.ui.define([
 	"./BaseController",
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
-	"../model/formatter"
+	"../model/formatter",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
+	'sap/ui/export/library',
+	'sap/ui/export/Spreadsheet'
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (BaseController, Controller, JSONModel, formatter) {
+	function (BaseController, Controller, JSONModel, formatter, Filter, FilterOperator, exportLibrary, Spreadsheet) {
 		"use strict";
+
+		var EdmType = exportLibrary.EdmType;
+
 		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/';
 
 		return BaseController.extend("com.tasa.consultamareas.controller.View1", {
 			formatter: formatter,
+			dataTableKeys: [
+				'NRMAR',
+				'WERKS',
+				'DESCR',
+				'DSEMP',
+				'NMEMB',
+				'FICAL',
+				'FFCAL',
+				'DSSPE',
+				'INPRP',
+				'CDMMA',
+				'FEMAR',
+				'FXMAR',
+				'FHZAR',
+				'FHLLE',
+				'FCSAZ',
+				'FCARP',
+				'FIDES',
+				'FFDES',
+				'CNTDS',
+				'CNPDC'
+			],
 			onInit: function () {
 				let oViewModel = new JSONModel({});
 
@@ -127,17 +156,15 @@ sap.ui.define([
 					});
 				}
 
-				if (motivos.length > 0) {
-					const isMulti = motivos.length == 2;
-
+				motivos.forEach(motivo => {
 					options.push({
 						cantidad: "10",
 						control: multiComboBox,
 						key: "CDMMA",
-						valueHigh: isMulti ? motivos[1] : "",
-						valueLow: motivos[0]
+						valueHigh: "",
+						valueLow: motivo
 					});
-				}
+				});
 
 				if (fechaInicio || fechaFin) {
 					const isRange = fechaInicio && fechaFin;
@@ -210,6 +237,118 @@ sap.ui.define([
 			},
 			detalleMarea: function (event) {
 				console.log(event);
+			},
+			filterGlobally: function (oEvent) {
+				let sQuery = oEvent.getSource().getValue();
+				const table = this.byId('tableData');
+				const tableItemsBinding = table.getBinding('items');
+				const dataTable = tableItemsBinding.oList;
+				let filters = [];
+
+				this.dataTableKeys.forEach(k => {
+					const typeValue = typeof dataTable[0][k];
+					let vOperator = null;
+
+					switch (typeValue) {
+						case 'string':
+							vOperator = FilterOperator.Contains;
+							break;
+						case 'number':
+							vOperator = FilterOperator.EQ;
+							break;
+					}
+
+					const filter = new Filter(k, vOperator, sQuery);
+					filters.push(filter);
+				});
+
+				const oFilters = new Filter({
+					filters: filters
+				});
+
+				/**
+				 * Actualizar tabla
+				 */
+				tableItemsBinding.filter(oFilters, "Application");
+			},
+			createColumnConfig: function () {
+				var aCols = [];
+				const title = [];
+				const table = this.byId('tableData');
+				let tableColumns = table.getColumns();
+				const dataTable = table.getBinding('items').oList;
+
+				/**
+				 * Obtener solo las opciones que se exportarán
+				 */
+				for (let i = 0; i < tableColumns.length; i++) {
+					let header = tableColumns[i].getAggregation('header');
+					if (header) {
+						let headerColId = tableColumns[i].getAggregation('header').getId();
+						let headerCol = sap.ui.getCore().byId(headerColId);
+						let headerColValue = headerCol.getText();
+
+						title.push(headerColValue);
+					}
+				}
+
+				title.pop();
+
+				/**
+				 * Combinar los títulos y los campos de la cabecera
+				 */
+				const properties = title.map((t, i) => {
+					return {
+						column: t,
+						key: this.dataTableKeys[i]
+					}
+				})
+
+				properties.forEach(p => {
+					const typeValue = typeof dataTable[0][p.key];
+					let propCol = {
+						label: p.column,
+						property: p.key
+					};
+
+					switch (typeValue) {
+						case 'number':
+							propCol.type = EdmType.Number;
+							propCol.scale = 0;
+							break;
+						case 'string':
+							propCol.type = EdmType.String;
+							propCol.wrap = true;
+							break;
+					}
+
+					aCols.push(propCol);
+				});
+
+				return aCols;
+			},
+			exportarExcel: function (event) {
+				var aCols, oRowBinding, oSettings, oSheet, oTable;
+
+				if (!this._oTable) {
+					this._oTable = this.byId('tableData');
+				}
+
+				oTable = this._oTable;
+				oRowBinding = oTable.getBinding('items');
+				aCols = this.createColumnConfig();
+
+				oSettings = {
+					workbook: { columns: aCols },
+					dataSource: oRowBinding,
+					fileName: 'Consulta de mareas.xlsx',
+					worker: false // We need to disable worker because we are using a Mockserver as OData Service
+				};
+
+				oSheet = new Spreadsheet(oSettings);
+				oSheet.build().finally(function () {
+					oSheet.destroy();
+				});
 			}
 		});
 	});
