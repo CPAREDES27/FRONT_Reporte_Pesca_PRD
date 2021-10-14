@@ -29,6 +29,8 @@ sap.ui.define([
 				'FICAL',
 				'FFCAL',
 				'DSSPE',
+				'DESC_INPRP',
+				'DESC_CDMMA',
 				'INPRP',
 				'CDMMA',
 				'FEMAR',
