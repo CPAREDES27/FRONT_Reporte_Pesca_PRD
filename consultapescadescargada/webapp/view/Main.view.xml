@@ -142,7 +142,7 @@
                                         </Column>
                                         <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                                             <header>
-                                                <Text text="Mol marea" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="Mot marea" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </header>
                                             <footer/>
                                         </Column>
@@ -247,12 +247,12 @@
                                         <ColumnListItem type="Active">
                                             <cells>
                                                 <Text text="{consultaPescaDescargada>WERKS}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{ path: 'consultaPescaDescargada>FECCONMOV', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaPescaDescargada>FECCONMOV}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 <Text text="{consultaPescaDescargada>CDMMA}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 <Text text="{consultaPescaDescargada>NRDES}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{ path: 'consultaPescaDescargada>FCZAR', formatter: '.formatter.formatDate' }" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaPescaDescargada>FCZAR}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 <Text text="{consultaPescaDescargada>HOZAR}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{ path: 'consultaPescaDescargada>FCARR', formatter: '.formatter.formatDate' }" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaPescaDescargada>FCARR}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 <Text text="{consultaPescaDescargada>HOARR}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 <Text text="{consultaPescaDescargada>MREMB}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 <Text text="{consultaPescaDescargada>NMEMB}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>

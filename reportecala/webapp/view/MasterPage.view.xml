@@ -292,6 +292,12 @@
                                     </Column>
                                     <Column width="5rem" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                                         <header>
+                                            <Text text="Moda" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="5rem" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
                                             <Text text="Observaciones" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                         </header>
                                         <footer/>
@@ -357,21 +363,21 @@
                                             <Text text = "{reporteCala>DSZPC}"/>
                                             <Text text = "{reporteCala>WERKS}"/>
                                             <Text text = "{reporteCala>DESCR}"/>
-                                            <Text text = "{ path: 'reporteCala>FECCONMOV', formatter: '.formatter.formatDate' }"/>
+                                            <Text text = "{reporteCala>FECCONMOV}"/>
                                             <Text text = "{reporteCala>NRMAR}"/>
                                             <Text text = "{reporteCala>NRDES}"/>
-                                            <Text text = "{reporteCala>CDMMA}"/>
+                                            <Text text = "Pesca {reporteCala>CDMMA}"/>
                                             <Text text = "{reporteCala>NMEMB}"/>
                                             <Text text = "{reporteCala>MREMB}"/>
                                             <Text text = "{reporteCala>CPPMS}"/>
-                                            <Text text = "Ind propiedad"/>
-                                            <Text text = "{ path: 'reporteCala>FIEVN', formatter: '.formatter.formatDate' }"/>
+                                            <Text text = "{reporteCala>INPRP}"/>
+                                            <Text text = "{reporteCala>FIEVN}"/>
                                             <Text text = "{reporteCala>HIEVN}"/>
-                                            <Text text = "{ path: 'reporteCala>FFEVN', formatter: '.formatter.formatDate' }"/>
+                                            <Text text = "{reporteCala>FFEVN}"/>
                                             <Text text = "{reporteCala>HFEVN}"/>
-                                            <Text text = "{ path: 'reporteCala>FIEVN', formatter: '.formatter.formatDate' }"/>
+                                            <Text text = "{reporteCala>FIEVN}"/>
                                             <Text text = "{reporteCala>HIEVN}"/>
-                                            <Text text = "{ path: 'reporteCala>FFEVN', formatter: '.formatter.formatDate' }"/>
+                                            <Text text = "{reporteCala>FFEVN}"/>
                                             <Text text = "{reporteCala>HFEVN}"/>
                                             <Text text = "{reporteCala>LTGEO}"/>
                                             <Text text = "{reporteCala>LNGEO}"/>

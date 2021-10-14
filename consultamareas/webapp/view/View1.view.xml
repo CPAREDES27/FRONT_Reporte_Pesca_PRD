@@ -271,19 +271,19 @@
                                                 <Text text="{consultaMareas>DESCR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 <Text text="{consultaMareas>DSEMP}" width="auto" maxLines="3" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 <Text text="{consultaMareas>NMEMB}" width="auto" maxLines="3" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{ path: 'consultaMareas>FICAL', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{ path: 'consultaMareas>FFCAL', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>FICAL}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>FFCAL}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 <Text text="{consultaMareas>DSSPE}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaMareas>INPRP}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaMareas>CDMMA}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>DESC_INPRP}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>DESC_CDMMA}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 <Text text="{consultaMareas>FEMAR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{ path: 'consultaMareas>FXMAR', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{ path: 'consultaMareas>FHZAR', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{ path: 'consultaMareas>FHLLE', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{ path: 'consultaMareas>FCSAZ', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{ path: 'consultaMareas>FCARP', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{ path: 'consultaMareas>FIDES', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{ path: 'consultaMareas>FFDES', formatter: '.formatter.formatDate' }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>FXMAR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>FHZAR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>FHLLE}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>FCSAZ}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>FCARP}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>FIDES}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{consultaMareas>FFDES}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 <Text text="{consultaMareas>CNTDS}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 <Text text="{consultaMareas>CNPDC}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 <Button press=".detalleMarea" text="Detalle" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
