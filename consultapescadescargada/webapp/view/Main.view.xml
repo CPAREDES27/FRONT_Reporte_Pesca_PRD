@@ -5,14 +5,14 @@
     xmlns="sap.m"
 	xmlns:form="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
-    xmlns:layout="sap.ui.layout"
+    xmlns:t="sap.ui.table"
 >
-	<Shell id="shell">
+	
 		<App id="app">
 			<pages>
 				<Page id="page" title="{i18n>title}">
 					<content>
-                        <form:Form width="100%" editable="true" visible="true">
+                        <form:Form width="100%" editable="true" visible="true" >
                             <form:title>
                                 <core:Title text="Datos de selección" level="Auto"/>
                             </form:title>
@@ -21,10 +21,25 @@
                                     <form:formElements>
                                         <form:FormElement visible="true">
                                             <form:label>
-                                                <Label text="Planta" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Label text="Centro" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <Input id="planta" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" valueHelpRequest="_onInputValueHelpRequest"/>
+                                                <Input id="centro" type="Text" valueState="Information" valueStateText="Ingrese centro" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{consultaPescaDescargada>/centros}" width="100%">
+                                                    <suggestionColumns>
+                                                        <Column>
+                                                            <Label text="Centro" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Label text="Descripción" />
+                                                        </Column>
+                                                    </suggestionColumns>
+                                                    <suggestionRows>
+                                                        <ColumnListItem>
+                                                            <Label text="{consultaPescaDescargada>WERKS}" />
+					                                        <Label text="{consultaPescaDescargada>NAME1}" />
+                                                        </ColumnListItem>
+                                                    </suggestionRows>
+                                                </Input>
                                             </form:fields>
                                         </form:FormElement>
                                         <form:FormElement visible="true">
@@ -32,7 +47,7 @@
                                                 <Label text="Ubicación de planta" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <ComboBox id="ubicacionPlanta" items="{consultaPescaDescargada>/ubicacionesPlanta}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
+                                                <ComboBox id="ubicacionPlanta" items="{consultaPescaDescargada>/ubicacionesPlanta}" editable="true" enabled="true" visible="true" width="100%" valueState="None" maxWidth="100%">
                                                     <items>
                                                         <core:Item text="{consultaPescaDescargada>descripcion}" enabled="true" key="{consultaPescaDescargada>id}"/>
                                                     </items>
@@ -44,7 +59,7 @@
                                                 <Label text="Embarcación" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <Input id="embarcacion" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" valueHelpRequest="_onInputValueHelpRequest1"/>
+                                                <Input id="embarcacion" showValueHelp="true" valueHelpRequest="onAbrirAyudaEmbarcacion" width="100%" valueStateText="Invalid entry"/>
                                             </form:fields>
                                         </form:FormElement>
                                         <form:FormElement visible="true">
@@ -52,7 +67,7 @@
                                                 <Label text="Indicador de propiedad" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <ComboBox id="indicadorPropiedad" items="{consultaPescaDescargada>/zinprpDom}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
+                                                <ComboBox id="indicadorPropiedad" items="{consultaPescaDescargada>/zinprpDom}" editable="true" enabled="true" visible="true" width="100%" valueState="None" maxWidth="100%">
                                                     <items>
                                                         <core:Item text="{consultaPescaDescargada>descripcion}" enabled="true" key="{consultaPescaDescargada>id}"/>
                                                     </items>
@@ -64,7 +79,7 @@
                                                 <Label text="Tipo de marea" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <ComboBox id="tipoMarea" items="{consultaPescaDescargada>/zdoTipoMareaDom}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
+                                                <ComboBox id="tipoMarea" items="{consultaPescaDescargada>/zdoTipoMareaDom}" editable="true" enabled="true" visible="true" width="100%" valueState="None" maxWidth="100%">
                                                     <items>
                                                         <core:Item text="{consultaPescaDescargada>descripcion}" enabled="true" key="{consultaPescaDescargada>id}"/>
                                                     </items>
@@ -76,8 +91,9 @@
                                                 <Label text="Fecha de producción" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <DatePicker id="fechaProdIni" width="auto" displayFormat="medium" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="yyyyMMdd"/>
-                                                <DatePicker id="fechaProdFin" width="auto" displayFormat="medium" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="yyyyMMdd"/>
+                                                <!--<DatePicker id="fechaProdIni" width="auto" displayFormat="medium" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="yyyyMMdd"/>-->
+                                                <!--<DatePicker id="fechaProdFin" width="auto" displayFormat="medium" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="yyyyMMdd"/>-->
+                                                <DateRangeSelection id="idDateRangeSelec" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>
                                             </form:fields>
                                         </form:FormElement>
                                         <form:FormElement visible="true">
@@ -85,7 +101,7 @@
                                                 <Label text="Cantidad de aciertos" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <Input id="numRegistros" value="200" type="Number" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
+                                                <Input id="numRegistros" value="200" type="Number" showValueHelp="false" enabled="true" visible="true" width="100%" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
                                             </form:fields>
                                         </form:FormElement>
                                         <form:FormElement visible="true">
@@ -93,7 +109,8 @@
                                                 <Label text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <Button press="searchData" text="Buscar" type="Default" icon="sap-icon://search" iconFirst="true" width="50%" enabled="true" visible="true" iconDensityAware="false"/>
+                                                <Button press="searchData" text="Buscar" type="Emphasized" icon="sap-icon://search" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
+                                                <Button press="clearFields" text="Limpiar" type="Emphasized" icon="sap-icon://clear-filter" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
                                             </form:fields>
                                         </form:FormElement>
                                     </form:formElements>
@@ -106,182 +123,158 @@
                         </form:Form>
                         <ScrollContainer>
                             <content>
-                                <Table id="tableData" items="{
-                                    path: 'consultaPescaDescargada>/items'
-                                }" width="100rem" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
-                                    <infoToolbar>
-                                        <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
-                                            <content>
-                                                <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </content>
-                                        </Toolbar>
-                                    </infoToolbar>
-                                    <headerToolbar>
-                                        <OverflowToolbar width="auto" height="auto" design="Transparent" visible="true" enabled="true">
-                                            <content>
-                                                <Title text="Lista de reportes (1)" titleStyle="Auto" width="auto" textAlign="Begin" visible="true" wrapping="false"/>
-                                                <ToolbarSpacer width=""/>
-                                                <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
-                                                <OverflowToolbarButton text="Sort" type="Transparent" icon="sap-icon://sort" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-                                                <OverflowToolbarButton text="Filter" type="Transparent" icon="sap-icon://filter" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-                                            </content>
-                                        </OverflowToolbar>
-                                    </headerToolbar>
-                                    <columns>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Centro" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Fecha producción" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Mot marea" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Número descarga" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Fecha Zarpe" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Hora Zarpe" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Fecha arribo" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Hora arribo" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Matrícula" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Nombre embarcación" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="CBOD" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Armador" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Pesca declarada" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Pesca descargada" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Especie" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Indicador propiedad" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Interlocutor" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="5rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Patrón" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                        <Column width="6rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                            <header>
-                                                <Text text="Opción" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </header>
-                                            <footer/>
-                                        </Column>
-                                    </columns>
-                                    <items>
-                                        <ColumnListItem type="Active">
-                                            <cells>
-                                                <Text text="{consultaPescaDescargada>WERKS}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>FECCONMOV}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>CDMMA}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>NRDES}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>FCZAR}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>HOZAR}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>FCARR}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>HOARR}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>MREMB}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>NMEMB}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>CPPMS}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>DSEMP}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>CNPCM}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>CNPDS}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>DSSPC}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Text text="{consultaPescaDescargada>INPRP}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Button visible="{= ${consultaPescaDescargada>INPRP} === 'T' ? true : false }" press=".openCambiarInterlocutor" text="Cambiar" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" iconDensityAware="false"/>
-                                                <Text text="{consultaPescaDescargada>NMPER}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                <Button text="Ver marea" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-                                            </cells>
-                                        </ColumnListItem>
-                                    </items>
-                                </Table>
+                                <t:Table id="tableData" rows="{consultaPescaDescargada>/items}" visibleRowCount="8" ariaLabelledBy="title" selectionMode="None">
+                                    <t:extension>
+					                    <OverflowToolbar style="Clear">
+						                    <Title id="title" text=""/>
+                                            <ToolbarSpacer width=""/>
+                                            <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
+                                            <Button press='.exportarExcel' text="Exportar" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+					                    </OverflowToolbar>
+				                    </t:extension>
+                                    <t:columns>
+                                        <t:Column width="8rem" filterProperty="WERKS" defaultFilterOperator="Contains" sortProperty="WERKS">
+						                    <Label text="Centro" />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>WERKS}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="8rem" filterProperty="FECCONMOV" defaultFilterOperator="Contains">
+						                    <Label text="F. Producción" />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>FECCONMOV}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="8rem" filterProperty="DESC_CDMMA" defaultFilterOperator="EQ" sortProperty="DESC_CDMMA">
+						                    <Label text="Mot. Marea" />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>DESC_CDMMA}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="NRDES" defaultFilterOperator="Contains" sortProperty="NRDES">
+						                    <Label text="Nro. Descarga" />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>NRDES}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="FCZAR" defaultFilterOperator="Contains">
+						                    <Label text="F/H Zarpe" />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>FCZAR} - {consultaPescaDescargada>HOZAR}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="FCARR" defaultFilterOperator="Contains">
+						                    <Label text="F/H Arribo" />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>FCARR} - {consultaPescaDescargada>HOARR}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="MREMB" defaultFilterOperator="Contains" sortProperty="MREMB">
+						                    <Label text="Matrícula" />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>MREMB}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
+						                    <Label text="Nom. Embarcación" />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>NMEMB}" wrapping="true" maxLines="3" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="6rem" hAlign="End" filterProperty="CPPMS" defaultFilterOperator="EQ" sortProperty="CPPMS">
+						                    <Label text="CBOD"/>
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>CPPMS}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
+						                    <Label text="Armador" />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>DSEMP}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="8rem" hAlign="End" filterProperty="CNPCM" defaultFilterOperator="EQ" sortProperty="CNPCM">
+						                    <Label text="Pesca Decla." />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>CNPCM}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="6rem" hAlign="End" filterProperty="CNPDS" defaultFilterOperator="EQ" sortProperty="CNPDS">
+						                    <Label text="Pesca Desc." />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>CNPDS}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="DSSPC" defaultFilterOperator="Contains" sortProperty="DSSPC">
+						                    <Label text="Especie" />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>DSSPC}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="DESC_INPRP" defaultFilterOperator="Contains" sortProperty="DESC_INPRP">
+						                    <Label text="Ind. Propiedad" />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>DESC_INPRP}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" >
+						                    <Label text="Interlocutor" />
+						                    <t:template>
+							                    <Button visible="{= ${consultaPescaDescargada>INPRP} === 'T' ? true : false }" press=".openCambiarInterlocutor" text="Cambiar" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" iconDensityAware="false"/>
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="NMPER" defaultFilterOperator="Contains" sortProperty="DESC_INPRP">
+						                    <Label text="Patrón" />
+						                    <t:template>
+							                    <Text text="{consultaPescaDescargada>NMPER}" width="auto" maxLines="3" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" >
+						                    <Label text="" />
+						                    <t:template>
+							                    <Button text="Ver marea" press="onVerMarea" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" visible="{consultaPescaDescargada>visibleMarea}" iconDensityAware="false"/>
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                </t:Table>
                             </content>
                         </ScrollContainer>
                     </content>
-                    <footer>
-                        <OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
-                            <content>
-                                <Button press='.exportarExcel' text="Exportar Excel" type="Emphasized" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-                                <ToolbarSpacer width=""/>
-                            </content>
-                        </OverflowToolbar>
-                    </footer>
+                    
 				</Page>
 			</pages>
 		</App>
-	</Shell>
 </mvc:View>

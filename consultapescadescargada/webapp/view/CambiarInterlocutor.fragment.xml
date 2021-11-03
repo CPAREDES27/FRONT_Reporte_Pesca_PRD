@@ -1,8 +1,7 @@
 <core:FragmentDefinition
 	xmlns="sap.m"
     xmlns:form="sap.ui.layout.form"
-	xmlns:core="sap.ui.core"
-    xmlns:layout="sap.ui.commons.layout">
+	xmlns:core="sap.ui.core">
     <Dialog contentWidth="75rem" title="Interlocutor alterno">
         <content>
             <form:Form width="100%" editable="true" visible="true">

@@ -41,21 +41,123 @@ sap.ui.define([
 
 				this.setModel(oViewModel, "listMareas");
 
+				this.loadData();
+
 				// this.router = this.getRouter().getTarget("TargetMain").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
 				this.router = sap.ui.core.UIComponent.getRouterFor(this);
 				this.router.getRoute("RouteMain").attachPatternMatched(this.handleRouteMatched, this)
 			},
+
+			loadData: function(){
+				BusyIndicator.show(0);
+				let plantas = [];
+				let embarcaciones = [];
+				let zinprpDom = [];
+				let zcdmmaDom = [];
+
+				const bodyDominios = {
+					"dominios": [
+						{
+							"domname": "ZINPRP",
+							"status": "A"
+						},
+						{
+							"domname": "ZCDMMA",
+							"status": "A"
+						}
+					]
+				};
+
+				fetch(`${mainUrlServices}dominios/Listar`,
+					{
+						method: 'POST',
+						body: JSON.stringify(bodyDominios)
+					})
+					.then(resp => resp.json()).then(data => {
+						console.log(data);
+						zinprpDom = data.data.find(d => d.dominio == "ZINPRP").data;
+						zcdmmaDom = data.data.find(d => d.dominio == "ZCDMMA").data;
+						this.getModel("listMareas").setProperty("/zinprpDom", zinprpDom);
+						this.getModel("listMareas").setProperty("/zcdmmaDom", zcdmmaDom);
+					}).catch(error => console.log(error));
+
+				const bodyAyudaPlantas = {
+					"nombreAyuda": "BSQPLANTAS",
+					"p_user": this.getCurrentUser()
+				};
+
+				fetch(`${mainUrlServices}General/AyudasBusqueda/`,
+				{
+					method: 'POST',
+					body: JSON.stringify(bodyAyudaPlantas)
+				})
+				.then(resp => resp.json()).then(data => {
+					console.log("Busqueda: ", data);
+					plantas = data.data;
+					this.getModel("listMareas").setProperty("/plantas", plantas);
+				}).catch(error => console.log(error));
+
+
+				const objectRT = {
+					"option": [
+					],
+					"option2": [
+					],
+					"options": [
+					],
+					"options2": [
+					 {
+						 "cantidad":"10",
+						 "control":"COMBOBOX",
+						 "key":"ESEMB",
+						 "valueHigh":"",
+						 "valueLow":"0"
+					 }
+
+					],
+					"p_user": "BUSQEMB"
+				  };
+
+				  fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
+			{
+				method: 'POST',
+				body: JSON.stringify(objectRT)
+			})
+			.then(resp => resp.json()).then(data => {
+				console.log("Emba: ", data);
+				embarcaciones = data.data;
+				
+				this.getModel("listMareas").setProperty("/embarcaciones", embarcaciones);
+				BusyIndicator.hide();
+			}).catch(error => console.log(error));
+
+
+			},
+
 			handleRouteMatched: function () { },
 			searchData: function () {
+				BusyIndicator.show(0);
 				let option = [];
 				let options = [];
 				let commands = [];
 				let marea = this.byId("marea").getValue();
 				let planta = this.byId("planta").getValue();
 				let embarcacion = this.byId("embarcacion").getValue();
-				let fechaInicio = this.byId("fechaInicio").getValue();
-				let fechaFin = this.byId("fechaFin").getValue();
+				/*let fechaInicio = this.byId("fechaInicio").getValue();
+				let fechaFin = this.byId("fechaFin").getValue();*/
 				let numAciertos = this.byId("numAciertos").getValue();
+
+				let fechaInicio = null;
+				let fechaFin = null;
+				var valueDateRange = this.byId("idDateRangeSelec").getValue();
+				if(valueDateRange){
+					var valDtrIni = valueDateRange.split("-")[0].trim();
+					var valDtrFin = valueDateRange.split("-")[1].trim();
+					if(valDtrIni && valDtrFin){
+						fechaInicio = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
+						fechaFin = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
+					}
+				}
 
 				const input = 'INPUT';
 				const multiinput = 'MULTIINPUT';
@@ -131,7 +233,7 @@ sap.ui.define([
 				const body = {
 					option: [],
 					options: options,
-					p_user: 'FGARCIA',
+					p_user: this.getCurrentUser(),
 					rowcount: numAciertos
 				};
 
@@ -142,6 +244,7 @@ sap.ui.define([
 					.then(resp => resp.json())
 					.then(data => {
 						this.getModel("listMareas").setProperty("/items", data.s_marea);
+						BusyIndicator.hide();
 					});
 
 			},
@@ -160,8 +263,8 @@ sap.ui.define([
 			filterGlobally: function (oEvent) {
 				let sQuery = oEvent.getSource().getValue();
 				const table = this.byId('tableData');
-				const tableItemsBinding = table.getBinding('items');
-				const dataTable = table.getBinding('items').oList;
+				const tableItemsBinding = table.getBinding('rows');
+				const dataTable = tableItemsBinding.oList;
 				let filters = [];
 
 				this.dataTableKeys.forEach(k => {
@@ -195,13 +298,13 @@ sap.ui.define([
 				const title = [];
 				const table = this.byId('tableData');
 				let tableColumns = table.getColumns();
-				const dataTable = table.getBinding('items').oList;
+				const dataTable = table.getBinding('rows').oList;
 
 				/**
 				 * Obtener solo las opciones que se exportarán
 				 */
 				for (let i = 0; i < tableColumns.length; i++) {
-					let header = tableColumns[i].getAggregation('header');
+					let header = tableColumns[i].getAggregation('template');
 					if (header) {
 						let headerColId = header.getId();
 						let headerCol = sap.ui.getCore().byId(headerColId);
@@ -254,13 +357,13 @@ sap.ui.define([
 				}
 
 				oTable = this._oTable;
-				oRowBinding = oTable.getBinding('items');
+				oRowBinding = oTable.getBinding('rows');
 				aCols = this.createColumnConfig();
 
 				oSettings = {
 					workbook: { columns: aCols },
 					dataSource: oRowBinding,
-					fileName: 'Reporte de TDC CHR.xlsx',
+					fileName: 'Reporte de TDC CHD.xlsx',
 					worker: false // We need to disable worker because we are using a Mockserver as OData Service
 				};
 
@@ -268,6 +371,145 @@ sap.ui.define([
 				oSheet.build().finally(function () {
 					oSheet.destroy();
 				});
+			},
+
+			onSelectEmba: function(evt){
+				var objeto = evt.getSource().getBindingContext("listMareas").getObject();
+				if(objeto){
+					var cdemb = objeto.CDEMB;
+					this.byId("embarcacion").setValue(cdemb);
+					this.getDialog().close();
+				}
+			},
+
+			onSearchEmbarcacion: function(evt){
+				BusyIndicator.show(0);
+				var idEmbarcacion =sap.ui.getCore().byId("idEmba").getValue();
+				var idEmbarcacionDesc =sap.ui.getCore().byId("idNombEmba").getValue();
+				var idMatricula =sap.ui.getCore().byId("idMatricula").getValue();
+				var idRuc =sap.ui.getCore().byId("idRucArmador").getValue();
+				var idArmador =sap.ui.getCore().byId("idDescArmador").getValue();
+				var idPropiedad = sap.ui.getCore().byId("indicadorPropiedad").getSelectedKey();
+				var options=[];
+				var options2=[];
+				let embarcaciones = [];
+				options.push({
+					"cantidad": "20",
+					"control": "COMBOBOX",
+					"key": "ESEMB",
+					"valueHigh": "",
+					"valueLow": "O"
+				})
+				if(idEmbarcacion){
+					options.push({
+						"cantidad": "20",
+						"control": "INPUT",
+						"key": "CDEMB",
+						"valueHigh": "",
+						"valueLow": idEmbarcacion
+						
+					});
+				}
+				if(idEmbarcacionDesc){
+					options.push({
+						"cantidad": "20",
+						"control": "INPUT",
+						"key": "NMEMB",
+						"valueHigh": "",
+						"valueLow": idEmbarcacionDesc
+						
+					});
+				}
+				if(idMatricula){
+					options.push({
+						"cantidad": "20",
+						"control": "INPUT",
+						"key": "MREMB",
+						"valueHigh": "",
+						"valueLow": idMatricula
+					})
+				}
+				if(idPropiedad){
+					options.push({
+						"cantidad": "20",
+						"control": "COMBOBOX",
+						"key": "INPRP",
+						"valueHigh": "",
+						"valueLow": idPropiedad
+					})
+				}
+				if(idRuc){
+					options2.push({
+						"cantidad": "20",
+						"control": "INPUT",
+						"key": "STCD1",
+						"valueHigh": "",
+						"valueLow": idRuc
+					})
+				}
+				if(idArmador){
+					options2.push({
+						"cantidad": "20",
+						"control": "INPUT",
+						"key": "NAME1",
+						"valueHigh": "",
+						"valueLow": idArmador
+					})
+				}
+				
+				var body={
+					"option": [
+					  
+					],
+					"option2": [
+					  
+					],
+					"options": options,
+					"options2": options2,
+					"p_user": "BUSQEMB"
+				};
+
+				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
+				{
+					method: 'POST',
+					body: JSON.stringify(body)
+				})
+				.then(resp => resp.json()).then(data => {
+					console.log("Emba: ", data);
+					embarcaciones = data.data;
+					
+					this.getModel("listMareas").setProperty("/embarcaciones", embarcaciones);
+					this.getModel("listMareas").refresh();
+					BusyIndicator.hide();
+				}).catch(error => console.log(error));
+			},
+
+			onOpenEmba: function(){
+				this.getDialog().open();
+			},
+
+			onCerrarEmba: function(){
+				this.getDialog().close();
+			},
+
+			getDialog: function(){
+				if (!this.oDialog) {
+					this.oDialog = sap.ui.xmlfragment("com.tasa.reportetdcchd.view.Embarcacion", this);
+					this.getView().addDependent(this.oDialog);
+				}
+				return this.oDialog;
+			},
+
+			clearFields: function(){
+				this.byId("marea").setValue(null);
+				this.byId("planta").setValue(null);
+				this.byId("embarcacion").setValue(null);
+				this.byId("idDateRangeSelec").setValue(null);
+			},
+
+			getCurrentUser: function(){
+				return "FGARCIA"
 			}
+
 		});
 	});

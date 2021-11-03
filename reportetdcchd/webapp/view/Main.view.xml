@@ -4,16 +4,13 @@
     displayBlock="true"
     xmlns="sap.m"
 	xmlns:form="sap.ui.layout.form"
-    xmlns:core="sap.ui.core"
-    xmlns:layout="sap.ui.layout"
+    xmlns:t="sap.ui.table"
 >
-	<Shell id="shell">
 		<App id="app">
 			<pages>
 				<Page id="page" title="{i18n>title}">
 					<content>
-                        <Panel height="auto" width="auto" headerText="Datos de selección" expandable="true" expanded="true" expandAnimation="true" backgroundDesign="Solid" class="sapUiResponsiveMargin">
-                            <content>
+                       
                                 <form:Form width="100%" editable="true" visible="true">
                                     <form:title/>
                                     <form:formContainers>
@@ -24,7 +21,7 @@
                                                         <Label text="Marea" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                     </form:label>
                                                     <form:fields>
-                                                        <Input id="marea" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
+                                                        <Input id="marea" type="Text" showValueHelp="false" enabled="true" visible="true" width="100%" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
                                                     </form:fields>
                                                 </form:FormElement>
                                                 <form:FormElement visible="true">
@@ -32,7 +29,26 @@
                                                         <Label text="Planta" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                     </form:label>
                                                     <form:fields>
-                                                        <Input id="planta" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" valueHelpRequest="_onInputValueHelpRequest"/>
+                                                        <Input id="planta" showValueHelp="false" width="100%" valueState="Information" valueStateText="Ingrese planta" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{listMareas>/plantas}">
+                                                    <suggestionColumns>
+                                                        <Column>
+                                                            <Label text="Planta" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Label text="Descripción" />
+                                                        </Column>
+                                                         <Column>
+                                                            <Label text="Centro" />
+                                                        </Column>
+                                                    </suggestionColumns>
+                                                    <suggestionRows>
+                                                        <ColumnListItem>
+                                                            <Label text="{listMareas>CDPTA}" />
+					                                        <Label text="{listMareas>DESCR}" />
+                                                            <Label text="{listMareas>WERKS}" />
+                                                        </ColumnListItem>
+                                                    </suggestionRows>
+                                                </Input>
                                                     </form:fields>
                                                 </form:FormElement>
                                                 <form:FormElement visible="true">
@@ -40,7 +56,7 @@
                                                         <Label text="Embarcación" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                     </form:label>
                                                     <form:fields>
-                                                        <Input id="embarcacion" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" valueHelpRequest="_onInputValueHelpRequest1"/>
+                                                        <Input id="embarcacion" showValueHelp="true" width="100%" valueStateText="Invalid entry" valueHelpRequest="onOpenEmba"/>
                                                     </form:fields>
                                                 </form:FormElement>
                                                 <form:FormElement visible="true">
@@ -48,8 +64,8 @@
                                                         <Label text="Inicio" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                     </form:label>
                                                     <form:fields>
-                                                        <DatePicker id="fechaInicio" width="auto" displayFormat="medium" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="yyyyMMdd"/>
-                                                        <DatePicker id="fechaFin" width="auto" displayFormat="medium" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="yyyyMMdd"/>
+                                                        
+                                                        <DateRangeSelection id="idDateRangeSelec" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>
                                                     </form:fields>
                                                 </form:FormElement>
                                                 <form:FormElement visible="true">
@@ -57,7 +73,7 @@
                                                         <Label text="Cantidad de aciertos" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                     </form:label>
                                                     <form:fields>
-                                                        <Input id="numAciertos" value="200" type="Number" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
+                                                        <Input id="numAciertos" value="200" type="Number" showValueHelp="false" enabled="true" visible="true" width="100%" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
                                                     </form:fields>
                                                 </form:FormElement>
                                                 <form:FormElement visible="true">
@@ -65,7 +81,8 @@
                                                         <Label text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                     </form:label>
                                                     <form:fields>
-                                                        <Button press="searchData" text="Buscar" type="Default" icon="sap-icon://search" iconFirst="true" width="50%" enabled="true" visible="true" iconDensityAware="false"/>
+                                                        <Button press="searchData" text="Buscar" type="Emphasized" icon="sap-icon://search" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
+                                                        <Button press="clearFields" text="Limpiar" type="Emphasized" icon="sap-icon://clear-filter" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
                                                     </form:fields>
                                                 </form:FormElement>
                                             </form:formElements>
@@ -76,152 +93,140 @@
                                         <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
                                     </form:layout>
                                 </form:Form>
-                            </content>
-                        </Panel>
-                        <Table id="tableData" items="{ path: 'listMareas>/items' }" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
-                            <infoToolbar>
-                                <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
-                                    <content>
-                                        <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </content>
-                                </Toolbar>
-                            </infoToolbar>
-                            <headerToolbar>
-                                <OverflowToolbar width="auto" height="auto" design="Transparent" visible="true" enabled="true">
-                                    <content>
-                                        <Title text="Lista de reportes (1)" titleStyle="Auto" width="auto" textAlign="Begin" visible="true" wrapping="false"/>
-                                        <ToolbarSpacer width=""/>
-                                        <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
-                                        <OverflowToolbarButton text="Sort" type="Transparent" icon="sap-icon://sort" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-                                        <OverflowToolbarButton text="Filter" type="Transparent" icon="sap-icon://filter" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-                                    </content>
-                                </OverflowToolbar>
-                            </headerToolbar>
-                            <columns>
-                                <Column width="auto" hAlign="Right" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Marea" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Centro" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Planta" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Nombre Embarcación" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Fecha Zarpe" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Llegada Zona" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Inicio Cala" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Fin Cala" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Salida Zona" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Arribar Puerto" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Inicio Descarga" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Fin Descarga" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="auto" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Descarga" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="auto" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Declaración" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                                <Column width="6rem" hAlign="Right" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                    <header>
-                                        <Text text="Opción" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                    </header>
-                                    <footer/>
-                                </Column>
-                            </columns>
-                            <items>
-                                <ColumnListItem type="Active">
-                                    <cells>
-                                        <Text text="{listMareas>NRMAR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{listMareas>WERKS}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{listMareas>DESCR}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{listMareas>NMEMB}" width="auto" maxLines="3" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{listMareas>FHZAR}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{listMareas>FHLLE}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{listMareas>FICAL}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{listMareas>FFCAL}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{listMareas>FCSAZ}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{listMareas>FCARP}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{listMareas>FIDES}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{listMareas>FFDES}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{listMareas>CNTDS}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Text text="{listMareas>CNPDC}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        <Button press="showDetalle" text="Detalle" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-                                    </cells>
-                                </ColumnListItem>
-                            </items>
-                        </Table>
+                         
+                        <t:Table id="tableData" rows="{listMareas>/items}" visibleRowCount="8" ariaLabelledBy="title" selectionMode="None">
+                                    <t:extension>
+					                    <OverflowToolbar style="Clear">
+						                    <Title id="title" text="Items"/>
+                                            <ToolbarSpacer width=""/>
+                                            <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
+                                            <Button press='.exportarExcel' text="Exportar" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+					                    </OverflowToolbar>
+				                    </t:extension>
+                                    <t:columns>
+                                        <t:Column width="6rem" filterProperty="NRMAR" defaultFilterOperator="EQ" sortProperty="NRMAR">
+						                    <Label text="Marea" />
+						                    <t:template>
+							                    <Text text="{listMareas>NRMAR}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="8rem" filterProperty="WERKS" defaultFilterOperator="Contains" sortProperty="WERKS">
+						                    <Label text="Centro" />
+						                    <t:template>
+							                    <Text text="{listMareas>WERKS}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="8rem" filterProperty="DESCR" defaultFilterOperator="Contains" sortProperty="DESCR">
+						                    <Label text="Planta" />
+						                    <t:template>
+							                    <Text text="{listMareas>DESCR}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
+						                    <Label text="Nombre Embarcación" />
+						                    <t:template>
+							                    <Text text="{listMareas>NMEMB}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="FHZAR" defaultFilterOperator="Contains">
+						                    <Label text="Fecha Zarpe"/>
+						                    <t:template>
+							                    <Text text="{listMareas>FHZAR} {listMareas>HRZAR}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="FHLLE" defaultFilterOperator="Contains">
+						                    <Label text="Llegada Zona" />
+						                    <t:template>
+							                    <Text text="{listMareas>FHLLE} {listMareas>HRLLE}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="FICAL" defaultFilterOperator="Contains">
+						                    <Label text="Inicio Cala" />
+						                    <t:template>
+							                    <Text text="{listMareas>FICAL} {listMareas>HICAL}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="FFCAL" defaultFilterOperator="Contains">
+						                    <Label text="Fin Cala" />
+						                    <t:template>
+							                    <Text text="{listMareas>FFCAL} {listMareas>HFCAL}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="FCSAZ" defaultFilterOperator="Contains">
+						                    <Label text="Salida Zona" />
+						                    <t:template>
+							                    <Text text="{listMareas>FCSAZ} {listMareas>HRSAZ}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="FCARP" defaultFilterOperator="Contains">
+						                    <Label text="Arribo Puerto"/>
+						                    <t:template>
+							                    <Text text="{listMareas>FCARP} {listMareas>HRARP}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="FIDES" defaultFilterOperator="Contains">
+						                    <Label text="Inicio Descarga" />
+						                    <t:template>
+							                    <Text text="{listMareas>FIDES} {listMareas>HIDES}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="FFDES" defaultFilterOperator="Contains">
+						                    <Label text="Fin Descarga" />
+						                    <t:template>
+							                    <Text text="{listMareas>FFDES} {listMareas>HFDES}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" hAlign="End" filterProperty="CNTDS" defaultFilterOperator="EQ" sortProperty="CNTDS">
+						                    <Label text="Descargada" />
+						                    <t:template>
+							                    <Text text="{listMareas>CNTDS}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                     <t:columns>
+                                        <t:Column width="11rem" hAlign="End" filterProperty="CNPDC" defaultFilterOperator="EQ" sortProperty="CNPDC">
+						                    <Label text="Declarada" />
+						                    <t:template>
+							                    <Text text="{listMareas>CNPDC}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem">
+						                    <Label text="" />
+						                    <t:template>
+							                    <Button text="Detalle" press="showDetalle" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                </t:Table>
                     </content>
-                    <footer>
-                        <OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
-                            <content>
-                                <Button text="Exportar Excel" press=".exportarExcel" type="Emphasized" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-                                <ToolbarSpacer width=""/>
-                            </content>
-                        </OverflowToolbar>
-                    </footer>
+                   
 				</Page>
 			</pages>
 		</App>
-	</Shell>
 </mvc:View>
