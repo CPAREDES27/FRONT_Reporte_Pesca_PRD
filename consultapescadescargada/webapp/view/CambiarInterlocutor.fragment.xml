@@ -57,7 +57,7 @@
                             </form:FormElement>
                             <form:FormElement label="Interlocutor alterno" visible="true">
                                 <form:fields>
-                                    <Input value="{consultaPescaDescargada>/mareaSelected/armador}" type="Text" showValueHelp="true" enabled="true" visible="true" width="50%" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
+                                    <Input value="{consultaPescaDescargada>/mareaSelected/armador}" type="Text" showValueHelp="true" valueHelpRequest="openIterlocutorDialog" enabled="true" visible="true" width="50%" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
                                     <Text text="" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                 </form:fields>
                             </form:FormElement>

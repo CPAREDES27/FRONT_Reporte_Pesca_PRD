@@ -24,19 +24,27 @@
                                                 <Label text="Centro" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <Input id="centro" type="Text" valueState="Information" valueStateText="Ingrese centro" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{consultaPescaDescargada>/centros}" width="100%">
+                                                <Input id="centro" type="Text" valueState="Information" valueStateText="Ingrese centro" suggestionItemSelected="onSelectWerks" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{consultaPescaDescargada>/centros}" width="100%">
                                                     <suggestionColumns>
                                                         <Column>
-                                                            <Label text="Centro" />
+                                                            <Label text="Planta" />
                                                         </Column>
                                                         <Column>
                                                             <Label text="Descripción" />
                                                         </Column>
+                                                        <Column>
+                                                            <Label text="Centro" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Label text="Armador" />
+                                                        </Column>
                                                     </suggestionColumns>
                                                     <suggestionRows>
                                                         <ColumnListItem>
+                                                            <Label text="{consultaPescaDescargada>CDPTA}" />
+					                                        <Label text="{consultaPescaDescargada>DESCR}" />
                                                             <Label text="{consultaPescaDescargada>WERKS}" />
-					                                        <Label text="{consultaPescaDescargada>NAME1}" />
+                                                            <Label text="{consultaPescaDescargada>STCD1}" />
                                                         </ColumnListItem>
                                                     </suggestionRows>
                                                 </Input>
@@ -126,11 +134,12 @@
                                 <t:Table id="tableData" rows="{consultaPescaDescargada>/items}" visibleRowCount="8" ariaLabelledBy="title" selectionMode="None">
                                     <t:extension>
 					                    <OverflowToolbar style="Clear">
-						                    <Title id="title" text=""/>
+						                    <Title id="titulo" text=""/>
                                             <ToolbarSpacer width=""/>
                                             <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
                                             <Button press='.exportarExcel' text="Exportar" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-					                    </OverflowToolbar>
+                                            
+                                        </OverflowToolbar>
 				                    </t:extension>
                                     <t:columns>
                                         <t:Column width="8rem" filterProperty="WERKS" defaultFilterOperator="Contains" sortProperty="WERKS">

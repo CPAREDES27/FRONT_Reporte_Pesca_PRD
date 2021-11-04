@@ -123,7 +123,7 @@ sap.ui.define([
 					}).catch(error => console.log(error));
 
 					const bodyAyudaBusqueda = {
-						"nombreAyuda": "BSQCENTRO",
+						"nombreAyuda": "BSQPLANTAS",
 						"p_user": this.getCurrentUser()
 					};
 				
@@ -521,6 +521,8 @@ sap.ui.define([
 				this.byId("cbTipoMarea").setSelectedKey(null);
 				this.byId("idDateRangeIniMar").setValue(null);
 				this.byId("idDateRangeFinMar").setValue(null);
+				this.getModel("reporteCala").setProperty("/items", []);
+				this.getModel("reporteCala").refresh();
 			},
 
 			onAbrirAyudaEmbarcacion: function(){
@@ -574,7 +576,7 @@ sap.ui.define([
 						"control": "COMBOBOX",
 						"key": "NMEMB",
 						"valueHigh": "",
-						"valueLow": idEmbarcacionDesc
+						"valueLow": idEmbarcacionDesc.toUpperCase()
 						
 					});
 				}
@@ -611,7 +613,7 @@ sap.ui.define([
 						"control": "COMBOBOX",
 						"key": "NAME1",
 						"valueHigh": "",
-						"valueLow": idArmador
+						"valueLow": idArmador.toUpperCase()
 					})
 				}
 				
@@ -683,19 +685,27 @@ sap.ui.define([
 					},
 					{
 						label: "LATIT",
-  						property: "LATSG"
+  						property: "LATSG",
+						type: "number",
+						scale: 2
 					},
 					{
 						label: "LONGI",
-  						property: "LOGSG"
+  						property: "LOGSG",
+						type: "number",
+						scale: 2
 					},
 					{
 						label: "TE_RCPE",
-  						property: "TEMAR"
+  						property: "TEMAR",
+						type: "number",
+						scale: 2
 					},
 					{
 						label: "QT_PES_RCPE",
-  						property: "CNPCM"
+  						property: "CNPCM",
+						type: "number",
+						scale: 2
 					},
 					{
 						label: "FG_PLAN",
@@ -717,7 +727,7 @@ sap.ui.define([
 						label: "QT_CBOD",
   						property: "CPPMS",
 						type: "number",
-						scale: 3
+						scale: 2
 					},
 					{
 						label: "DE_ARTI",
@@ -735,6 +745,7 @@ sap.ui.define([
 						label: "MODA",
   						property: "ZMODA",
 						type: "number",
+						scale: 2
 					},
 					{
 						label: "MATRICULA",
@@ -762,7 +773,7 @@ sap.ui.define([
 					},
 					{
 						label: "Tipo Marea",
-  						property: "PESCA {DESC_TIPOMAREA}"
+  						property: "DESC_TIPOMAREA"
 					},
 					{
 						label: "Observaciones",
@@ -831,6 +842,24 @@ sap.ui.define([
 					}
 				];
 				return aColumns;
+			},
+			
+			clearFilterEmba: function(){
+				sap.ui.getCore().byId("idEmba").setValue(null);
+				sap.ui.getCore().byId("idNombEmba").setValue(null);
+				sap.ui.getCore().byId("idRucArmador").setValue(null);
+				sap.ui.getCore().byId("idMatricula").setValue(null);
+				sap.ui.getCore().byId("indicadorPropiedad").setSelectedKey(null);
+				sap.ui.getCore().byId("idDescArmador").setValue(null);
+				this.getModel("reporteCala").setProperty("/embarcaciones", []);
+				this.getModel("reporteCala").refresh();
+			},
+
+			onSelectWerks: function (evt) {
+				var objeto = evt.getParameter("selectedRow").getBindingContext("reporteCala").getObject();
+				if (objeto) {
+					this.getView().byId("txtCentro").setValue(objeto.WERKS);
+				}
 			},
 
 			getCurrentUser: function(){

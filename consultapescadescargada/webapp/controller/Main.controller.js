@@ -46,6 +46,10 @@ sap.ui.define([
 				this.currentInputEmba = "";
 				this.setModel(oViewModel, "consultaPescaDescargada");
 				this.loadData();
+				this.primerOption = [];
+				this.segundoOption = [];
+				this.currentPage = "";
+				this.lastPage = "";
 			},
 			loadData: function () {
 				BusyIndicator.show(0);
@@ -85,13 +89,13 @@ sap.ui.define([
 						this.getModel("consultaPescaDescargada").setProperty("/zinprpDom", zinprpDom);
 						this.getModel("consultaPescaDescargada").setProperty("/zdoTipoMareaDom", zdoTipoMareaDom);
 					}).catch(error => console.log(error));
-				
-					const bodyAyudaBusqueda = {
-						"nombreAyuda": "BSQCENTRO",
-						"p_user": this.getCurrentUser()
-					};
-				
-					fetch(`${mainUrlServices}General/AyudasBusqueda/`,
+
+				const bodyAyudaBusqueda = {
+					"nombreAyuda": "BSQPLANTAS",
+					"p_user": this.getCurrentUser()
+				};
+
+				fetch(`${mainUrlServices}General/AyudasBusqueda/`,
 					{
 						method: 'POST',
 						body: JSON.stringify(bodyAyudaBusqueda)
@@ -120,15 +124,15 @@ sap.ui.define([
 				let fechaProdIni = null;
 				let fechaProdFin = null;
 				var valueDateRange = this.byId("idDateRangeSelec").getValue();
-				if(valueDateRange){
+				if (valueDateRange) {
 					var valDtrIni = valueDateRange.split("-")[0].trim();
 					var valDtrFin = valueDateRange.split("-")[1].trim();
-					if(valDtrIni && valDtrFin){
+					if (valDtrIni && valDtrFin) {
 						fechaProdIni = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
 						fechaProdFin = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
 					}
 				}
-				
+
 				const input = 'INPUT';
 				const multiinput = 'MULTIINPUT';
 				const comboBox = "COMBOBOX";
@@ -147,7 +151,7 @@ sap.ui.define([
 				if (ubicacionPlanta) {
 					options.push({
 						cantidad: '10',
-						control: comboBox,
+						control: input,
 						key: 'CDUPT',
 						valueHigh: '',
 						valueLow: ubicacionPlanta
@@ -227,7 +231,7 @@ sap.ui.define([
 
 					return option;
 				}); */
-				
+
 				const body = {
 					p_options: [],
 					options: options,
@@ -248,8 +252,8 @@ sap.ui.define([
 						for (let index = 0; index < sData.length; index++) {
 							const element = sData[index];
 							element.visibleMarea = true;
-							sumCnpcm += element.CNPCM;
-							sumCnpds += element.CNPDS;
+							sumCnpcm += !isNaN(element.CNPCM) ? Number(element.CNPCM) : 0;
+							sumCnpds += !isNaN(element.CNPDS) ? Number(element.CNPDS) : 0;
 							tmpData.push(element);
 						}
 
@@ -257,17 +261,19 @@ sap.ui.define([
 						var lastObject = tmpData[tmpData.length - 1];
 						var objFooter = {}
 						for (var key in lastObject) {
-							if(key == "visibleMarea"){
+							if (key == "visibleMarea") {
 								objFooter[key] = false;
-							}else if(key == "visibleInterLoc"){
+							} else if (key == "visibleInterLoc") {
 								objFooter[key] = false;
-							}else if(key == "CNPCM"){
-								objFooter[key] = sumCnpcm;
-							}else if(key == "CNPDS"){
-								objFooter[key] = sumCnpds.toFixed(3);
-							}else if(key == "INPRP"){
+							} else if (key == "CNPCM") {
+								objFooter[key] = parseFloat(sumCnpcm).toFixed(3);
+							} else if (key == "CNPDS") {
+								objFooter[key] = parseFloat(sumCnpds).toFixed(3);
+							} else if (key == "INPRP") {
 								objFooter[key] = "P";
-							}else{
+							} else if (key == "WERKS") {
+								objFooter[key] = "Total General:";
+							} else {
 								objFooter[key] = null;
 							}
 						}
@@ -278,7 +284,7 @@ sap.ui.define([
 						console.error(error);
 						BusyIndicator.hide();
 					});
-					
+
 			},
 
 			openCambiarInterlocutor: async function (event) {
@@ -451,11 +457,11 @@ sap.ui.define([
 				aCols = this.getColumnsConfig();
 
 				oSettings = {
-					workbook: { 
+					workbook: {
 						columns: aCols,
 						context: {
 							sheetName: "CONSULTA DE DESCARGAS"
-						} 
+						}
 					},
 					dataSource: oRowBinding,
 					fileName: 'Consulta de pesca descargada.xlsx',
@@ -466,13 +472,13 @@ sap.ui.define([
 				oSheet.build().finally(function () {
 					oSheet.destroy();
 				});
-			}, 
+			},
 
-			onAbrirAyudaEmbarcacion: function(evt){
+			onAbrirAyudaEmbarcacion: function (evt) {
 				this.getDialog().open();
 			},
 
-			getDialog: function(){
+			getDialog: function () {
 				if (!this.oDialog) {
 					this.oDialog = sap.ui.xmlfragment("com.tasa.consultapescadescargada.view.Embarcacion", this);
 					this.getView().addDependent(this.oDialog);
@@ -480,20 +486,20 @@ sap.ui.define([
 				return this.oDialog;
 			},
 
-			onCerrarEmba: function(){
+			onCerrarEmba: function () {
 				this.getDialog().close();
 			},
 
-			onSearchEmbarcacion: function(){
+			onSearchEmbarcacion: function () {
 				BusyIndicator.show(0);
-				var idEmbarcacion =sap.ui.getCore().byId("idEmba").getValue();
-				var idEmbarcacionDesc =sap.ui.getCore().byId("idNombEmba").getValue();
-				var idMatricula =sap.ui.getCore().byId("idMatricula").getValue();
-				var idRuc =sap.ui.getCore().byId("idRucArmador").getValue();
-				var idArmador =sap.ui.getCore().byId("idDescArmador").getValue();
+				var idEmbarcacion = sap.ui.getCore().byId("idEmba").getValue();
+				var idEmbarcacionDesc = sap.ui.getCore().byId("idNombEmba").getValue();
+				var idMatricula = sap.ui.getCore().byId("idMatricula").getValue();
+				var idRuc = sap.ui.getCore().byId("idRucArmador").getValue();
+				var idArmador = sap.ui.getCore().byId("idDescArmador").getValue();
 				var idPropiedad = sap.ui.getCore().byId("indicadorPropiedad").getSelectedKey();
-				var options=[];
-				var options2=[];
+				var options = [];
+				var options2 = [];
 				let embarcaciones = [];
 				options.push({
 					"cantidad": "20",
@@ -502,104 +508,212 @@ sap.ui.define([
 					"valueHigh": "",
 					"valueLow": "O"
 				})
-				if(idEmbarcacion){
+				if (idEmbarcacion) {
 					options.push({
 						"cantidad": "20",
 						"control": "COMBOBOX",
 						"key": "CDEMB",
 						"valueHigh": "",
 						"valueLow": idEmbarcacion
-						
+
 					});
 				}
-				if(idEmbarcacionDesc){
+				if (idEmbarcacionDesc) {
 					options.push({
 						"cantidad": "20",
 						"control": "COMBOBOX",
 						"key": "NMEMB",
 						"valueHigh": "",
-						"valueLow": idEmbarcacionDesc
-						
+						"valueLow": idEmbarcacionDesc.toUpperCase()
+
 					});
 				}
-				if(idMatricula){
+				if (idMatricula) {
 					options.push({
 						"cantidad": "20",
 						"control": "COMBOBOX",
 						"key": "MREMB",
 						"valueHigh": "",
 						"valueLow": idMatricula
-					})
+					});
 				}
-				if(idPropiedad){
+				if (idPropiedad) {
 					options.push({
 						"cantidad": "20",
 						"control": "COMBOBOX",
 						"key": "INPRP",
 						"valueHigh": "",
 						"valueLow": idPropiedad
-					})
+					});
 				}
-				if(idRuc){
+				if (idRuc) {
 					options2.push({
 						"cantidad": "20",
 						"control": "COMBOBOX",
 						"key": "STCD1",
 						"valueHigh": "",
 						"valueLow": idRuc
-					})
+					});
 				}
-				if(idArmador){
+				if (idArmador) {
 					options2.push({
 						"cantidad": "20",
 						"control": "COMBOBOX",
 						"key": "NAME1",
 						"valueHigh": "",
-						"valueLow": idArmador
-					})
+						"valueLow": idArmador.toUpperCase()
+					});
 				}
-				
-				var body={
+
+				this.primerOption = options;
+				this.segundoOption = options2;
+
+				var body = {
 					"option": [
-					  
+
 					],
 					"option2": [
-					  
+
 					],
 					"options": options,
 					"options2": options2,
-					"p_user": "BUSQEMB"
+					"p_user": "BUSQEMB",
+					//"p_pag": "1" //por defecto la primera parte
 				};
 
 				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
-				{
-					method: 'POST',
-					body: JSON.stringify(body)
-				})
-				.then(resp => resp.json()).then(data => {
-					console.log("Emba: ", data);
-					embarcaciones = data.data;
-					
-					this.getModel("consultaPescaDescargada").setProperty("/embarcaciones", embarcaciones);
-					this.getModel("consultaPescaDescargada").refresh();
-					BusyIndicator.hide();
-				}).catch(error => console.log(error));
+					{
+						method: 'POST',
+						body: JSON.stringify(body)
+					})
+					.then(resp => resp.json()).then(data => {
+						console.log("Emba: ", data);
+						embarcaciones = data.data;
+
+						this.getModel("consultaPescaDescargada").setProperty("/embarcaciones", embarcaciones);
+						this.getModel("consultaPescaDescargada").refresh();
+
+						if (!isNaN(data.p_totalpag)) {
+							if (Number(data.p_totalpag) > 0) {
+								sap.ui.getCore().byId("goFirstPag").setEnabled(true);
+								sap.ui.getCore().byId("goPreviousPag").setEnabled(true);
+								sap.ui.getCore().byId("comboPaginacion").setEnabled(true);
+								sap.ui.getCore().byId("goLastPag").setEnabled(true);
+								sap.ui.getCore().byId("goNextPag").setEnabled(true);
+								var tituloTablaEmba = "Página 1/" + Number(data.p_totalpag);
+								this.getModel("consultaPescaDescargada").setProperty("/TituloEmba", tituloTablaEmba);
+								var numPag = Number(data.p_totalpag) + 1;
+								var paginas = [];
+								for (let index = 1; index < numPag; index++) {
+									paginas.push({
+										numero: index
+									});
+								}
+								this.getModel("consultaPescaDescargada").setProperty("/NumerosPaginacion", paginas);
+								sap.ui.getCore().byId("comboPaginacion").setSelectedKey("1");
+								this.currentPage = "1";
+								this.lastPage = data.p_totalpag;
+							} else {
+								var tituloTablaEmba = "Página 1/1";
+								this.getModel("consultaPescaDescargada").setProperty("/TituloEmba", tituloTablaEmba);
+								this.getModel("consultaPescaDescargada").setProperty("/NumerosPaginacion", []);
+								sap.ui.getCore().byId("goFirstPag").setEnabled(false);
+								sap.ui.getCore().byId("goPreviousPag").setEnabled(false);
+								sap.ui.getCore().byId("comboPaginacion").setEnabled(false);
+								sap.ui.getCore().byId("goLastPag").setEnabled(false);
+								sap.ui.getCore().byId("goNextPag").setEnabled(false);
+								this.currentPage = "1";
+								this.lastPage = data.p_totalpag;
+							}
+						}
+
+
+						//sap.ui.getCore().byId("comboPaginacion").setVisible(true);
+
+						BusyIndicator.hide();
+					}).catch(error => console.log(error));
 			},
 
-			onSelectEmba: function(evt){
-				var objeto = evt.getSource().getBindingContext("consultaPescaDescargada").getObject();
-				if(objeto){
+			onChangePag: function (evt) {
+				var id = evt.getSource().getId();
+				var oControl = sap.ui.getCore().byId(id);
+				var pagina = oControl.getSelectedKey();
+				this.currentPage = pagina;
+				this.onNavPage();
+			},
+
+			onSetCurrentPage: function (evt) {
+				var id = evt.getSource().getId();
+				if (id == "goFirstPag") {
+					this.currentPage = "1";
+				} else if (id == "goPreviousPag") {
+					if (!isNaN(this.currentPage)) {
+						if (this.currentPage != "1") {
+							var previousPage = Number(this.currentPage) - 1;
+							this.currentPage = previousPage.toString();
+						}
+					}
+				} else if (id == "goNextPag") {
+					if (!isNaN(this.currentPage)) {
+						if (this.currentPage != this.lastPage) {
+							var nextPage = Number(this.currentPage) + 1;
+							this.currentPage = nextPage.toString();
+						}
+					}
+				} else if (id == "goLastPag") {
+					this.currentPage = this.lastPage;
+				}
+				this.onNavPage();
+			},
+
+			onNavPage: function () {
+				BusyIndicator.show(0);
+				let embarcaciones = [];
+				var body = {
+					"option": [
+
+					],
+					"option2": [
+
+					],
+					"options": this.primerOption,
+					"options2": this.segundoOption,
+					"p_user": "BUSQEMB",
+					"p_pag": this.currentPage
+				};
+
+				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
+					{
+						method: 'POST',
+						body: JSON.stringify(body)
+					})
+					.then(resp => resp.json()).then(data => {
+						console.log("Emba: ", data);
+						embarcaciones = data.data;
+
+						this.getModel("consultaPescaDescargada").setProperty("/embarcaciones", embarcaciones);
+						this.getModel("consultaPescaDescargada").refresh();
+						var tituloTablaEmba = "Página " + this.currentPage + "/" + Number(data.p_totalpag);
+						this.getModel("consultaPescaDescargada").setProperty("/TituloEmba", tituloTablaEmba);
+						sap.ui.getCore().byId("comboPaginacion").setSelectedKey(this.currentPage);
+						BusyIndicator.hide();
+					}).catch(error => console.log(error));
+			},
+
+			onSelectEmba: function (evt) {
+				var objeto = evt.getParameter("rowContext").getObject();
+				if (objeto) {
 					var cdemb = objeto.CDEMB;
 					this.byId("embarcacion").setValue(cdemb);
 					this.getDialog().close();
 				}
 			},
 
-			onCerrarEmba: function(){
+			onCerrarEmba: function () {
 				this.getDialog().close();
 			},
 
-			clearFields: function(){
+			clearFields: function () {
 				this.byId("centro").setValue(null);
 				this.byId("ubicacionPlanta").setSelectedKey(null);
 				this.byId("embarcacion").setValue(null);
@@ -607,9 +721,11 @@ sap.ui.define([
 				this.byId("tipoMarea").setSelectedKey(null);
 				this.byId("numRegistros").setValue(null);
 				this.byId("idDateRangeSelec").setValue(null);
+				this.getModel("consultaPescaDescargada").setProperty("/items", []);
+				this.getModel("consultaPescaDescargada").refresh();
 			},
 
-			buscarEmbaFiltro: async function(filtro){
+			buscarEmbaFiltro: async function (filtro) {
 				BusyIndicator.show(0);
 				let embarcaciones = [];
 				const objectRT = {
@@ -620,231 +736,223 @@ sap.ui.define([
 					"options": [
 					],
 					"options2": [
-					 {
-						 "cantidad":"10",
-						 "control":"COMBOBOX",
-						 "key":"ESEMB",
-						 "valueHigh":"",
-						 "valueLow":"0"
-					 }
+						{
+							"cantidad": "10",
+							"control": "COMBOBOX",
+							"key": "ESEMB",
+							"valueHigh": "",
+							"valueLow": "0"
+						}
 
 					],
 					"p_user": "BUSQEMB"
-				  };
+				};
 
-				  fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
-				{
-					method: 'POST',
-					body: JSON.stringify(objectRT)
-				})
-				.then(resp => resp.json()).then(data => {
-					console.log("Emba: ", data);
-					embarcaciones = data.data;
-					var tmpEmba = [];
-					for (let index = 0; index < 200; index++) {
-						const element = embarcaciones[index];
-						for (var key in filtro) {
-							if(element.hasOwnProperty(key)){
-								if(filtro[key] == element[key]){
-									tmpEmba.push(element);
+				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
+					{
+						method: 'POST',
+						body: JSON.stringify(objectRT)
+					})
+					.then(resp => resp.json()).then(data => {
+						console.log("Emba: ", data);
+						embarcaciones = data.data;
+						var tmpEmba = [];
+						for (let index = 0; index < 200; index++) {
+							const element = embarcaciones[index];
+							for (var key in filtro) {
+								if (element.hasOwnProperty(key)) {
+									if (filtro[key] == element[key]) {
+										tmpEmba.push(element);
+									}
 								}
 							}
 						}
-					}
-					var tabla = sap.ui.getCore().byId("tblEmbarcaciones");
-					var data = {
-						data: tmpEmba
-					}
-					var modelo = new JSONModel(data);
-					tabla.setModel(modelo)
-					/*this.getModel("consultaPescaDescargada").setProperty("/embarcaciones", tmpEmba);
-					this.getModel("consultaPescaDescargada").refresh();*/
-					BusyIndicator.hide();
-				}).catch(error => console.log(error));
+						var tabla = sap.ui.getCore().byId("tblEmbarcaciones");
+						var data = {
+							data: tmpEmba
+						}
+						var modelo = new JSONModel(data);
+						tabla.setModel(modelo)
+						/*this.getModel("consultaPescaDescargada").setProperty("/embarcaciones", tmpEmba);
+						this.getModel("consultaPescaDescargada").refresh();*/
+						BusyIndicator.hide();
+					}).catch(error => console.log(error));
 			},
 
-			getColumnsConfig: function(){
+			getColumnsConfig: function () {
 				var aColumns = [
 					{
 						label: "Marea",
-  						property: "NRMAR",
+						property: "NRMAR",
 						type: "number"
 					},
 					{
 						label: "Descarga",
-  						property: "NRDES",
+						property: "NRDES",
 					},
 					{
 						label: "Lote",
-  						property: "NROLOTE",
+						property: "NROLOTE",
 					},
 					{
 						label: "Ticket",
-  						property: "TICKE",
+						property: "TICKE",
 					},
 					{
 						label: "Centro",
-  						property: "WERKS",
+						property: "WERKS",
 					},
 					{
 						label: "Desc. Planta",
-  						property: "DESCR",
+						property: "DESCR",
 					},
 					{
 						label: "Ubic. Planta",
-  						property: "DSUPT",
+						property: "DSUPT",
 					},
 					{
 						label: "Fecha Producción",
-  						property: "FECCONMOV",
+						property: "FECCONMOV",
 					},
 					{
 						label: "Embarcación",
-  						property: "CDEMB",
+						property: "CDEMB",
 					},
 					{
 						label: "Nombre Embarcación",
-  						property: "NMEMB",
+						property: "NMEMB",
 					},
 					{
 						label: "Matrícula",
-  						property: "MREMB",
-					},
-					{
-						label: "Matrícula",
-  						property: "MREMB",
+						property: "MREMB",
 					},
 					{
 						label: "CBOD",
-  						property: "CPPMS",
+						property: "CPPMS",
 						type: "number",
 						scale: 3
 					},
 					{
 						label: "Armador",
-  						property: "DSEMP",
+						property: "DSEMP",
 					},
 					{
 						label: "Ind. Propiedad",
-  						property: "DESC_INPRP",
+						property: "DESC_INPRP",
 					},
 					{
 						label: "Puerto Zarpe",
-  						property: "DSPZA",
+						property: "DSPZA",
 					},
 					{
 						label: "Fecha Zarpe",
-  						property: "FCZAR",
+						property: "FCZAR",
 					},
 					{
 						label: "Hora Zarpe",
-  						property: "HOZAR",
-					},
-					{
-						label: "Hora Zarpe",
-  						property: "HOZAR",
+						property: "HOZAR",
 					},
 					{
 						label: "Fecha LLeg Zona",
-  						property: "FCLLZ",
+						property: "FCLLZ",
 					},
 					{
 						label: "Hora LLeg Zona",
-  						property: "HOLLZ",
+						property: "HOLLZ",
 					},
 					{
 						label: "Zona de Pesca",
-  						property: "CDZPC",
+						property: "CDZPC",
 					},
 					{
 						label: "Fecha Ult Cala",
-  						property: "FCTCL",
+						property: "FCTCL",
 					},
 					{
 						label: "Hora Ult Cala",
-  						property: "HOTCL",
+						property: "HOTCL",
 					},
 					{
 						label: "Fecha Salida Zona",
-  						property: "FCSAZ",
+						property: "FCSAZ",
 					},
 					{
 						label: "Hora Salida Zona",
-  						property: "HOSAZ",
+						property: "HOSAZ",
 					},
 					{
 						label: "Puerto Arribo",
-  						property: "DSPAR",
+						property: "DSPAR",
 					},
 					{
 						label: "Fecha Arribo",
-  						property: "FCARR",
+						property: "FCARR",
 					},
 					{
 						label: "Hora Arribo",
-  						property: "HOARR",
+						property: "HOARR",
 					},
 					{
 						label: "Fecha Ini Desc",
-  						property: "FIDES",
+						property: "FIDES",
 					},
 					{
 						label: "Hora Ini Desc",
-  						property: "HIDES",
+						property: "HIDES",
 					},
 					{
 						label: "Fecha Fin Desc",
-  						property: "FFDES",
+						property: "FFDES",
 					},
 					{
 						label: "Hora Fin Desc",
-  						property: "HFDES",
+						property: "HFDES",
 					},
 					{
 						label: "Pesc. Decl.",
-  						property: "CNPCM",
+						property: "CNPCM",
 						type: "number",
 						scale: 3
 					},
 					{
 						label: "Pesc. Desc.",
-  						property: "CNPDS",
+						property: "CNPDS",
 						type: "number",
 						scale: 3
 					},
 					{
 						label: "Motivo Marea",
-  						property: "DESC_CDMMA",
+						property: "DESC_CDMMA",
 					},
 					{
 						label: "Especie",
-  						property: "DSSPC",
+						property: "DSSPC",
 					},
 					{
 						label: "Motivo Limitación",
-  						property: "DSMLM",
+						property: "DSMLM",
 					},
 					{
 						label: "Desc. Bomba",
-  						property: "DSBOM",
+						property: "DSBOM",
 					},
 					{
 						label: "Lado Descarga",
-  						property: "DSLDS",
+						property: "DSLDS",
 					},
 					{
 						label: "Punto Descarga",
-  						property: "DSPDG",
+						property: "DSPDG",
 					},
 					{
 						label: "Patrón",
-  						property: "NMPER",
+						property: "NMPER",
 					}
 				];
 				return aColumns;
 			},
 
-			onVerMarea: function(evt){
+			onVerMarea: function (evt) {
 				var obj = evt.getSource().getParent().getBindingContext("consultaPescaDescargada").getObject()
 				var nrmar = obj.NRMAR;
 				var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
@@ -858,7 +966,71 @@ sap.ui.define([
 				});
 			},
 
-			getCurrentUser: function(){
+			clearFilterEmba: function () {
+				sap.ui.getCore().byId("idEmba").setValue(null);
+				sap.ui.getCore().byId("idNombEmba").setValue(null);
+				sap.ui.getCore().byId("idRucArmador").setValue(null);
+				sap.ui.getCore().byId("idMatricula").setValue(null);
+				sap.ui.getCore().byId("indicadorPropiedad").setSelectedKey(null);
+				sap.ui.getCore().byId("idDescArmador").setValue(null);
+				//sap.ui.getCore().byId("comboPaginacion").setVisible(false);
+				this.getModel("consultaPescaDescargada").setProperty("/embarcaciones", []);
+				this.getModel("consultaPescaDescargada").setProperty("/NumerosPaginacion", []);
+				this.getModel("consultaPescaDescargada").refresh();
+			},
+
+			onSelectWerks: function (evt) {
+				var objeto = evt.getParameter("selectedRow").getBindingContext("consultaPescaDescargada").getObject();
+				if (objeto) {
+					this.getView().byId("centro").setValue(objeto.WERKS);
+				}
+			},
+
+			getInterlocutorDialog: function () {
+				if (!this.oDialogInterlocutor) {
+					this.oDialogInterlocutor = sap.ui.xmlfragment("com.tasa.consultapescadescargada.view.Interlocutor", this);
+					this.getView().addDependent(this.oDialogInterlocutor);
+				}
+				return this.oDialogInterlocutor;
+			},
+
+			openIterlocutorDialog: function () {
+				this.getInterlocutorDialog().open();
+			},
+
+			cerrarInterlocutorDialog: function () {
+				this.getInterlocutorDialog().close();
+			},
+
+			onSelecInterlocutor: function (evt) {
+				var objeto = evt.getSource().getBindingContext("consultaPescaDescargada").getObject();
+				if (objeto) {
+					var cdemb = objeto.CDEMB;
+					this.byId("embarcacion").setValue(cdemb);
+					this.getDialog().close();
+				}
+			},
+
+			listaArmador: function () {
+				BusyIndicator.show(0);
+				var body = {
+					"codigo": "100"
+				}
+				fetch(`${mainUrlServices}General/Armador`,
+					{
+						method: 'POST',
+						body: JSON.stringify(body)
+					})
+					.then(resp => resp.json()).then(data => {
+						var dataPuerto = data.data;
+						console.log(dataPuerto);
+						this.getView().getModel("consultaPescaDescargada").setProperty("/listaArmador", dataPuerto)
+						BusyIndicator.hide();
+					}).catch(error => console.log(error)
+					);
+			},
+
+			getCurrentUser: function () {
 				return "FGARCIA";
 			}
 

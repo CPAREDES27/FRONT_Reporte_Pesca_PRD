@@ -191,28 +191,11 @@
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
-                                    
                                     <t:columns>
                                         <t:Column width="11rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
 						                    <Label text="Nombre Embarcación" />
 						                    <t:template>
 							                    <Text text="{consultaMareas>NMEMB}" wrapping="false" />
-						                    </t:template>
-					                    </t:Column>       
-                                    </t:columns>
-                                    <t:columns>
-                                        <t:Column width="11rem" filterProperty="FICAL" defaultFilterOperator="Contains" >
-						                    <Label text="Inicio Envase" />
-						                    <t:template>
-							                    <Text text="{consultaMareas>FICAL} {consultaMareas>HICAL}" wrapping="false" />
-						                    </t:template>
-					                    </t:Column>       
-                                    </t:columns>
-                                    <t:columns>
-                                        <t:Column width="11rem" filterProperty="FFCAL" defaultFilterOperator="Contains" >
-						                    <Label text="Fin Envase" />
-						                    <t:template>
-							                    <Text text="{consultaMareas>FFCAL} {consultaMareas>HFCAL}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -269,6 +252,22 @@
 						                    <Label text="Llega Zona" />
 						                    <t:template>
 							                    <Text text="{consultaMareas>FHLLE} {consultaMareas>HRLLE}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="FICAL" defaultFilterOperator="Contains" >
+						                    <Label text="Inicio Envase" />
+						                    <t:template>
+							                    <Text text="{consultaMareas>FICAL} {consultaMareas>HICAL}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="11rem" filterProperty="FFCAL" defaultFilterOperator="Contains" >
+						                    <Label text="Fin Envase" />
+						                    <t:template>
+							                    <Text text="{consultaMareas>FFCAL} {consultaMareas>HFCAL}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>

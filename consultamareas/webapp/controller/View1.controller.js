@@ -199,7 +199,7 @@ sap.ui.define([
 					options.push({
 						cantidad: "10",
 						control: multiinput,
-						key: "WERKS",
+						key: "CDPTA",
 						valueHigh: isMulti ? plantaHigh : "",
 						valueLow: isMulti ? plantaLow : planta
 					});
@@ -476,7 +476,7 @@ sap.ui.define([
 						"control": "COMBOBOX",
 						"key": "NMEMB",
 						"valueHigh": "",
-						"valueLow": idEmbarcacionDesc
+						"valueLow": idEmbarcacionDesc.toUpperCase()
 						
 					});
 				}
@@ -513,7 +513,7 @@ sap.ui.define([
 						"control": "COMBOBOX",
 						"key": "NAME1",
 						"valueHigh": "",
-						"valueLow": idArmador
+						"valueLow": idArmador.toUpperCase()
 					})
 				}
 				
@@ -526,7 +526,8 @@ sap.ui.define([
 					],
 					"options": options,
 					"options2": options2,
-					"p_user": "BUSQEMB"
+					"p_user": "BUSQEMB",
+					"p_pag": "1"
 				};
 
 				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
@@ -609,6 +610,14 @@ sap.ui.define([
 						property: "HRZAR",
 					},
 					{
+						label: "Fecha Llegada Zona",
+						property: "FHLLE",
+					},
+					{
+						label: "Hora Llegada Zona",
+						property: "HRLLE",
+					},
+					{
 						label: "Fecha Inicio Envase",
 						property: "FICAL",
 					},
@@ -682,7 +691,18 @@ sap.ui.define([
 				this.byId("propiedad").setSelectedKey(null);
 				this.byId("motivos").setSelectedKeys(null);
 				this.byId("idDateRangeSelec").setValue(null);
-				
+				this.getModel("consultaMareas").setProperty("/items", []);
+			},
+
+			clearFilterEmba: function(){
+				sap.ui.getCore().byId("idEmba").setValue(null);
+				sap.ui.getCore().byId("idNombEmba").setValue(null);
+				sap.ui.getCore().byId("idRucArmador").setValue(null);
+				sap.ui.getCore().byId("idMatricula").setValue(null);
+				sap.ui.getCore().byId("indicadorPropiedad").setSelectedKey(null);
+				sap.ui.getCore().byId("idDescArmador").setValue(null);
+				this.getModel("consultaMareas").setProperty("/embarcaciones", []);
+				this.getModel("consultaMareas").refresh();
 			},
 
 			getDialog: function(){

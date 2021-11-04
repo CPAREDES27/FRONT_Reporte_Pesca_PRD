@@ -68,7 +68,8 @@
                                         <Label text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                     </form:label>
                                     <form:fields>
-                                        <Button text="Buscar" type="Emphasized" icon="sap-icon://search" iconFirst="true" width="50%" enabled="true" visible="true" iconDensityAware="false" press="onSearchEmbarcacion"/>
+                                        <Button text="Buscar" type="Emphasized" icon="sap-icon://search" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false" press="onSearchEmbarcacion"/>
+                                        <Button press="clearFilterEmba" text="Limpiar" type="Emphasized" icon="sap-icon://clear-filter" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
                                     </form:fields>
                             </form:FormElement>
 						</form:formElements>
@@ -137,11 +138,10 @@
                                 <Text text="{listMareas>CDEMB}" width="auto" maxLines="1" wrapping="false" />
                                 <Text text="{listMareas>MREMB}" width="auto" maxLines="1" wrapping="false" />
                                 <Text text="{listMareas>NMEMB}" width="auto" maxLines="1" wrapping="false" />
-                                <Text text="{listMareas>LIFNR}" width="auto" maxLines="1" wrapping="false" />
+                                <Text text="{listMareas>STCD1}" width="auto" maxLines="1" wrapping="false" />
                                 <Text text="{listMareas>NAME1}" width="auto" maxLines="1" wrapping="false" />
                             </cells>
                         </ColumnListItem>
-                    
                 </items>
             </Table>
 

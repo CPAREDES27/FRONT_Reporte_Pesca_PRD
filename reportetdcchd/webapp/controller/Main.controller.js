@@ -416,7 +416,7 @@ sap.ui.define([
 						"control": "INPUT",
 						"key": "NMEMB",
 						"valueHigh": "",
-						"valueLow": idEmbarcacionDesc
+						"valueLow": idEmbarcacionDesc.toUpperCase()
 						
 					});
 				}
@@ -453,7 +453,7 @@ sap.ui.define([
 						"control": "INPUT",
 						"key": "NAME1",
 						"valueHigh": "",
-						"valueLow": idArmador
+						"valueLow": idArmador.toUpperCase()
 					})
 				}
 				
@@ -505,6 +505,19 @@ sap.ui.define([
 				this.byId("planta").setValue(null);
 				this.byId("embarcacion").setValue(null);
 				this.byId("idDateRangeSelec").setValue(null);
+				this.getModel("listMareas").setProperty("/items", []);
+				this.getModel("listMareas").refresh();
+			},
+
+			clearFilterEmba: function(){
+				sap.ui.getCore().byId("idEmba").setValue(null);
+				sap.ui.getCore().byId("idNombEmba").setValue(null);
+				sap.ui.getCore().byId("idRucArmador").setValue(null);
+				sap.ui.getCore().byId("idMatricula").setValue(null);
+				sap.ui.getCore().byId("indicadorPropiedad").setSelectedKey(null);
+				sap.ui.getCore().byId("idDescArmador").setValue(null);
+				this.getModel("listMareas").setProperty("/embarcaciones", []);
+				this.getModel("listMareas").refresh();
 			},
 
 			getCurrentUser: function(){

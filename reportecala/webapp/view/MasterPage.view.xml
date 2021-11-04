@@ -24,19 +24,27 @@
                                                 <Label text="Centro" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <Input id="txtCentro" type="Text" valueState="Information" valueStateText="Ingrese centro" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{reporteCala>/centros}" width="100%">
+                                                <Input id="txtCentro" suggestionItemSelected="onSelectWerks" type="Text" valueState="Information" valueStateText="Ingrese centro" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{reporteCala>/centros}" width="100%">
                                                     <suggestionColumns>
                                                         <Column>
-                                                            <Label text="Centro" />
+                                                            <Label text="Planta" />
                                                         </Column>
                                                         <Column>
                                                             <Label text="Descripción" />
                                                         </Column>
+                                                        <Column>
+                                                            <Label text="Centro" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Label text="Armador" />
+                                                        </Column>
                                                     </suggestionColumns>
                                                     <suggestionRows>
                                                         <ColumnListItem>
+                                                            <Label text="{reporteCala>CDPTA}" />
+					                                        <Label text="{reporteCala>DESCR}" />
                                                             <Label text="{reporteCala>WERKS}" />
-					                                        <Label text="{reporteCala>NAME1}" />
+                                                            <Label text="{reporteCala>STCD1}" />
                                                         </ColumnListItem>
                                                     </suggestionRows>
                                                 </Input>
@@ -137,7 +145,8 @@
 						                    <Title id="title" text=""/>
                                             <ToolbarSpacer width=""/>
                                             <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
-                                            <Button press='.exportarExcel' text="Exportar Excel" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                            <Button press='.exportarExcel' text="Exportar" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                            <Button press='.exportBiometriaToExcel' text="Exportar Biometria" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
 					                    </OverflowToolbar>
 				                    </t:extension>
                                     <t:columns>
