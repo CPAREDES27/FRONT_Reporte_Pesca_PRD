@@ -2,6 +2,7 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
     xmlns:form="sap.ui.layout.form"
+    xmlns:t="sap.ui.table"
 >
 <Dialog horizontalScrolling="true" showHeader="true" state="None" stretch="false" title="Buscar Embarcación" type="Standard"
 		verticalScrolling="true">
@@ -16,7 +17,7 @@
 									<Label text="Cod. Embarcación" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
 								</form:label>
 								<form:fields>
-									<Input id="idEmba" width="auto" valueStateText="Invalid entry"/>
+									<Input id="idEmba" width="auto" valueStateText="Invalid entry" maxLength="10"/>
 								</form:fields>
 							</form:FormElement>
                             <form:FormElement visible="true">
@@ -80,103 +81,83 @@
 					<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
 				</form:layout>
 			</form:Form>
-            <Table id="tblEmbarcaciones" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiSmallMargin"
-            items="{listMareas>/embarcaciones}">
-                <infoToolbar>
-                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
-                        <content>
-                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                        </content>
-                    </Toolbar>
-                </infoToolbar>
-                <headerToolbar>
-                    <OverflowToolbar width="auto" height="auto" design="Transparent" visible="true" enabled="true">
-                        <content>
-                            <ToolbarSpacer width=""/>
-                            <OverflowToolbarButton text="Action" type="Default" icon="" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-                            <OverflowToolbarButton text="Action" type="Default" icon="sap-icon://action-settings" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-                        </content>
-                    </OverflowToolbar>
-                </headerToolbar>
-                <columns>
-                    <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
-                        <header>
-                            <Text text="Cod. Embarcación" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                        </header>
-                        <footer/>
-                    </Column>
-                    <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                        <header>
-                            <Text text="Matrícula" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                        </header>
-                        <footer/>
-                    </Column>
-                    <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                        <header>
-                            <Text text="Nomb. Embarcación" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                        </header>
-                        <footer/>
-                    </Column>
-                    <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                        <header>
-                            <Text text="R.U.C. Armador" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                        </header>
-                        <footer/>
-                    </Column>
-                    <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                        <header>
-                            <Text text="Desc. Armador" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                        </header>
-                        <footer/>
-                    </Column>
-                    
-                </columns>
-                    
+
+                        <t:Table id="tblEmbarcaciones" rows="{listMareas>/embarcaciones}" ariaLabelledBy="title" selectionMode="Single" rowSelectionChange="onSelectEmba">
+                                    <t:extension>
+					                    <OverflowToolbar style="Clear">
+                                            <Title id="titleEmba" text="{listMareas>/TituloEmba}"/>
+                                            <ToolbarSpacer width=""/>
+                                        </OverflowToolbar>
+				                    </t:extension>
+                                    <t:columns>
+                                        <t:Column width="auto" filterProperty="CDEMB" defaultFilterOperator="Contains" sortProperty="CDEMB">
+						                    <Label text="Cod. Embarcación" />
+						                    <t:template>
+							                    <Text text="{listMareas>CDEMB}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="auto" filterProperty="MREMB" defaultFilterOperator="Contains" sortProperty="MREMB">
+						                    <Label text="Matrícula" />
+						                    <t:template>
+							                    <Text text="{listMareas>MREMB}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="auto" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
+						                    <Label text="Nomb. Embarcación" />
+						                    <t:template>
+							                    <Text text="{listMareas>NMEMB}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="auto" filterProperty="STCD1" defaultFilterOperator="Contains" sortProperty="STCD1">
+						                    <Label text="R.U.C. Armador" />
+						                    <t:template>
+							                    <Text text="{listMareas>STCD1}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="auto" filterProperty="NAME1" defaultFilterOperator="Contains" sortProperty="NAME1">
+						                    <Label text="Desc. Armador" />
+						                    <t:template>
+							                    <Text text="{listMareas>NAME1}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                </t:Table>
+                                <FlexBox
+        alignItems="Center"
+        justifyContent="Center">
+      <items>
+            <Button id="goFirstPag" press="onSetCurrentPage" enabled="false" activeIcon="" icon="sap-icon://close-command-field" width="" tooltip="Inicio"/>
+            <Button id="goPreviousPag" press="onSetCurrentPage" enabled="false"  activeIcon="" icon="sap-icon://navigation-left-arrow" width="" tooltip="Anterior"/>
+            <ComboBox id="comboPaginacion" enabled="false" items="{listMareas>/NumerosPaginacion}"  width="auto" change="onChangePag"  >
                 <items>
-                        <ColumnListItem type="Active" press="onSelectEmba" >
-                            <cells>
-                                <Text text="{listMareas>CDEMB}" width="auto" maxLines="1" wrapping="false" />
-                                <Text text="{listMareas>MREMB}" width="auto" maxLines="1" wrapping="false" />
-                                <Text text="{listMareas>NMEMB}" width="auto" maxLines="1" wrapping="false" />
-                                <Text text="{listMareas>STCD1}" width="auto" maxLines="1" wrapping="false" />
-                                <Text text="{listMareas>NAME1}" width="auto" maxLines="1" wrapping="false" />
-                            </cells>
-                        </ColumnListItem>
+                    <core:Item text="{listMareas>numero}" key="{listMareas>numero}"/>
                 </items>
-            </Table>
-
-            <form:Form width="67%" editable="true" visible="true">
-                <form:title/>
-                <form:formContainers>
-                    <form:FormContainer visible="true">
-                        <form:formElements>
-                            <form:FormElement visible="true">
-                                <form:label>
-                                    <Label text="Número de Filas" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                </form:label>
-                                <form:fields>
-                                    <Input type="Number" showValueHelp="false" value="{modelReqPesca>/SearchPlanta/Numfilas}" enabled="true" visible="true" width="200px" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
-                                </form:fields>
-                            </form:FormElement>
-                        </form:formElements>
-                        <form:title/>
-                    </form:FormContainer>
-                </form:formContainers>
-                <form:layout>
-                    <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
-                </form:layout>
-            </form:Form>
-
+            </ComboBox>
+            <Button id="goNextPag" press="onSetCurrentPage" activeIcon="" enabled="false" icon="sap-icon://navigation-right-arrow" width="" tooltip="Siguiente"/>         
+            <Button id="goLastPag" press="onSetCurrentPage" activeIcon="" enabled="false" icon="sap-icon://open-command-field" width="" tooltip="Ultimo"/>                   
+      </items>
+    </FlexBox>
+                                
 		</content>
 		<beginButton/>
 		<buttons>
 			<Button text="Cancel" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onCerrarEmba"/>
+            
 		</buttons>
 		<customHeader/>
 		<endButton/>
 		<subHeader/>
 	</Dialog>
+    
+
 
 
 </core:FragmentDefinition>
-

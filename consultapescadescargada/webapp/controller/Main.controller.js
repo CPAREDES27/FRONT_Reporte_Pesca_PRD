@@ -511,7 +511,7 @@ sap.ui.define([
 				if (idEmbarcacion) {
 					options.push({
 						"cantidad": "20",
-						"control": "COMBOBOX",
+						"control": "INPUT",
 						"key": "CDEMB",
 						"valueHigh": "",
 						"valueLow": idEmbarcacion
@@ -521,7 +521,7 @@ sap.ui.define([
 				if (idEmbarcacionDesc) {
 					options.push({
 						"cantidad": "20",
-						"control": "COMBOBOX",
+						"control": "INPUT",
 						"key": "NMEMB",
 						"valueHigh": "",
 						"valueLow": idEmbarcacionDesc.toUpperCase()
@@ -531,7 +531,7 @@ sap.ui.define([
 				if (idMatricula) {
 					options.push({
 						"cantidad": "20",
-						"control": "COMBOBOX",
+						"control": "INPUT",
 						"key": "MREMB",
 						"valueHigh": "",
 						"valueLow": idMatricula
@@ -549,7 +549,7 @@ sap.ui.define([
 				if (idRuc) {
 					options2.push({
 						"cantidad": "20",
-						"control": "COMBOBOX",
+						"control": "INPUT",
 						"key": "STCD1",
 						"valueHigh": "",
 						"valueLow": idRuc
@@ -558,7 +558,7 @@ sap.ui.define([
 				if (idArmador) {
 					options2.push({
 						"cantidad": "20",
-						"control": "COMBOBOX",
+						"control": "INPUT",
 						"key": "NAME1",
 						"valueHigh": "",
 						"valueLow": idArmador.toUpperCase()
