@@ -120,7 +120,7 @@
                                             <form:fields>
                                                 <!--<DatePicker id="fechaProdIni" width="auto" displayFormat="medium" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="yyyyMMdd"/>-->
                                                 <!--<DatePicker id="fechaProdFin" width="auto" displayFormat="medium" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="yyyyMMdd"/>-->
-                                                <DateRangeSelection id="idDateRangeSelec" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>
+                                                <DateRangeSelection id="idDateRangeSelec" required="true" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>
                                             </form:fields>
                                         </form:FormElement>
                                         <form:FormElement visible="true">
@@ -153,10 +153,10 @@
                                 <t:Table id="tableData" rows="{consultaMareas>/items}" visibleRowCount="8" ariaLabelledBy="title" selectionMode="None">
                                     <t:extension>
 					                    <OverflowToolbar style="Clear">
-						                    <Title id="title" text=""/>
+						                    <Title id="title" text="{consultaMareas>/titulo}"/>
                                             <ToolbarSpacer width=""/>
-                                            <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
                                             <Button press='.exportarExcel' text="Exportar" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                            <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>                                            
 					                    </OverflowToolbar>
 				                    </t:extension>
                                     <t:columns>
