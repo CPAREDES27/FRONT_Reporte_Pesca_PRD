@@ -151,6 +151,7 @@ sap.ui.define([
 
 			},
 			searchData: function (event) {
+				console.log("ENTRE");
 				BusyIndicator.show(0);
 				let options = [];
 				let commands = [];
@@ -264,7 +265,7 @@ sap.ui.define([
 						p_user: this.getCurrentUser(),
 						rowcount: numRegistros
 					};
-
+					console.log(body);
 					fetch(`${mainUrlServices}reportepesca/ConsultarMareas`, {
 						method: 'POST',
 						body: JSON.stringify(body)
@@ -282,9 +283,6 @@ sap.ui.define([
 						.catch(error => console.error(error));
 
 
-				} else {
-					BusyIndicator.hide();
-					MessageBox.error("El campo fecha es obligatorio");
 				}
 			},
 			detalleMarea: function (event) {
@@ -408,20 +406,22 @@ sap.ui.define([
 				});
 			},
 
-			onSelectEmba: function (evt) {
+			
+
+			onSelectEmba: function(evt){
 				var objeto = evt.getParameter("rowContext").getObject();
 				if (objeto) {
 					var cdemb = objeto.CDEMB;
 					if (this.currentInputEmba.includes("embarcacionLow")) {
 						this.byId("embarcacionLow").setValue(cdemb);
-					} else if (this.currentInputEmba.includes("embarcacionHigh")) {
+					}else if(this.currentInputEmba.includes("embarcacionHigh")){
 						this.byId("embarcacionHigh").setValue(cdemb);
 					}
 					this.getDialog().close();
 				}
 			},
-
-			onSearchEmbarcacion: function (evt) {
+	
+			onSearchEmbarcacion: function(evt){
 				BusyIndicator.show(0);
 				var idEmbarcacion = sap.ui.getCore().byId("idEmba").getValue();
 				var idEmbarcacionDesc = sap.ui.getCore().byId("idNombEmba").getValue();
@@ -446,7 +446,7 @@ sap.ui.define([
 						"key": "CDEMB",
 						"valueHigh": "",
 						"valueLow": idEmbarcacion
-
+	
 					});
 				}
 				if (idEmbarcacionDesc) {
@@ -456,7 +456,7 @@ sap.ui.define([
 						"key": "NMEMB",
 						"valueHigh": "",
 						"valueLow": idEmbarcacionDesc.toUpperCase()
-
+	
 					});
 				}
 				if (idMatricula) {
@@ -495,23 +495,23 @@ sap.ui.define([
 						"valueLow": idArmador.toUpperCase()
 					});
 				}
-
+	
 				this.primerOption = options;
 				this.segundoOption = options2;
-
+	
 				var body = {
 					"option": [
-
+	
 					],
 					"option2": [
-
+	
 					],
 					"options": options,
 					"options2": options2,
 					"p_user": "BUSQEMB",
 					//"p_pag": "1" //por defecto la primera parte
 				};
-
+	
 				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
 					{
 						method: 'POST',
@@ -520,10 +520,10 @@ sap.ui.define([
 					.then(resp => resp.json()).then(data => {
 						console.log("Emba: ", data);
 						embarcaciones = data.data;
-
+	
 						this.getModel("consultaMareas").setProperty("/embarcaciones", embarcaciones);
 						this.getModel("consultaMareas").refresh();
-
+	
 						if (!isNaN(data.p_totalpag)) {
 							if (Number(data.p_totalpag) > 0) {
 								sap.ui.getCore().byId("goFirstPag").setEnabled(true);
@@ -557,15 +557,15 @@ sap.ui.define([
 								this.lastPage = data.p_totalpag;
 							}
 						}
-
-
+	
+	
 						//sap.ui.getCore().byId("comboPaginacion").setVisible(true);
-
+	
 						BusyIndicator.hide();
 					}).catch(error => console.log(error));
 			},
-
-
+	
+	
 			onChangePag: function (evt) {
 				var id = evt.getSource().getId();
 				var oControl = sap.ui.getCore().byId(id);
@@ -573,7 +573,7 @@ sap.ui.define([
 				this.currentPage = pagina;
 				this.onNavPage();
 			},
-
+	
 			onSetCurrentPage: function (evt) {
 				var id = evt.getSource().getId();
 				if (id == "goFirstPag") {
@@ -597,23 +597,23 @@ sap.ui.define([
 				}
 				this.onNavPage();
 			},
-
+	
 			onNavPage: function () {
 				BusyIndicator.show(0);
 				let embarcaciones = [];
 				var body = {
 					"option": [
-
+	
 					],
 					"option2": [
-
+	
 					],
 					"options": this.primerOption,
 					"options2": this.segundoOption,
 					"p_user": "BUSQEMB",
 					"p_pag": this.currentPage
 				};
-
+	
 				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
 					{
 						method: 'POST',
@@ -622,7 +622,7 @@ sap.ui.define([
 					.then(resp => resp.json()).then(data => {
 						console.log("Emba: ", data);
 						embarcaciones = data.data;
-
+	
 						this.getModel("consultaMareas").setProperty("/embarcaciones", embarcaciones);
 						this.getModel("consultaMareas").refresh();
 						var tituloTablaEmba = "Página " + this.currentPage + "/" + Number(data.p_totalpag);
@@ -631,16 +631,45 @@ sap.ui.define([
 						BusyIndicator.hide();
 					}).catch(error => console.log(error));
 			},
-
-			onOpenEmba: function (evt) {
+			getDialog: function(){
+				if (!this.oDialog) {
+					this.oDialog = sap.ui.xmlfragment("tasa.com.aprobacionprecios.view.Embarcacion", this);
+					this.getView().addDependent(this.oDialog);
+				}
+				return this.oDialog;
+			},
+			onOpenEmba: function(evt){
 				this.currentInputEmba = evt.getSource().getId();
 				this.getDialog().open();
 			},
-
-			onCerrarEmba: function () {
+	
+			onCerrarEmba: function(){
+				this.clearFilterEmba();
 				this.getDialog().close();
+				this.getModel("consultaMareas").setProperty("/embarcaciones", "");
+				this.getModel("consultaMareas").setProperty("/TituloEmba", "");
+				sap.ui.getCore().byId("comboPaginacion").setEnabled(false);
+				sap.ui.getCore().byId("goFirstPag").setEnabled(false);
+				sap.ui.getCore().byId("goPreviousPag").setEnabled(false);
+				sap.ui.getCore().byId("comboPaginacion").setEnabled(false);
+				sap.ui.getCore().byId("goLastPag").setEnabled(false);
+				sap.ui.getCore().byId("goNextPag").setEnabled(false);
+				sap.ui.getCore().byId("comboPaginacion").setSelectedKey("1");
 			},
-
+			buscarEmbarca: function(evt){
+				console.log(evt);
+				var indices = evt.mParameters.listItem.oBindingContexts.consultaMareas.sPath.split("/")[2];
+				console.log(indices);
+			
+				var data = this.getView().getModel("consultaMareas").oData.embarcaciones[indices].CDEMB;
+				if (this.currentInputEmba.includes("embarcacionLow")) {
+					this.byId("embarcacionLow").setValue(data);
+				}else if(this.currentInputEmba.includes("embarcacionHigh")){
+					this.byId("embarcacionHigh").setValue(data);
+				}
+				this.onCerrarEmba();
+				
+			},
 			getColumnsConfig: function () {
 				var aColumns = [
 					{

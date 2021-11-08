@@ -49,9 +49,9 @@
                                     <Label text="Indicador de propiedad" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                 </form:label>
                                 <form:fields>
-                                    <ComboBox id="indicadorPropiedad" items="{consultaMareas>/zinprpDom}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
+                                    <ComboBox id="indicadorPropiedad" items="{Propiedad>/listaPropiedad}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
                                         <items>
-                                            <core:Item text="{consultaMareas>descripcion}" enabled="true" key="{consultaMareas>id}"/>
+                                            <core:Item text="{Propiedad>descripcion}" enabled="true" key="{Propiedad>id}"/>
                                         </items>
                                     </ComboBox>
                                 </form:fields>
@@ -80,56 +80,79 @@
 				<form:layout>
 					<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
 				</form:layout>
+				
 			</form:Form>
-
-                        <t:Table id="tblEmbarcaciones" rows="{consultaMareas>/embarcaciones}" ariaLabelledBy="title" selectionMode="Single" rowSelectionChange="onSelectEmba">
-                                    <t:extension>
-					                    <OverflowToolbar style="Clear">
-                                            <Title id="titleEmba" text="{consultaMareas>/TituloEmba}"/>
-                                            <ToolbarSpacer width=""/>
-                                        </OverflowToolbar>
-				                    </t:extension>
-                                    <t:columns>
-                                        <t:Column width="auto" filterProperty="CDEMB" defaultFilterOperator="Contains" sortProperty="CDEMB">
-						                    <Label text="Cod. Embarcación" />
-						                    <t:template>
-							                    <Text text="{consultaMareas>CDEMB}" wrapping="false" />
-						                    </t:template>
-					                    </t:Column>       
-                                    </t:columns>
-                                    <t:columns>
-                                        <t:Column width="auto" filterProperty="MREMB" defaultFilterOperator="Contains" sortProperty="MREMB">
-						                    <Label text="Matrícula" />
-						                    <t:template>
-							                    <Text text="{consultaMareas>MREMB}" wrapping="false" />
-						                    </t:template>
-					                    </t:Column>       
-                                    </t:columns>
-                                    <t:columns>
-                                        <t:Column width="auto" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
-						                    <Label text="Nomb. Embarcación" />
-						                    <t:template>
-							                    <Text text="{consultaMareas>NMEMB}" wrapping="false" />
-						                    </t:template>
-					                    </t:Column>       
-                                    </t:columns>
-                                    <t:columns>
-                                        <t:Column width="auto" filterProperty="STCD1" defaultFilterOperator="Contains" sortProperty="STCD1">
-						                    <Label text="R.U.C. Armador" />
-						                    <t:template>
-							                    <Text text="{consultaMareas>STCD1}" wrapping="false" />
-						                    </t:template>
-					                    </t:Column>       
-                                    </t:columns>
-                                    <t:columns>
-                                        <t:Column width="auto" filterProperty="NAME1" defaultFilterOperator="Contains" sortProperty="NAME1">
-						                    <Label text="Desc. Armador" />
-						                    <t:template>
-							                    <Text text="{consultaMareas>NAME1}" wrapping="false" />
-						                    </t:template>
-					                    </t:Column>       
-                                    </t:columns>
-                                </t:Table>
+			
+ <ScrollContainer height='20rem' vertical='true'> 
+                         <Table id="idProductsTable2"
+							itemPress="buscarEmbarca"
+							inset="false"
+							items="{
+								path: 'consultaMareas>/embarcaciones',
+								sorter: {
+									path: 'Name'
+								}
+							}">
+                                    
+									<headerToolbar>
+			<OverflowToolbar>
+				
+					<Title id="titleEmba" text="{consultaMareas>/TituloEmba}"/>
+					<ToolbarSpacer width="" />
+			
+			</OverflowToolbar>
+		</headerToolbar>
+		
+		<columns>
+			<Column
+				width="12em">
+				<Text text="Codigo Embarcacion" />
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="Matricula" />
+			</Column>
+			<Column
+				minScreenWidth="Desktop"
+				demandPopin="true">
+				<Text text="Nombre Embarcación" />
+			</Column>
+			<Column
+				minScreenWidth="Desktop"
+				demandPopin="true">
+				<Text text="RUC" />
+			</Column>
+			<Column>
+				<Text text="Descripción Armador" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem type="Active">
+				<cells>
+					<ObjectIdentifier
+						text="{consultaMareas>CDEMB}"/>
+				</cells>
+                <cells>
+					<ObjectIdentifier
+						text="{consultaMareas>MREMB}"/>
+				</cells>
+                <cells>
+					<ObjectIdentifier
+						text="{consultaMareas>NMEMB}"/>
+				</cells>
+                <cells>
+					<ObjectIdentifier
+						text="{consultaMareas>LIFNR}"/>
+				</cells>
+                <cells>
+					<ObjectIdentifier
+						text="{consultaMareas>NAME1}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+                                </Table>
+								  </ScrollContainer>
                                 <FlexBox
         alignItems="Center"
         justifyContent="Center">
@@ -149,8 +172,9 @@
 		</content>
 		<beginButton/>
 		<buttons>
-			<Button text="Cancel" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onCerrarEmba"/>
-            
+			
+            <Button text="Cerrar"
+             type="Reject" icon="sap-icon://decline" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onCerrarEmba"/>
 		</buttons>
 		<customHeader/>
 		<endButton/>
