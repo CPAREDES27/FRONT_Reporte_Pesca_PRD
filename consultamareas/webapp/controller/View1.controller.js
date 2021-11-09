@@ -283,6 +283,9 @@ sap.ui.define([
 						.catch(error => console.error(error));
 
 
+				} else {
+					BusyIndicator.hide();
+					MessageBox.error("El campo fecha es obligatorio");
 				}
 			},
 			detalleMarea: function (event) {
