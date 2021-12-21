@@ -6,6 +6,7 @@
 	xmlns:form="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
     xmlns:t="sap.ui.table"
+    xmlns:semantic="sap.f.semantic"
 >
 	
 		<App id="app">
@@ -13,9 +14,6 @@
                 <Page showHeader="true" title="Consulta de Calas" >
                     <content>
                         <form:Form width="100%" editable="true" visible="true">
-                            <form:title>
-                                <core:Title text="Datos de selección" level="Auto"/>
-                            </form:title>
                             <form:formContainers>
                                 <form:FormContainer visible="true">
                                     <form:formElements>
@@ -42,7 +40,7 @@
                                                     <suggestionRows>
                                                         <ColumnListItem>
                                                             <Label text="{reporteCala>CDPTA}" />
-					                                        <Label text="{reporteCala>DESCR}" />
+                                                            <Label text="{reporteCala>DESCR}" />
                                                             <Label text="{reporteCala>WERKS}" />
                                                             <Label text="{reporteCala>STCD1}" />
                                                         </ColumnListItem>
@@ -50,7 +48,7 @@
                                                 </Input>
                                             </form:fields>
                                         </form:FormElement>
-                                        <form:FormElement visible="true">
+                                        <!-- <form:FormElement visible="true">
                                             <form:label>
                                                 <Label text="Ubicación planta" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
@@ -61,7 +59,7 @@
                                                     </items>
                                                 </ComboBox>
                                             </form:fields>
-                                        </form:FormElement>
+                                        </form:FormElement> -->
                                         <form:FormElement visible="true">
                                             <form:label>
                                                 <Label text="Embarcación" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
@@ -126,8 +124,8 @@
                                             </form:label>
                                             <form:fields>
                                                 <Button text="Buscar" type="Emphasized" icon="sap-icon://search" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"
-                                                   press="loadReporteCalas"/>
-                                                   <Button press="clearFields" text="Limpiar" type="Emphasized" icon="sap-icon://clear-filter" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
+                                                press="loadReporteCalas"/>
+                                                <Button press="clearFields" text="Limpiar" type="Emphasized" icon="sap-icon://clear-filter" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
                                             </form:fields>
                                         </form:FormElement>
                                     </form:formElements>
@@ -135,18 +133,19 @@
                                 </form:FormContainer>
                             </form:formContainers>
                             <form:layout>
-                                <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+                                <form:ResponsiveGridLayout adjustLabelSpan="true" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12" singleContainerFullSize="true" />
                             </form:layout>
                         </form:Form>
+
                         <ScrollContainer  width="100%" vertical="true" focusable="true">
                             <t:Table id="tableReporteCalas" rows="{reporteCala>/items}" visibleRowCount="8" ariaLabelledBy="title" selectionMode="None">
                                     <t:extension>
 					                    <OverflowToolbar style="Clear">
 						                    <Title id="title" text=""/>
                                             <ToolbarSpacer width=""/>
-                                            <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
                                             <Button press='.exportarExcel' text="Exportar" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                                             <Button press='.exportBiometriaToExcel' text="Exportar Biometria" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                            <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
 					                    </OverflowToolbar>
 				                    </t:extension>
                                     <t:columns>

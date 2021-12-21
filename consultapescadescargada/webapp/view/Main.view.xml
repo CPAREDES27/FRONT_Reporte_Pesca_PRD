@@ -136,8 +136,8 @@
 					                    <OverflowToolbar style="Clear">
 						                    <Title id="titulo" text=""/>
                                             <ToolbarSpacer width=""/>
-                                            <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
                                             <Button press='.exportarExcel' text="Exportar" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                            <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
                                             
                                         </OverflowToolbar>
 				                    </t:extension>

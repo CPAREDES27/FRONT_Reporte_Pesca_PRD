@@ -90,7 +90,7 @@
                                         </form:FormContainer>
                                     </form:formContainers>
                                     <form:layout>
-                                        <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+                                        <form:ResponsiveGridLayout adjustLabelSpan="true" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12" singleContainerFullSize="true"/>
                                     </form:layout>
                                 </form:Form>
                          
@@ -99,8 +99,8 @@
 					                    <OverflowToolbar style="Clear">
 						                    <Title id="title" text="Items"/>
                                             <ToolbarSpacer width=""/>
-                                            <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
                                             <Button press='.exportarExcel' text="Exportar" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                            <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
 					                    </OverflowToolbar>
 				                    </t:extension>
                                     <t:columns>
