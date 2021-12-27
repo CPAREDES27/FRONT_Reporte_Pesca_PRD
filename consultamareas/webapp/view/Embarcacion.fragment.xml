@@ -2,7 +2,7 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
     xmlns:form="sap.ui.layout.form"
-    xmlns:t="sap.ui.table"
+    
 >
 <Dialog horizontalScrolling="true" showHeader="true" state="None" stretch="false" title="Buscar Embarcación" type="Standard"
 		verticalScrolling="true">

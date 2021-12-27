@@ -55,7 +55,7 @@ sap.ui.define([
 				this.segundoOption = [];
 				this.currentPage = "";
 				this.lastPage = "";
-
+				
 			},
 			handleSelectionChange: function (event) {
 				console.log(event.getParameter("changedItem"));
@@ -212,7 +212,7 @@ sap.ui.define([
 						});
 					}
 
-					
+
 					if (embarcacionLow || embarcacionHigh) {
 						const isMulti = embarcacionHigh && embarcacionLow;
 						const embarcacion = !isMulti ? embarcacionLow ? embarcacionLow : embarcacionHigh : null;
@@ -288,8 +288,28 @@ sap.ui.define([
 					MessageBox.error("El campo fecha es obligatorio");
 				}
 			},
-			detalleMarea: function (event) {
-				console.log(event);
+			detalleMarea: async function (event) {
+				var obj = event.getSource().getParent().getBindingContext("consultaMareas").getObject();
+				if (obj) {
+					var cargarMarea = await this.cargarDatosMarea(obj);
+					if (cargarMarea) {
+						var modelo = this.getOwnerComponent().getModel("DetalleMarea");
+						var modeloConsultaMarea = this.getModel("consultaMareas");
+						var dataModelo = modelo.getData();
+						var dataConsultaMarea = modeloConsultaMarea.getData();
+						var oStore = jQuery.sap.storage(jQuery.sap.storage.Type.Session);
+						oStore.put("DataModelo", dataModelo);
+						oStore.put("ConsultaMarea", dataConsultaMarea);
+						oStore.put("AppOrigin", "consultamareas");
+						var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
+						oCrossAppNav.toExternal({
+							target: {
+								semanticObject: "mareaevento",
+								action: "display"
+							}
+						});
+					}
+				}
 			},
 			filterGlobally: function (oEvent) {
 				let sQuery = oEvent.getSource().getValue();
@@ -409,22 +429,22 @@ sap.ui.define([
 				});
 			},
 
-			
 
-			onSelectEmba: function(evt){
+
+			onSelectEmba: function (evt) {
 				var objeto = evt.getParameter("rowContext").getObject();
 				if (objeto) {
 					var cdemb = objeto.CDEMB;
 					if (this.currentInputEmba.includes("embarcacionLow")) {
 						this.byId("embarcacionLow").setValue(cdemb);
-					}else if(this.currentInputEmba.includes("embarcacionHigh")){
+					} else if (this.currentInputEmba.includes("embarcacionHigh")) {
 						this.byId("embarcacionHigh").setValue(cdemb);
 					}
 					this.getDialog().close();
 				}
 			},
-	
-			onSearchEmbarcacion: function(evt){
+
+			onSearchEmbarcacion: function (evt) {
 				BusyIndicator.show(0);
 				var idEmbarcacion = sap.ui.getCore().byId("idEmba").getValue();
 				var idEmbarcacionDesc = sap.ui.getCore().byId("idNombEmba").getValue();
@@ -449,7 +469,7 @@ sap.ui.define([
 						"key": "CDEMB",
 						"valueHigh": "",
 						"valueLow": idEmbarcacion
-	
+
 					});
 				}
 				if (idEmbarcacionDesc) {
@@ -459,7 +479,7 @@ sap.ui.define([
 						"key": "NMEMB",
 						"valueHigh": "",
 						"valueLow": idEmbarcacionDesc.toUpperCase()
-	
+
 					});
 				}
 				if (idMatricula) {
@@ -498,23 +518,23 @@ sap.ui.define([
 						"valueLow": idArmador.toUpperCase()
 					});
 				}
-	
+
 				this.primerOption = options;
 				this.segundoOption = options2;
-	
+
 				var body = {
 					"option": [
-	
+
 					],
 					"option2": [
-	
+
 					],
 					"options": options,
 					"options2": options2,
 					"p_user": "BUSQEMB",
 					//"p_pag": "1" //por defecto la primera parte
 				};
-	
+
 				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
 					{
 						method: 'POST',
@@ -523,10 +543,10 @@ sap.ui.define([
 					.then(resp => resp.json()).then(data => {
 						console.log("Emba: ", data);
 						embarcaciones = data.data;
-	
+
 						this.getModel("consultaMareas").setProperty("/embarcaciones", embarcaciones);
 						this.getModel("consultaMareas").refresh();
-	
+
 						if (!isNaN(data.p_totalpag)) {
 							if (Number(data.p_totalpag) > 0) {
 								sap.ui.getCore().byId("goFirstPag").setEnabled(true);
@@ -560,15 +580,15 @@ sap.ui.define([
 								this.lastPage = data.p_totalpag;
 							}
 						}
-	
-	
+
+
 						//sap.ui.getCore().byId("comboPaginacion").setVisible(true);
-	
+
 						BusyIndicator.hide();
 					}).catch(error => console.log(error));
 			},
-	
-	
+
+
 			onChangePag: function (evt) {
 				var id = evt.getSource().getId();
 				var oControl = sap.ui.getCore().byId(id);
@@ -576,7 +596,7 @@ sap.ui.define([
 				this.currentPage = pagina;
 				this.onNavPage();
 			},
-	
+
 			onSetCurrentPage: function (evt) {
 				var id = evt.getSource().getId();
 				if (id == "goFirstPag") {
@@ -600,23 +620,23 @@ sap.ui.define([
 				}
 				this.onNavPage();
 			},
-	
+
 			onNavPage: function () {
 				BusyIndicator.show(0);
 				let embarcaciones = [];
 				var body = {
 					"option": [
-	
+
 					],
 					"option2": [
-	
+
 					],
 					"options": this.primerOption,
 					"options2": this.segundoOption,
 					"p_user": "BUSQEMB",
 					"p_pag": this.currentPage
 				};
-	
+
 				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
 					{
 						method: 'POST',
@@ -625,7 +645,7 @@ sap.ui.define([
 					.then(resp => resp.json()).then(data => {
 						console.log("Emba: ", data);
 						embarcaciones = data.data;
-	
+
 						this.getModel("consultaMareas").setProperty("/embarcaciones", embarcaciones);
 						this.getModel("consultaMareas").refresh();
 						var tituloTablaEmba = "Página " + this.currentPage + "/" + Number(data.p_totalpag);
@@ -634,19 +654,19 @@ sap.ui.define([
 						BusyIndicator.hide();
 					}).catch(error => console.log(error));
 			},
-			getDialog: function(){
+			getDialog: function () {
 				if (!this.oDialog) {
 					this.oDialog = sap.ui.xmlfragment("tasa.com.aprobacionprecios.view.Embarcacion", this);
 					this.getView().addDependent(this.oDialog);
 				}
 				return this.oDialog;
 			},
-			onOpenEmba: function(evt){
+			onOpenEmba: function (evt) {
 				this.currentInputEmba = evt.getSource().getId();
 				this.getDialog().open();
 			},
-	
-			onCerrarEmba: function(){
+
+			onCerrarEmba: function () {
 				this.clearFilterEmba();
 				this.getDialog().close();
 				this.getModel("consultaMareas").setProperty("/embarcaciones", "");
@@ -659,19 +679,19 @@ sap.ui.define([
 				sap.ui.getCore().byId("goNextPag").setEnabled(false);
 				sap.ui.getCore().byId("comboPaginacion").setSelectedKey("1");
 			},
-			buscarEmbarca: function(evt){
+			buscarEmbarca: function (evt) {
 				console.log(evt);
 				var indices = evt.mParameters.listItem.oBindingContexts.consultaMareas.sPath.split("/")[2];
 				console.log(indices);
-			
+
 				var data = this.getView().getModel("consultaMareas").oData.embarcaciones[indices].CDEMB;
 				if (this.currentInputEmba.includes("embarcacionLow")) {
 					this.byId("embarcacionLow").setValue(data);
-				}else if(this.currentInputEmba.includes("embarcacionHigh")){
+				} else if (this.currentInputEmba.includes("embarcacionHigh")) {
 					this.byId("embarcacionHigh").setValue(data);
 				}
 				this.onCerrarEmba();
-				
+
 			},
 			getColumnsConfig: function () {
 				var aColumns = [
