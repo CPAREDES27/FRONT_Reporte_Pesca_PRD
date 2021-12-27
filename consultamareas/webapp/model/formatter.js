@@ -26,6 +26,15 @@ sap.ui.define([], function () {
             const operator = isRange ? `BETWEEN ${quot}${value1}${quot} AND ${quot}${value2}${quot}` : `LIKE ${quot}${valueSelected}${quot}`;
 
             return `(${param} ${operator})`;
+        },
+        formatCodeDigits: function (code) {
+            if(code){
+                const length = 10;
+                const codeFormatted = code.toString().padStart(length, "0");
+                return codeFormatted;
+            }else{
+                return "";
+            }
         }
     };
 });

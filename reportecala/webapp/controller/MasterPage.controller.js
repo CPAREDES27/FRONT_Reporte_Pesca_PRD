@@ -90,7 +90,7 @@ sap.ui.define([
 			},
 			loadData: function () {
 				BusyIndicator.show(0);
-				let ubicaciones = null;
+				//let ubicaciones = null;
 				let zdoZinprpDom = null;
 				let zdoTipoMareaDom = null;
 				let centros = [];
@@ -119,12 +119,12 @@ sap.ui.define([
 					})
 					.then(resp => resp.json()).then(data => {
 						console.log(data);
-						ubicaciones = data.data.find(d => d.dominio == "UBICPLANTA").data;
+						//ubicaciones = data.data.find(d => d.dominio == "UBICPLANTA").data;
 						zdoZinprpDom = data.data.find(d => d.dominio == "ZINPRP").data;
 						zdoTipoMareaDom = data.data.find(d => d.dominio == "ZDO_TIPOMAREA").data;
 						this.getModel("reporteCala").setProperty("/zdoZinprpDom", zdoZinprpDom);
 						this.getModel("reporteCala").setProperty("/zdoTipoMareaDom", zdoTipoMareaDom);
-						this.getModel("reporteCala").setProperty("/ubicaciones", ubicaciones);
+						//this.getModel("reporteCala").setProperty("/ubicaciones", ubicaciones);
 					}).catch(error => console.log(error));
 
 					const bodyAyudaBusqueda = {
@@ -149,7 +149,7 @@ sap.ui.define([
 				let options = [];
 				let commands = [];
 				let centro = this.byId("txtCentro").getValue();
-				let ubicacion = this.byId("cbUbicaciones").getSelectedKey();
+				//let ubicacion = this.byId("cbUbicaciones").getSelectedKey();
 				let embarcacion = this.byId("embarcacion").getValue();
 				let indicadorPropiedad = this.byId("cbIndicadorPropiedad").getSelectedKey();
 				let tipoMarea = this.byId("cbTipoMarea").getSelectedKey();
@@ -242,7 +242,7 @@ sap.ui.define([
 					});
 				}
 
-				if (ubicacion) {
+				/* if (ubicacion) {
 					options.push({
 						cantidad: '10',
 						control: comboBox,
@@ -250,7 +250,7 @@ sap.ui.define([
 						valueHigh: '',
 						valueLow: ubicacion
 					});
-				}
+				} */
 
 				if (embarcacion) {
 					options.push({
@@ -520,7 +520,7 @@ sap.ui.define([
 
 			clearFields: function(){
 				this.byId("txtCentro").setValue(null);
-				this.byId("cbUbicaciones").setSelectedKey(null);
+				//this.byId("cbUbicaciones").setSelectedKey(null);
 				this.byId("embarcacion").setValue(null);
 				this.byId("cbIndicadorPropiedad").setSelectedKey(null);
 				this.byId("cbTipoMarea").setSelectedKey(null);

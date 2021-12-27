@@ -163,7 +163,10 @@
                                         <t:Column width="6rem" filterProperty="NRMAR" defaultFilterOperator="EQ" sortProperty="NRMAR">
 						                    <Label text="Marea" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>NRMAR}" wrapping="false" />
+							                    <Text text="{
+                                                    path: 'consultaMareas>NRMAR',
+                                                    formatter: '.formatter.formatCodeDigits'
+                                                }" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
