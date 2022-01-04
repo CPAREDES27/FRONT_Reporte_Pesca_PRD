@@ -19,7 +19,7 @@ sap.ui.define([
 		var EdmType = exportLibrary.EdmType;
 
 		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'; //utilities.getHostService();
-
+		const HOST = "https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com";
 		return BaseController.extend("com.tasa.reportetdcchd.controller.Main", {
 			dataTableKeys: [
 				'NRMAR',
@@ -148,7 +148,7 @@ sap.ui.define([
 				let commands = [];
 				let marea = this.byId("marea").getValue();
 				let planta = this.byId("planta").getValue();
-				let embarcacion = this.byId("embarcacion").getValue();
+				let embarcacion = this.byId("inputId0_R").getValue();
 				/*let fechaInicio = this.byId("fechaInicio").getValue();
 				let fechaFin = this.byId("fechaFin").getValue();*/
 				let numAciertos = this.byId("numAciertos").getValue();
@@ -383,7 +383,7 @@ sap.ui.define([
 				var objeto = evt.getParameter("rowContext").getObject();
 				if (objeto) {
 					var cdemb = objeto.CDEMB;
-					this.byId("embarcacion").setValue(cdemb);
+					this.byId("inputId0_R").setValue(cdemb);
 					this.getDialog().close();
 				}
 			},
@@ -617,7 +617,7 @@ sap.ui.define([
 			clearFields: function () {
 				this.byId("marea").setValue(null);
 				this.byId("planta").setValue(null);
-				this.byId("embarcacion").setValue(null);
+				this.byId("inputId0_R").setValue(null);
 				this.byId("idDateRangeSelec").setValue(null);
 				this.getModel("listMareas").setProperty("/items", []);
 				this.getModel("listMareas").refresh();
@@ -638,6 +638,65 @@ sap.ui.define([
 
 			getCurrentUser: function () {
 				return "FGARCIA"; //utilities.getCurrentUser();
+			},
+			onSearchHelp:function(oEvent){
+				let sIdInput = oEvent.getSource().getId(),
+				oModel = this.getModel(),
+				nameComponent="busqembarcaciones",
+				idComponent="busqembarcaciones",
+				urlComponent=HOST+"/9acc820a-22dc-4d66-8d69-bed5b2789d3c.AyudasBusqueda.busqembarcaciones-1.0.0",
+				oView = this.getView(),
+		
+					oInput = this.getView().byId(sIdInput);	
+				
+				
+				oModel.setProperty("/input",oInput);
+	
+				if(!this.DialogComponent){
+					this.DialogComponent = new sap.m.Dialog({
+						title:"Búsqueda de embarcaciones",
+						icon:"sap-icon://search",
+						state:"Information",
+						endButton:new sap.m.Button({
+							icon:"sap-icon://decline",
+							text:"Cerrar",
+							type:"Reject",
+							press:function(oEvent){
+								this.onCloseDialog(oEvent);
+							}.bind(this)
+						})
+					});
+					oView.addDependent(this.DialogComponent);
+					oModel.setProperty("/idDialogComp",this.DialogComponent.getId());
+				}
+	
+				let comCreateOk = function(oEvent){
+					BusyIndicator.hide();
+				};
+	
+				
+				if(this.DialogComponent.getContent().length===0){
+					BusyIndicator.show(0);
+					let oComponent = new sap.ui.core.ComponentContainer({
+						id:idComponent,
+						name:nameComponent,
+						url:urlComponent,
+						settings:{},
+						componentData:{},
+						propagateModel:true,
+						componentCreated:comCreateOk,
+						height:'100%',
+						// manifest:true,
+						async:false
+					});
+	
+					this.DialogComponent.addContent(oComponent);
+				}
+				
+				this.DialogComponent.open();
+			},
+			onCloseDialog:function(oEvent){
+				oEvent.getSource().getParent().close();
 			}
 
 		});

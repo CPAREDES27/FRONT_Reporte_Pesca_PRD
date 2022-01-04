@@ -82,8 +82,10 @@
                                                 <Label text="Embarcación" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <Input id="embarcacionLow" showValueHelp="true" width="auto" valueStateText="Invalid entry" valueHelpRequest="onOpenEmba"/>
-                                                <Input id="embarcacionHigh" showValueHelp="true" width="auto" valueStateText="Invalid entry" valueHelpRequest="onOpenEmba"/>
+                                                <Input id="inputId0_R" placeholder="Seleccione embarcación" showValueHelp="true"  valueHelpRequest="onSearchHelp"/>
+											    <Input id="inputId1_R" placeholder="Seleccione embarcación" showValueHelp="true"  valueHelpRequest="onSearchHelp"/>
+                                                <!-- <Input id="embarcacionLow" showValueHelp="true" width="auto" valueStateText="Invalid entry" valueHelpRequest="onOpenEmba"/>
+                                                <Input id="embarcacionHigh" showValueHelp="true" width="auto" valueStateText="Invalid entry" valueHelpRequest="onOpenEmba"/> -->
                                             </form:fields>
                                         </form:FormElement>
                                         <form:FormElement visible="true">

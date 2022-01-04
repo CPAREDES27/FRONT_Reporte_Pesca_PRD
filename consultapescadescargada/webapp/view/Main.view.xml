@@ -67,7 +67,8 @@
                                                 <Label text="Embarcación" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <Input id="embarcacion" showValueHelp="true" valueHelpRequest="onAbrirAyudaEmbarcacion" width="100%" valueStateText="Invalid entry"/>
+                                                <Input id="inputId0_R" placeholder="Seleccione embarcación" showValueHelp="true"  valueHelpRequest="onSearchHelp"/>
+                                                <!-- <Input id="embarcacion" showValueHelp="true" valueHelpRequest="onAbrirAyudaEmbarcacion" width="100%" valueStateText="Invalid entry"/> -->
                                             </form:fields>
                                         </form:FormElement>
                                         <form:FormElement visible="true">
