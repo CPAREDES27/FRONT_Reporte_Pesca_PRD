@@ -7,17 +7,18 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	'sap/ui/export/library',
-	'sap/ui/export/Spreadsheet'
+	'sap/ui/export/Spreadsheet',
+	"../model/utilities"
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (BaseController, Controller, JSONModel, formatter, BusyIndicator, Filter, FilterOperator, exportLibrary, Spreadsheet) {
+	function (BaseController, Controller, JSONModel, formatter, BusyIndicator, Filter, FilterOperator, exportLibrary, Spreadsheet, utilities) {
 		"use strict";
 
 		var EdmType = exportLibrary.EdmType;
 
-		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/';
+		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'; //utilities.getHostService();
 
 		return BaseController.extend("com.tasa.reportetdcchd.controller.Main", {
 			dataTableKeys: [
@@ -636,7 +637,7 @@ sap.ui.define([
 			},
 
 			getCurrentUser: function () {
-				return "FGARCIA"
+				return "FGARCIA"; //utilities.getCurrentUser();
 			}
 
 		});

@@ -1,9 +1,11 @@
 sap.ui.define([
     "./CoreService",
-    "./UtilService"
+    "./UtilService",
+    "../model/utilities"
 ], function (
     CoreService,
-    UtilService
+    UtilService,
+    utilities
 ) {
     "use strict";
 
@@ -545,7 +547,7 @@ sap.ui.define([
             sBody.nombreConsulta = "CONSGENVERIFTEMP";
             sBody.parametro1 = codTemp;
             sBody.parametro2 = fecha;
-            sBody.p_user = "Fgarcia";
+            sBody.p_user = "Fgarcia"; //utilities.getCurrentUser();
             var data = await this.http(uri).post(null, sBody).then(function (response) {
                 var data = JSON.parse(response);
                 if(data.data){
@@ -577,7 +579,7 @@ sap.ui.define([
             sBody.nombreConsulta = "CONSGENTEMP";
             sBody.parametro1 = codTemp;
             sBody.parametro2 = fecha;
-            sBody.p_user = "Fgarcia";
+            sBody.p_user = "Fgarcia"; //utilities.getCurrentUser();
             var data = await this.http(uri).post(null, sBody).then(function (response) {
                 var data = JSON.parse(response);
                 if(data.data){

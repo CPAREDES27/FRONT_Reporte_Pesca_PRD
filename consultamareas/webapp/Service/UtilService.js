@@ -1,13 +1,16 @@
 sap.ui.define([
-    "./UtilService"
+    "./UtilService",
+    "../model/utilities"
 ], function (
+	UtilService,
+	utilities
 ) {
     "use strict";
 
     return {
 
         getHostService: function () {
-            return "https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com";
+            return "https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com"; //utilities.getHostService();
         },
 
         getBodyDetalleMarea: function () {

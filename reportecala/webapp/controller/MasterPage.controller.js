@@ -7,17 +7,18 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator",
 	'sap/ui/export/library',
 	'sap/ui/export/Spreadsheet',
-	"sap/ui/core/BusyIndicator"
+	"sap/ui/core/BusyIndicator",
+	"../model/utilities"
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (BaseController, Controller, JSONModel, formatter, Filter, FilterOperator, exportLibrary, Spreadsheet, BusyIndicator) {
+	function (BaseController, Controller, JSONModel, formatter, Filter, FilterOperator, exportLibrary, Spreadsheet, BusyIndicator, utilities) {
 		"use strict";
 
 		var EdmType = exportLibrary.EdmType;
 
-		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/';
+		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'; //utilities.getHostService();
 		let reporteCalas = [];
 
 		return BaseController.extend("com.tasa.reportecala.controller.MasterPage", {
@@ -978,7 +979,7 @@ sap.ui.define([
 			},
 
 			getCurrentUser: function(){
-				return "FGARCIA";
+				return "FGARCIA"; //utilities.getCurrentUser();
 			}
 		});
 	});

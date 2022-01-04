@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/Device"
-], function (JSONModel, Device) {
+	"sap/ui/Device",
+    "./utilities"
+], function (JSONModel, Device, utilities) {
 	"use strict";
 
 	return {
@@ -216,7 +217,7 @@ sap.ui.define([
                     EmbarcacionDesc: ""
                 },
                 DataSession:{
-                    User: "FGARCIA",
+                    User: "FGARCIA", // utilities.getCurrentUser(),
                     IsAllOk: false,
                     IsRollngComb: false,
                     IsRolRadOpe: false,

@@ -9,16 +9,17 @@ sap.ui.define([
 	'sap/ui/export/Spreadsheet',
 	"sap/ui/core/BusyIndicator",
 	"sap/m/MessageBox",
+	"../model/utilities"
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (BaseController, Controller, JSONModel, formatter, Filter, FilterOperator, exportLibrary, Spreadsheet, BusyIndicator, MessageBox) {
+	function (BaseController, Controller, JSONModel, formatter, Filter, FilterOperator, exportLibrary, Spreadsheet, BusyIndicator, MessageBox, utilities) {
 		"use strict";
 
 		var EdmType = exportLibrary.EdmType;
 
-		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/';
+		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'; //utilities.getHostService();
 
 		return BaseController.extend("com.tasa.consultamareas.controller.View1", {
 			formatter: formatter,
@@ -855,7 +856,7 @@ sap.ui.define([
 			},
 
 			getCurrentUser: function () {
-				return "FGARCIA"
+				return "FGARCIA"; //utilities.getCurrentUser();
 			}
 
 		});
