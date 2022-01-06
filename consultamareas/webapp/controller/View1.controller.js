@@ -173,9 +173,13 @@ sap.ui.define([
 				let fechaInicio = null;
 				let fechaFin = null;
 				var valueDateRange = this.byId("idDateRangeSelec").getValue();
-				if (valueDateRange) {
-					var valDtrIni = valueDateRange.split("-")[0].trim();
-					var valDtrFin = valueDateRange.split("-")[1].trim();
+				var valDtrIni="";
+				var valDtrFin="";
+				if(valueDateRange){
+					 valDtrIni = valueDateRange.split("-")[0].trim();
+					 valDtrFin = valueDateRange.split("-")[1].trim();
+				}
+					
 					if (valDtrIni && valDtrFin) {
 						fechaInicio = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
 						fechaFin = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
@@ -284,10 +288,7 @@ sap.ui.define([
 						.catch(error => console.error(error));
 
 
-				} else {
-					BusyIndicator.hide();
-					MessageBox.error("El campo fecha es obligatorio");
-				}
+				
 			},
 			detalleMarea: async function (event) {
 				var obj = event.getSource().getParent().getBindingContext("consultaMareas").getObject();
