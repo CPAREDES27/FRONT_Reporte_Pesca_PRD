@@ -93,7 +93,7 @@ sap.ui.define([
 
 				const bodyAyudaBusqueda = {
 					"nombreAyuda": "BSQPLANTAS",
-					"p_user": this.getCurrentUser()
+					"p_user": this.userOperation
 				};
 
 				fetch(`${mainUrlServices}General/AyudasBusqueda/`,
@@ -109,7 +109,14 @@ sap.ui.define([
 					}).catch(error => console.log(error));
 
 			},
-			searchData: function (event) {
+
+			onAfterRendering: async function(){
+				this.userOperation =await this.getCurrentUser();
+				console.log(this.userOperation);
+	
+			},
+
+			searchData: async function (event) {
 				BusyIndicator.show(0);
 				let options = [];
 				let commands = [];
@@ -237,7 +244,7 @@ sap.ui.define([
 					p_options: [],
 					options: options,
 					p_rows: numRegistros,
-					p_user: this.getCurrentUser()
+					p_user: this.userOperation
 				};
 
 				fetch(`${mainUrlServices}reportepesca/ConsultarPescaDescargada`, {
@@ -335,7 +342,7 @@ sap.ui.define([
 				console.log(armador)
 
 				const body = {
-					p_user: this.getCurrentUser(),
+					p_user: this.userOperation,
 					p_nrmar: mareaSelected.NRMAR.toString(),
 					p_lifnr: armador
 				};

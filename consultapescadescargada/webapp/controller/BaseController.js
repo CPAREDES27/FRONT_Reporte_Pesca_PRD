@@ -51,7 +51,7 @@ sap.ui.define([
 		cargarDatosMarea: async function (obj) {
 			var marea = obj.NRMAR;
 			var bOk = false;
-			var usuario = this.getCurrentUser();
+			var usuario = await this.getCurrentUser();
 			var response = await TasaBackendService.obtenerDetalleMarea(marea, usuario);
 			if (response) {
 				bOk = await this.setDetalleMarea(response);
@@ -70,7 +70,7 @@ sap.ui.define([
 			var incidental = data.str_pscinc;
 			var biometria = data.str_flbsp;
 			var motivoResCombu = ["1", "2", "4", "5", "6", "7", "8"];
-			this.clearAllData();//inicalizar valores
+			await this.clearAllData();//inicalizar valores
 			modeloDetalleMarea.setProperty("/Cabecera/INDICADOR", "E");
 			//setear cabecera de formulario
 			//var cabecera = dataDetalleMarea.Cabecera;
@@ -151,12 +151,12 @@ sap.ui.define([
 			return true;
 		},
 
-        clearAllData: function () {
+        clearAllData: async function () {
             var modelo = this.getOwnerComponent().getModel("DetalleMarea");
             modelo.setProperty("/DatosGenerales/ESMAR", "A");
             modelo.setProperty("/Cabecera/FCCRE", Utils.strDateToSapDate(Utils.dateToStrDate(new Date())));
             modelo.setProperty("/Cabecera/HRCRE", Utils.strHourToSapHo(Utils.dateToStrHours(new Date())));
-            modelo.setProperty("/Cabecera/ATCRE", this.getCurrentUser());
+            modelo.setProperty("/Cabecera/ATCRE", await this.getCurrentUser());
         },
 
 		obtenerDatosDistribFlota: async function (codigo) {
@@ -164,7 +164,7 @@ sap.ui.define([
 			var modelo = this.getOwnerComponent().getModel("DetalleMarea");
 			//var dataSesionModel = this.getModel("DataSession");
 			//var usuario = dataSesionModel.getProperty("/User");
-			var usuario = this.getCurrentUser();
+			var usuario = await this.getCurrentUser();
 			//var distribFlota = this.getModel("DistribFlota");
 			var distribFlota = modelo.getProperty("/DistribFlota");
 			var constantsUtility = sap.ui.getCore().getModel("ConstantsUtility");
@@ -195,7 +195,7 @@ sap.ui.define([
                 var mareaAnterior = modelo.getProperty("/MareaAnterior");
                 //var utilitario = this.getModel("Utilitario");
                 //var dataSesionModel = this.getModel("DataSession");
-                var usuario = this.getCurrentUser();
+                var usuario = await this.getCurrentUser();
                 var motivosSinZarpe = ["3", "7", "8"]; // motivos sin zarpe
                 //var mareaAnterior = this.getModel("MareaAnterior");
                 var response = await TasaBackendService.obtenerMareaAnterior(marea, codigo, usuario);
@@ -232,7 +232,7 @@ sap.ui.define([
                 var visibleNuevo = true;
                 var mostrarTab = false;
                 var mareaCerrada = modelo.getProperty("/DatosGenerales/ESMAR") == "C" ? true : false;
-                var usuario = this.getCurrentUser();
+                var usuario = await this.getCurrentUser();
                 var response = await TasaBackendService.obtenerNroReserva(marea, usuario);
                 var motivoMarea = modelo.getProperty("/Cabecera/CDMMA");
                 var embarcacion = modelo.getProperty("/Cabecera/CDEMB");
@@ -472,7 +472,6 @@ sap.ui.define([
 
             BusyIndicator.hide();
 		},
-
 
 		getCurrentUser: async function () {
 			const oUserInfo = await this.getUserInfoService();
