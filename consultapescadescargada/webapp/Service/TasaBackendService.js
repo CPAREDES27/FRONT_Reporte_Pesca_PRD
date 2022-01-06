@@ -7,7 +7,7 @@ sap.ui.define([
 ) {
     "use strict";
 
-    var TasaBackend = CoreService.extend("com.tasa.consultamareas.Service.TasaBackendService", {
+    var TasaBackend = CoreService.extend("com.tasa.consultapescadescargada.Service.TasaBackendService", {
 
         obtenerTipoEmbarcacion: async function (sUsuario) {
             var uri = UtilService.getHostService() + "/api/embarcacion/listaTipoEmbarcacion";

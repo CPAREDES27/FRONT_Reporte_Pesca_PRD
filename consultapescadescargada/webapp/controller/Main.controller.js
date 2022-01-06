@@ -953,17 +953,31 @@ sap.ui.define([
 			},
 
 			onVerMarea: function (evt) {
+				BusyIndicator.show(0);
 				var obj = evt.getSource().getParent().getBindingContext("consultaPescaDescargada").getObject()
-				var nrmar = obj.NRMAR;
-				var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
-				var route = "DetalleMarea/" + nrmar;
-				oCrossAppNav.toExternal({
-					target: {
-						semanticObject: "registroeventospescav2",
-						action: "display"
-					},
-					appSpecificRoute: route
-				});
+				if (obj) {
+					var cargarMarea = await this.cargarDatosMarea(obj);
+					if (cargarMarea) {
+						var modelo = this.getOwnerComponent().getModel("DetalleMarea");
+						var modeloConsultaMarea = this.getModel("consultaPescaDescargada");
+						var dataModelo = modelo.getData();
+						var dataConsultaPescDesc = modeloConsultaMarea.getData();
+						var oStore = jQuery.sap.storage(jQuery.sap.storage.Type.Session);
+						oStore.put("DataModelo", dataModelo);
+						oStore.put("ConsultaPescaDescargada", dataConsultaPescDesc);
+						oStore.put("AppOrigin", "consultapescadescargada");
+						BusyIndicator.hide();
+						var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
+						oCrossAppNav.toExternal({
+							target: {
+								semanticObject: "mareaevento",
+								action: "display"
+							}
+						});
+					}else{
+						BusyIndicator.hide();
+					}
+				}
 			},
 
 			clearFilterEmba: function () {
@@ -1030,9 +1044,9 @@ sap.ui.define([
 					);
 			},
 
-			getCurrentUser: function () {
+			/*getCurrentUser: function () {
 				return "FGARCIA";
-			}
+			}*/
 
 		});
 	});

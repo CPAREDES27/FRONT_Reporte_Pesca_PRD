@@ -289,6 +289,7 @@ sap.ui.define([
 				}
 			},
 			detalleMarea: async function (event) {
+				BusyIndicator.show(0);
 				var obj = event.getSource().getParent().getBindingContext("consultaMareas").getObject();
 				if (obj) {
 					var cargarMarea = await this.cargarDatosMarea(obj);
@@ -301,6 +302,7 @@ sap.ui.define([
 						oStore.put("DataModelo", dataModelo);
 						oStore.put("ConsultaMarea", dataConsultaMarea);
 						oStore.put("AppOrigin", "consultamareas");
+						BusyIndicator.hide();
 						var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
 						oCrossAppNav.toExternal({
 							target: {
@@ -308,6 +310,8 @@ sap.ui.define([
 								action: "display"
 							}
 						});
+					}else{
+						BusyIndicator.hide();
 					}
 				}
 			},

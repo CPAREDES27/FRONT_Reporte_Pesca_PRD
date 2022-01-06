@@ -13,7 +13,7 @@ sap.ui.define([
 		},
 
 		createMareaModel: function(){
-			var sData = {
+			var initModel = {
 				Cabecera: {
                     INDICADOR: "",
 					NRMAR: "",
@@ -84,12 +84,13 @@ sap.ui.define([
 				},
                 Eventos: {
 					TituloEventos: "",
+                    CantPescaDescDeclText : "",
                     Lista: [],
                     LeadSelEvento: 0
 				},
                 Incidental: [],
                 Biometria: [],
-                DetalleReserva: {
+                DetalleSuministro: {
                     NRRSV: "",
                     DESC_ESRSV: "",
                     CDEMB: "",
@@ -102,6 +103,7 @@ sap.ui.define([
                 },
                 Suministro: [],
                 ReservasCombustible: [],
+                VentasCombustible: [],
                 ConfigReservas: {
                     BWART: "",
                     MATNR: "",
@@ -195,12 +197,23 @@ sap.ui.define([
                     visibleTabSepComb: true,
                     readOnlyFechIni: true,
                     readOnlyEstaMar: true,
+                    readOnlyMotMarea: true,
                     visibleReserva1: false,
                     visibleReserva2: false,
                     visibleReserva3: false,
                     visibleBtnNuevaReserva: false,
                     visibleCheckReserva: true,
                     visibleAnulaReserva: true,
+                    visibleBtnNuevaVenta: true,
+                    visibleAnulaVenta: true,
+                    visibleCheckVenta: true,
+                    visibleVenta1: true,
+                    visibleVenta2: true,
+                    visibleDetalleEvento: true,
+                    visibleBtnGuardar: true,
+                    visibleBtnSiguiente: true,
+                    visibleBtnCrear: true,
+                    visibleBtnReabrir: true,
 					datosCombo: {
                         Departamentos: [],
                         MotivosMarea: [],
@@ -247,8 +260,14 @@ sap.ui.define([
                     NroEvento_Incidental : "",
                     NroEvento_Biometria : "",
                     TipoConsulta:"",
+                    MensajeGrabacion : "",
+                    NumeroMarea : "",
                     MessageItemsDM: [],
-                    MessageItemsEP: []
+                    MessageItemsEP: [],
+                    MessageItemsMA: [],
+                    TxtBtnSuministro: "",
+                    TxtNuevaVentaRes: "",
+                    CrearMarea: []
                 },
                 InputsDescargas :{
                     CentPlanta : "",
@@ -271,7 +290,8 @@ sap.ui.define([
                     ValMaxFlujPanga: 250
                 }
 			};
-			var oModel = new JSONModel(sData);
+			var oModel = new JSONModel(initModel);
+			//oModel.setDefaultBindingMode("OneWay");
 			return oModel;
 		},
 
