@@ -180,7 +180,7 @@ sap.ui.define([
 				modelo.setProperty("/DistribFlota/IntLatPuerto", parseInt(response.LTGEO));
 				modelo.setProperty("/DistribFlota/IntLonPuerto", parseInt(response.LNGEO));
 				if (!response.DSEMP || !response.INPRP) {
-					var mssg = this.oBundle.getText("PLANTASINEMPRESA");
+					var mssg = this.getResourceBundle().getText("PLANTASINEMPRESA");
 					MessageBox.error(mssg);
 				}
 				modelo.refresh();
