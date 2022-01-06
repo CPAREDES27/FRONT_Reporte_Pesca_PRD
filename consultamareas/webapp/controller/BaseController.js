@@ -4,8 +4,9 @@ sap.ui.define([
 	"sap/m/library",
 	"../Service/TasaBackendService",
 	"./Utils",
-	"sap/ui/core/BusyIndicator"
-], function (Controller, UIComponent, mobileLibrary, TasaBackendService, Utils, BusyIndicator) {
+	"sap/ui/core/BusyIndicator",
+	"../model/utilities"
+], function (Controller, UIComponent, mobileLibrary, TasaBackendService, Utils, BusyIndicator, utilities) {
 	"use strict";
 
 	return Controller.extend("com.tasa.consultamareas.controller.BaseController", {

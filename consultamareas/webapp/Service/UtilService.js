@@ -1,6 +1,9 @@
 sap.ui.define([
-    "./UtilService"
+    "./UtilService",
+    "../model/utilities"
 ], function (
+	UtilService,
+	utilities
 ) {
     "use strict";
 

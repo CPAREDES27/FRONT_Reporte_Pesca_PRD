@@ -4,7 +4,8 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
     "sap/ui/core/routing/History",
-    "sap/ui/core/BusyIndicator"
+    "sap/ui/core/BusyIndicator",
+    "../model/utilities"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -14,9 +15,10 @@ sap.ui.define([
         JSONModel,
         formatter,
         History,
-        BusyIndicator) {
+        BusyIndicator,
+        utilities) {
         "use strict";
-        const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/';
+        const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'; //utilities.getHostService();
 
         return BaseController.extend("com.tasa.reportetdcchd.controller.ReporteTDCCHR", {
             formatter: formatter,

@@ -9,17 +9,18 @@ sap.ui.define([
 	'sap/ui/export/Spreadsheet',
 	"sap/ui/core/BusyIndicator",
 	"sap/m/MessageBox",
+	"../model/utilities"
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (BaseController, Controller, JSONModel, formatter, Filter, FilterOperator, exportLibrary, Spreadsheet, BusyIndicator, MessageBox) {
+	function (BaseController, Controller, JSONModel, formatter, Filter, FilterOperator, exportLibrary, Spreadsheet, BusyIndicator, MessageBox, utilities) {
 		"use strict";
 
 		var EdmType = exportLibrary.EdmType;
 
-		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/';
-
+		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'; //utilities.getHostService();
+		const HOST = "https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com";
 		return BaseController.extend("com.tasa.consultamareas.controller.View1", {
 			formatter: formatter,
 			dataTableKeys: [
@@ -159,8 +160,8 @@ sap.ui.define([
 				let mareaHigh = parseInt(this.byId("mareaHigh").getValue());
 				let plantaLow = this.byId("plantaLow").getValue();
 				let plantaHigh = this.byId("plantaHigh").getValue();
-				let embarcacionLow = this.byId("embarcacionLow").getValue();
-				let embarcacionHigh = this.byId("embarcacionHigh").getValue();
+				let embarcacionLow = this.byId("inputId0_R").getValue();
+				let embarcacionHigh = this.byId("inputId1_R").getValue();
 				console.log("Emba Low: ", embarcacionLow);
 				console.log("Emba high: ", embarcacionHigh);
 				let propiedad = this.byId("propiedad").getSelectedKey();
@@ -172,9 +173,13 @@ sap.ui.define([
 				let fechaInicio = null;
 				let fechaFin = null;
 				var valueDateRange = this.byId("idDateRangeSelec").getValue();
-				if (valueDateRange) {
-					var valDtrIni = valueDateRange.split("-")[0].trim();
-					var valDtrFin = valueDateRange.split("-")[1].trim();
+				var valDtrIni="";
+				var valDtrFin="";
+				if(valueDateRange){
+					 valDtrIni = valueDateRange.split("-")[0].trim();
+					 valDtrFin = valueDateRange.split("-")[1].trim();
+				}
+					
 					if (valDtrIni && valDtrFin) {
 						fechaInicio = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
 						fechaFin = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
@@ -283,10 +288,7 @@ sap.ui.define([
 						.catch(error => console.error(error));
 
 
-				} else {
-					BusyIndicator.hide();
-					MessageBox.error("El campo fecha es obligatorio");
-				}
+				
 			},
 			detalleMarea: async function (event) {
 				BusyIndicator.show(0);
@@ -439,10 +441,10 @@ sap.ui.define([
 				var objeto = evt.getParameter("rowContext").getObject();
 				if (objeto) {
 					var cdemb = objeto.CDEMB;
-					if (this.currentInputEmba.includes("embarcacionLow")) {
-						this.byId("embarcacionLow").setValue(cdemb);
-					} else if (this.currentInputEmba.includes("embarcacionHigh")) {
-						this.byId("embarcacionHigh").setValue(cdemb);
+					if (this.currentInputEmba.includes("inputId0_R")) {
+						this.byId("inputId0_R").setValue(cdemb);
+					} else if (this.currentInputEmba.includes("inputId1_R")) {
+						this.byId("inputId1_R").setValue(cdemb);
 					}
 					this.getDialog().close();
 				}
@@ -689,10 +691,10 @@ sap.ui.define([
 				console.log(indices);
 
 				var data = this.getView().getModel("consultaMareas").oData.embarcaciones[indices].CDEMB;
-				if (this.currentInputEmba.includes("embarcacionLow")) {
-					this.byId("embarcacionLow").setValue(data);
-				} else if (this.currentInputEmba.includes("embarcacionHigh")) {
-					this.byId("embarcacionHigh").setValue(data);
+				if (this.currentInputEmba.includes("inputId0_R")) {
+					this.byId("inputId0_R").setValue(data);
+				} else if (this.currentInputEmba.includes("inputId1_R")) {
+					this.byId("inputId1_R").setValue(data);
 				}
 				this.onCerrarEmba();
 
@@ -829,8 +831,8 @@ sap.ui.define([
 				this.byId("mareaHigh").setValue(null);
 				this.byId("plantaLow").setValue(null);
 				this.byId("plantaHigh").setValue(null);
-				this.byId("embarcacionLow").setValue(null);
-				this.byId("embarcacionHigh").setValue(null);
+				this.byId("inputId0_R").setValue(null);
+				this.byId("inputId1_R").setValue(null);
 				this.byId("propiedad").setSelectedKey(null);
 				this.byId("motivos").setSelectedKeys(null);
 				this.byId("idDateRangeSelec").setValue(null);
@@ -859,7 +861,66 @@ sap.ui.define([
 			},
 
 			getCurrentUser: function () {
-				return "FGARCIA"
+				return "FGARCIA"; //utilities.getCurrentUser();
+			},
+			onSearchHelp:function(oEvent){
+				let sIdInput = oEvent.getSource().getId(),
+				oModel = this.getModel(),
+				nameComponent="busqembarcaciones",
+				idComponent="busqembarcaciones",
+				urlComponent=HOST+"/9acc820a-22dc-4d66-8d69-bed5b2789d3c.AyudasBusqueda.busqembarcaciones-1.0.0",
+				oView = this.getView(),
+		
+					oInput = this.getView().byId(sIdInput);	
+				
+				
+				oModel.setProperty("/input",oInput);
+	
+				if(!this.DialogComponent){
+					this.DialogComponent = new sap.m.Dialog({
+						title:"Búsqueda de embarcaciones",
+						icon:"sap-icon://search",
+						state:"Information",
+						endButton:new sap.m.Button({
+							icon:"sap-icon://decline",
+							text:"Cerrar",
+							type:"Reject",
+							press:function(oEvent){
+								this.onCloseDialog(oEvent);
+							}.bind(this)
+						})
+					});
+					oView.addDependent(this.DialogComponent);
+					oModel.setProperty("/idDialogComp",this.DialogComponent.getId());
+				}
+	
+				let comCreateOk = function(oEvent){
+					BusyIndicator.hide();
+				};
+	
+				
+				if(this.DialogComponent.getContent().length===0){
+					BusyIndicator.show(0);
+					let oComponent = new sap.ui.core.ComponentContainer({
+						id:idComponent,
+						name:nameComponent,
+						url:urlComponent,
+						settings:{},
+						componentData:{},
+						propagateModel:true,
+						componentCreated:comCreateOk,
+						height:'100%',
+						// manifest:true,
+						async:false
+					});
+	
+					this.DialogComponent.addContent(oComponent);
+				}
+				
+				this.DialogComponent.open();
+			},
+			onCloseDialog:function(oEvent){
+				oEvent.getSource().getParent().close();
 			}
 
 		});

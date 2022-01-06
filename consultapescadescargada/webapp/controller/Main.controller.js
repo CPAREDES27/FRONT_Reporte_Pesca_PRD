@@ -8,17 +8,18 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	'sap/ui/export/library',
-	'sap/ui/export/Spreadsheet'
+	'sap/ui/export/Spreadsheet',
+	"../model/utilities"
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (BaseController, JSONModel, Fragment, formatter, BusyIndicator, MessageBox, Filter, FilterOperator, exportLibrary, Spreadsheet) {
+	function (BaseController, JSONModel, Fragment, formatter, BusyIndicator, MessageBox, Filter, FilterOperator, exportLibrary, Spreadsheet, utilities) {
 		"use strict";
 
 		var EdmType = exportLibrary.EdmType;
-
-		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/';
+		const HOST = "https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com";
+		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'; //utilities.getHostService();
 
 		return BaseController.extend("com.tasa.consultapescadescargada.controller.Main", {
 			formatter: formatter,
@@ -114,7 +115,7 @@ sap.ui.define([
 				let commands = [];
 				let planta = this.byId("centro").getValue();
 				let ubicacionPlanta = this.byId("ubicacionPlanta").getSelectedKey();
-				let embarcacion = this.byId("embarcacion").getValue();
+				let embarcacion = this.byId("inputId0_R").getValue();
 				let indicadorPropiedad = this.byId("indicadorPropiedad").getSelectedKey();
 				let tipoMarea = this.byId("tipoMarea").getSelectedKey();
 				//let fechaProdIni = this.byId("fechaProdIni").getValue();
@@ -704,7 +705,7 @@ sap.ui.define([
 				var objeto = evt.getParameter("rowContext").getObject();
 				if (objeto) {
 					var cdemb = objeto.CDEMB;
-					this.byId("embarcacion").setValue(cdemb);
+					this.byId("inputId0_R").setValue(cdemb);
 					this.getDialog().close();
 				}
 			},
@@ -716,7 +717,7 @@ sap.ui.define([
 			clearFields: function () {
 				this.byId("centro").setValue(null);
 				this.byId("ubicacionPlanta").setSelectedKey(null);
-				this.byId("embarcacion").setValue(null);
+				this.byId("inputId0_R").setValue(null);
 				this.byId("indicadorPropiedad").setSelectedKey(null);
 				this.byId("tipoMarea").setSelectedKey(null);
 				this.byId("numRegistros").setValue(null);
@@ -1020,7 +1021,7 @@ sap.ui.define([
 				var objeto = evt.getSource().getBindingContext("consultaPescaDescargada").getObject();
 				if (objeto) {
 					var cdemb = objeto.CDEMB;
-					this.byId("embarcacion").setValue(cdemb);
+					this.byId("inputId0_R").setValue(cdemb);
 					this.getDialog().close();
 				}
 			},
@@ -1045,8 +1046,67 @@ sap.ui.define([
 			},
 
 			/*getCurrentUser: function () {
-				return "FGARCIA";
-			}*/
+				return "FGARCIA"; //utilities.getCurrentUser();
+			},*/
 
+			onSearchHelp:function(oEvent){
+				let sIdInput = oEvent.getSource().getId(),
+				oModel = this.getModel(),
+				nameComponent="busqembarcaciones",
+				idComponent="busqembarcaciones",
+				urlComponent=HOST+"/9acc820a-22dc-4d66-8d69-bed5b2789d3c.AyudasBusqueda.busqembarcaciones-1.0.0",
+				oView = this.getView(),
+		
+					oInput = this.getView().byId(sIdInput);	
+				
+				
+				oModel.setProperty("/input",oInput);
+	
+				if(!this.DialogComponent){
+					this.DialogComponent = new sap.m.Dialog({
+						title:"Búsqueda de embarcaciones",
+						icon:"sap-icon://search",
+						state:"Information",
+						endButton:new sap.m.Button({
+							icon:"sap-icon://decline",
+							text:"Cerrar",
+							type:"Reject",
+							press:function(oEvent){
+								this.onCloseDialog(oEvent);
+							}.bind(this)
+						})
+					});
+					oView.addDependent(this.DialogComponent);
+					oModel.setProperty("/idDialogComp",this.DialogComponent.getId());
+				}
+	
+				let comCreateOk = function(oEvent){
+					BusyIndicator.hide();
+				};
+	
+				
+				if(this.DialogComponent.getContent().length===0){
+					BusyIndicator.show(0);
+					let oComponent = new sap.ui.core.ComponentContainer({
+						id:idComponent,
+						name:nameComponent,
+						url:urlComponent,
+						settings:{},
+						componentData:{},
+						propagateModel:true,
+						componentCreated:comCreateOk,
+						height:'100%',
+						// manifest:true,
+						async:false
+					});
+	
+					this.DialogComponent.addContent(oComponent);
+				}
+				
+				this.DialogComponent.open();
+			},
+			onCloseDialog:function(oEvent){
+				oEvent.getSource().getParent().close();
+			}
 		});
 	});
