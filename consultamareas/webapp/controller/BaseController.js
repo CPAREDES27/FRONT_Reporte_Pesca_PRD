@@ -168,7 +168,7 @@ sap.ui.define([
 			var usuario = this.getCurrentUser();
 			//var distribFlota = this.getModel("DistribFlota");
 			var distribFlota = modelo.getProperty("/DistribFlota");
-			var constantsUtility = this.getModel("ConstantsUtility");
+			var constantsUtility = sap.ui.getCore().getModel("ConstantsUtility");
 			var caracterEditar = constantsUtility.getProperty("/CARACTEREDITAR");
 			var response = await TasaBackendService.obtenerDatosDstrFlota(codigo, usuario);
 			if (response) {
