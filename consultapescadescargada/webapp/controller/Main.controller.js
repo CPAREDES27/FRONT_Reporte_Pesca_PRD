@@ -953,7 +953,7 @@ sap.ui.define([
 				return aColumns;
 			},
 
-			onVerMarea: function (evt) {
+			onVerMarea: async function (evt) {
 				BusyIndicator.show(0);
 				var obj = evt.getSource().getParent().getBindingContext("consultaPescaDescargada").getObject()
 				if (obj) {
