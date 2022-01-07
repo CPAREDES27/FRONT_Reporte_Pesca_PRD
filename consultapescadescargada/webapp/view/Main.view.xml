@@ -143,7 +143,7 @@
                                         </OverflowToolbar>
 				                    </t:extension>
                                     <t:columns>
-                                        <t:Column width="8rem" filterProperty="WERKS" defaultFilterOperator="Contains" sortProperty="WERKS">
+                                        <t:Column width="5rem" filterProperty="WERKS" defaultFilterOperator="Contains" sortProperty="WERKS">
 						                    <Label text="Centro" />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>WERKS}" wrapping="false" />
@@ -151,7 +151,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="8rem" filterProperty="FECCONMOV" defaultFilterOperator="Contains">
+                                        <t:Column width="6rem" filterProperty="FECCONMOV" defaultFilterOperator="Contains">
 						                    <Label text="F. Producción" />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>FECCONMOV}" wrapping="false" />
@@ -159,7 +159,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="8rem" filterProperty="DESC_CDMMA" defaultFilterOperator="EQ" sortProperty="DESC_CDMMA">
+                                        <t:Column width="6rem" filterProperty="DESC_CDMMA" defaultFilterOperator="EQ" sortProperty="DESC_CDMMA">
 						                    <Label text="Mot. Marea" />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>DESC_CDMMA}" wrapping="false" />
@@ -167,7 +167,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="NRDES" defaultFilterOperator="Contains" sortProperty="NRDES">
+                                        <t:Column width="9rem" filterProperty="NRDES" defaultFilterOperator="Contains" sortProperty="NRDES">
 						                    <Label text="Nro. Descarga" />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>NRDES}" wrapping="false" />
@@ -176,7 +176,7 @@
                                     </t:columns>
                                     
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="FCZAR" defaultFilterOperator="Contains">
+                                        <t:Column width="9rem" filterProperty="FCZAR" defaultFilterOperator="Contains">
 						                    <Label text="F/H Zarpe" />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>FCZAR} - {consultaPescaDescargada>HOZAR}" wrapping="false" />
@@ -184,7 +184,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="FCARR" defaultFilterOperator="Contains">
+                                        <t:Column width="9rem" filterProperty="FCARR" defaultFilterOperator="Contains">
 						                    <Label text="F/H Arribo" />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>FCARR} - {consultaPescaDescargada>HOARR}" wrapping="false" />
@@ -192,7 +192,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="MREMB" defaultFilterOperator="Contains" sortProperty="MREMB">
+                                        <t:Column width="9rem" filterProperty="MREMB" defaultFilterOperator="Contains" sortProperty="MREMB">
 						                    <Label text="Matrícula" />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>MREMB}" wrapping="false" />
@@ -200,7 +200,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
+                                        <t:Column width="10rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
 						                    <Label text="Nom. Embarcación" />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>NMEMB}" wrapping="true" maxLines="3" />
@@ -216,7 +216,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
+                                        <t:Column width="13rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
 						                    <Label text="Armador" />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>DSEMP}" wrapping="false" />
@@ -224,7 +224,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="8rem" hAlign="End" filterProperty="CNPCM" defaultFilterOperator="EQ" sortProperty="CNPCM">
+                                        <t:Column width="6rem" hAlign="End" filterProperty="CNPCM" defaultFilterOperator="EQ" sortProperty="CNPCM">
 						                    <Label text="Pesca Decla." />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>CNPCM}" wrapping="false" />
@@ -240,7 +240,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="DSSPC" defaultFilterOperator="Contains" sortProperty="DSSPC">
+                                        <t:Column width="10rem" filterProperty="DSSPC" defaultFilterOperator="Contains" sortProperty="DSSPC">
 						                    <Label text="Especie" />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>DSSPC}" wrapping="false" />
@@ -256,7 +256,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" >
+                                        <t:Column width="10rem" >
 						                    <Label text="Interlocutor" />
 						                    <t:template>
 							                    <Button visible="{= ${consultaPescaDescargada>INPRP} === 'T' ? true : false }" press=".openCambiarInterlocutor" text="Cambiar" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" iconDensityAware="false"/>
@@ -264,7 +264,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="NMPER" defaultFilterOperator="Contains" sortProperty="DESC_INPRP">
+                                        <t:Column width="10rem" filterProperty="NMPER" defaultFilterOperator="Contains" sortProperty="DESC_INPRP">
 						                    <Label text="Patrón" />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>NMPER}" width="auto" maxLines="3" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
@@ -272,7 +272,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" >
+                                        <t:Column width="8rem" >
 						                    <Label text="" />
 						                    <t:template>
 							                    <Button text="Ver marea" press="onVerMarea" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" visible="{consultaPescaDescargada>visibleMarea}" iconDensityAware="false"/>
