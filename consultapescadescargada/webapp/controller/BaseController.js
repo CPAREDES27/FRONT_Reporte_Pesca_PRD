@@ -200,21 +200,23 @@ sap.ui.define([
                 //var mareaAnterior = this.getModel("MareaAnterior");
                 var response = await TasaBackendService.obtenerMareaAnterior(marea, codigo, usuario);
                 if (response) {
-                    var mareaAnt = response.data[0];
-                    for (var key in mareaAnt) {
-                        if (mareaAnterior.hasOwnProperty(key)) {
-                            mareaAnterior[key] = mareaAnt[key];
+                    if (response.data.length > 0) {
+                        var mareaAnt = response.data[0];
+                        for (var key in mareaAnt) {
+                            if (mareaAnterior.hasOwnProperty(key)) {
+                                mareaAnterior[key] = mareaAnt[key];
+                            }
                         }
-                    }
-                    if (!motivosSinZarpe.includes(mareaAnt.CDMMA)) {
-                        var response1 = await TasaBackendService.obtenerEventoAnterior(parseInt(mareaAnt.NRMAR), usuario);
-                        if (response1) {
-                            var eventoAnt = response1.data[0];
-                            if (eventoAnt) {
-                                var evtMarAnt = modelo.getProperty("/MareaAnterior/EventoMarAnt");
-                                for (var key in eventoAnt) {
-                                    if (evtMarAnt.hasOwnProperty(key)) {
-                                        evtMarAnt[key] = eventoAnt[key];
+                        if (!motivosSinZarpe.includes(mareaAnt.CDMMA)) {
+                            var response1 = await TasaBackendService.obtenerEventoAnterior(parseInt(mareaAnt.NRMAR), usuario);
+                            if (response1) {
+                                var eventoAnt = response1.data[0];
+                                if (eventoAnt) {
+                                    var evtMarAnt = modelo.getProperty("/MareaAnterior/EventoMarAnt");
+                                    for (var key in eventoAnt) {
+                                        if (evtMarAnt.hasOwnProperty(key)) {
+                                            evtMarAnt[key] = eventoAnt[key];
+                                        }
                                     }
                                 }
                             }
