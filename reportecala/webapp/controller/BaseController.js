@@ -45,6 +45,97 @@ sap.ui.define([
 			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
 		},
 
+		getCurrentUser: async function(){
+            let oUshell = sap.ushell,
+            oUser={};
+            if(oUshell){
+                let  oUserInfo =await sap.ushell.Container.getServiceAsync("UserInfo");
+                let sEmail = oUserInfo.getEmail().toUpperCase(),
+                sName = sEmail.split("@")[0],
+                sDominio= sEmail.split("@")[1];
+                if(sDominio === "XTERNAL.BIZ") sName = "FGARCIA";
+                oUser = {
+                    name:sName
+                }
+            }else{
+                oUser = {
+                    name: "FGARCIA"
+                }
+            }
+
+			var usuario=oUser.name;
+			console.log(usuario);
+
+            return usuario;
+        },
+		onLocation:function(){
+
+			var oRouter = window.location.origin;
+	
+			console.log(oRouter)
+	
+			var service="";
+	
+			if(oRouter.indexOf("localhost") !== -1){
+	
+				//service='https://cf-nodejs-cheerful-bat-js.cfapps.us10.hana.ondemand.com/api/'
+				service='https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'
+
+			}
+	
+			if(oRouter.indexOf("tasadev")!== -1){
+	
+				service='https://cf-nodejs-cheerful-bat-js.cfapps.us10.hana.ondemand.com/api/'
+	
+			}
+	
+			if(oRouter.indexOf("tasaprd")!==-1){
+	
+				service='https://cf-nodejs-prd.cfapps.us10.hana.ondemand.com/api/'
+	
+			}
+	
+			if(oRouter.indexOf("tasaqas")!==-1){
+	
+				service='https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'
+	
+			}
+	
+			console.log(service);
+	
+			return service;
+	
+		},
+		
+		_getHelpSearch:  function(){
+			var oRouter = window.location.origin;
+			var service=[];
+			if(oRouter.indexOf("localhost") !== -1){
+				service.push({
+					url:"https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com/",
+					parameter:"IDH4_QAS"
+				})
+			}
+			if(oRouter.indexOf("tasadev")!== -1){
+				service.push({
+					url:"https://tasadev.launchpad.cfapps.us10.hana.ondemand.com/",
+					parameter:"IDH4_DEV"
+				})
+			}
+			if(oRouter.indexOf("tasaprd")!==-1){
+				service.push({
+					url:"https://tasaprd.launchpad.cfapps.us10.hana.ondemand.com/",
+					parameter:"IDH4_PRD"
+				})
+			}
+			if(oRouter.indexOf("tasaqas")!==-1){
+				service.push({
+					url:"https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com/",
+					parameter:"IDH4_QAS"
+				})
+			}
+			return service;
+		},
 	});
 
 });

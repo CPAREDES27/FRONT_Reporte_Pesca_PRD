@@ -16,10 +16,10 @@ sap.ui.define([
 	 */
 	function (BaseController, JSONModel, Fragment, formatter, BusyIndicator, MessageBox, Filter, FilterOperator, exportLibrary, Spreadsheet, utilities) {
 		"use strict";
-
+		var oGlobalBusyDialog = new sap.m.BusyDialog();
 		var EdmType = exportLibrary.EdmType;
-		const HOST = "https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com";
-		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'; //utilities.getHostService();
+		//const HOST = "https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com";
+		//const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'; //utilities.getHostService();
 
 		return BaseController.extend("com.tasa.consultapescadescargada.controller.Main", {
 			formatter: formatter,
@@ -76,7 +76,7 @@ sap.ui.define([
 					]
 				};
 
-				fetch(`${mainUrlServices}dominios/Listar`,
+				fetch(`${this.onLocation()}dominios/Listar`,
 					{
 						method: 'POST',
 						body: JSON.stringify(bodyDominios)
@@ -96,7 +96,7 @@ sap.ui.define([
 					"p_user": this.userOperation
 				};
 
-				fetch(`${mainUrlServices}General/AyudasBusqueda/`,
+				fetch(`${this.onLocation()}General/AyudasBusqueda/`,
 					{
 						method: 'POST',
 						body: JSON.stringify(bodyAyudaBusqueda)
@@ -112,8 +112,41 @@ sap.ui.define([
 
 			onAfterRendering: async function(){
 				this.userOperation =await this.getCurrentUser();
-				console.log(this.userOperation);
+				console.log(this.userOperation);	
 	
+				this.objetoHelp =  this._getHelpSearch();
+				this.parameter= this.objetoHelp[0].parameter;
+				this.url= this.objetoHelp[0].url;
+				console.log(this.parameter)
+				console.log(this.url)
+				console.log(this.userOperation);
+				this.callConstantes();
+			},
+	
+			callConstantes: function(){
+				oGlobalBusyDialog.open();
+				var body={
+					"nombreConsulta": "CONSGENCONST",
+					"p_user": this.userOperation,
+					"parametro1": this.parameter,
+					"parametro2": "",
+					"parametro3": "",
+					"parametro4": "",
+					"parametro5": ""
+				}
+				fetch(`${this.onLocation()}General/ConsultaGeneral/`,
+					  {
+						  method: 'POST',
+						  body: JSON.stringify(body)
+					  })
+					  .then(resp => resp.json()).then(data => {
+						
+						console.log(data.data);
+						this.HOST_HELP=this.url+data.data[0].LOW;
+						console.log(this.HOST_HELP);
+							oGlobalBusyDialog.close();
+					  }).catch(error => console.log(error)
+				);
 			},
 
 			searchData: async function (event) {
@@ -247,7 +280,7 @@ sap.ui.define([
 					p_user: this.userOperation
 				};
 
-				fetch(`${mainUrlServices}reportepesca/ConsultarPescaDescargada`, {
+				fetch(`${this.onLocation()}reportepesca/ConsultarPescaDescargada`, {
 					method: 'POST',
 					body: JSON.stringify(body)
 				})
@@ -302,7 +335,7 @@ sap.ui.define([
 				this.getModel("consultaPescaDescargada").setProperty("/mareaSelected", mareaSelected);
 
 				//Asignar la descripción del motivo de marea
-				await fetch(`${mainUrlServices}dominios/Listar`, {
+				await fetch(`${this.onLocation()}dominios/Listar`, {
 					method: 'POST',
 					body: JSON.stringify({
 						"dominios": [
@@ -350,7 +383,7 @@ sap.ui.define([
 				console.log(body);
 
 
-				fetch(`${mainUrlServices}reportepesca/AgregarInterlocutor`, {
+				fetch(`${this.onLocation()}reportepesca/AgregarInterlocutor`, {
 					method: 'POST',
 					body: JSON.stringify(body)
 				})
@@ -589,7 +622,7 @@ sap.ui.define([
 					//"p_pag": "1" //por defecto la primera parte
 				};
 
-				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
+				fetch(`${this.onLocation()}embarcacion/ConsultarEmbarcacion/`,
 					{
 						method: 'POST',
 						body: JSON.stringify(body)
@@ -690,7 +723,7 @@ sap.ui.define([
 					"p_pag": this.currentPage
 				};
 
-				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
+				fetch(`${this.onLocation()}embarcacion/ConsultarEmbarcacion/`,
 					{
 						method: 'POST',
 						body: JSON.stringify(body)
@@ -756,7 +789,7 @@ sap.ui.define([
 					"p_user": "BUSQEMB"
 				};
 
-				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
+				fetch(`${this.onLocation()}embarcacion/ConsultarEmbarcacion/`,
 					{
 						method: 'POST',
 						body: JSON.stringify(objectRT)
@@ -1038,7 +1071,7 @@ sap.ui.define([
 				var body = {
 					"codigo": "100"
 				}
-				fetch(`${mainUrlServices}General/Armador`,
+				fetch(`${this.onLocation()}General/Armador`,
 					{
 						method: 'POST',
 						body: JSON.stringify(body)
@@ -1061,7 +1094,7 @@ sap.ui.define([
 				oModel = this.getModel(),
 				nameComponent="busqembarcaciones",
 				idComponent="busqembarcaciones",
-				urlComponent=HOST+"/9acc820a-22dc-4d66-8d69-bed5b2789d3c.AyudasBusqueda.busqembarcaciones-1.0.0",
+				urlComponent=this.HOST_HELP+".AyudasBusqueda.busqembarcaciones-1.0.0",
 				oView = this.getView(),
 		
 					oInput = this.getView().byId(sIdInput);	

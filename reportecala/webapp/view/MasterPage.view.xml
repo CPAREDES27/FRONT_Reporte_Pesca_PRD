@@ -150,7 +150,7 @@
 					                    </OverflowToolbar>
 				                    </t:extension>
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="DSZPC" defaultFilterOperator="Contains" sortProperty="DSZPC">
+                                        <t:Column width="9rem" filterProperty="DSZPC" defaultFilterOperator="Contains" sortProperty="DSZPC">
 						                    <Label text="Zona pesca" />
 						                    <t:template>
 							                    <Text text="{reporteCala>DSZPC}" wrapping="false" />
@@ -158,7 +158,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="8rem" filterProperty="WERKS" defaultFilterOperator="Contains" sortProperty="WERKS">
+                                        <t:Column width="6rem" filterProperty="WERKS" defaultFilterOperator="Contains" sortProperty="WERKS">
 						                    <Label text="Centro" />
 						                    <t:template>
 							                    <Text text="{reporteCala>WERKS}" wrapping="false" />
@@ -174,7 +174,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="10rem" filterProperty="FECCONMOV" defaultFilterOperator="Contains">
+                                        <t:Column width="8rem" filterProperty="FECCONMOV" defaultFilterOperator="Contains">
 						                    <Label text="Fecha producción" />
 						                    <t:template>
 							                    <Text text="{reporteCala>FECCONMOV}" wrapping="false" />
@@ -183,7 +183,7 @@
                                     </t:columns>
                                     
                                     <t:columns>
-                                        <t:Column width="8rem" filterProperty="NRMAR" defaultFilterOperator="EQ" sortProperty="NRMAR">
+                                        <t:Column width="6rem" filterProperty="NRMAR" defaultFilterOperator="EQ" sortProperty="NRMAR">
 						                    <Label text="Marea" />
 						                    <t:template>
 							                    <Text text="{reporteCala>NRMAR}" wrapping="false" />
@@ -191,7 +191,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="NRDES" defaultFilterOperator="Contains" sortProperty="NRDES">
+                                        <t:Column width="9rem" filterProperty="NRDES" defaultFilterOperator="Contains" sortProperty="NRDES">
 						                    <Label text="Descarga" />
 						                    <t:template>
 							                    <Text text="{reporteCala>NRDES}" wrapping="false" />
@@ -199,7 +199,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="DESC_TIPOMAREA" defaultFilterOperator="Contains" sortProperty="DESC_TIPOMAREA">
+                                        <t:Column width="7rem" filterProperty="DESC_TIPOMAREA" defaultFilterOperator="Contains" sortProperty="DESC_TIPOMAREA">
 						                    <Label text="Tipo marea" />
 						                    <t:template>
 							                    <Text text="Pesca {reporteCala>DESC_TIPOMAREA}" wrapping="false" />
@@ -207,7 +207,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
+                                        <t:Column width="8rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
 						                    <Label text="Embarcación" />
 						                    <t:template>
 							                    <Text text="{reporteCala>NMEMB}" wrapping="true" maxLines="3" />
@@ -215,7 +215,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="MREMB" defaultFilterOperator="Contains" sortProperty="MREMB">
+                                        <t:Column width="9rem" filterProperty="MREMB" defaultFilterOperator="Contains" sortProperty="MREMB">
 						                    <Label text="Matricula"/>
 						                    <t:template>
 							                    <Text text="{reporteCala>MREMB}" wrapping="false" />
@@ -231,7 +231,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="DESC_INPRP" defaultFilterOperator="Contains" sortProperty="DESC_INPRP">
+                                        <t:Column width="10rem" filterProperty="DESC_INPRP" defaultFilterOperator="Contains" sortProperty="DESC_INPRP">
 						                    <Label text="Indicador propiedad" />
 						                    <t:template>
 							                    <Text text="{reporteCala>DESC_INPRP}" wrapping="false" />
@@ -239,7 +239,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="FIEVN" defaultFilterOperator="Contains">
+                                        <t:Column width="8rem" filterProperty="FIEVN" defaultFilterOperator="Contains">
 						                    <Label text="Fecha Ini Cala" />
 						                    <t:template>
 							                    <Text text="{reporteCala>FIEVN}" wrapping="false" />
@@ -247,7 +247,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="HIEVN" defaultFilterOperator="Contains">
+                                        <t:Column width="8rem" filterProperty="HIEVN" defaultFilterOperator="Contains">
 						                    <Label text="Hora Ini Cala" />
 						                    <t:template>
 							                    <Text text="{reporteCala>HIEVN}" wrapping="false" />
@@ -255,7 +255,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="FFEVN" defaultFilterOperator="Contains">
+                                        <t:Column width="8rem" filterProperty="FFEVN" defaultFilterOperator="Contains">
 						                    <Label text="Fecha Fin Cala" />
 						                    <t:template>
 							                    <Text text="{reporteCala>FFEVN}" wrapping="false" />
@@ -263,7 +263,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="HFEVN" defaultFilterOperator="Contains">
+                                        <t:Column width="8rem" filterProperty="HFEVN" defaultFilterOperator="Contains">
 						                    <Label text="Hora Fin Cala"/>
 						                    <t:template>
 							                    <Text text="{reporteCala>HFEVN}" wrapping="false" />
@@ -271,7 +271,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="FIEVN" defaultFilterOperator="Contains">
+                                        <t:Column width="8rem" filterProperty="FIEVN" defaultFilterOperator="Contains">
 						                    <Label text="Fecha Ini Envase" />
 						                    <t:template>
 							                    <Text text="{reporteCala>FIEVN}" wrapping="false" />
@@ -279,7 +279,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="HIEVN" defaultFilterOperator="Contains">
+                                        <t:Column width="8rem" filterProperty="HIEVN" defaultFilterOperator="Contains">
 						                    <Label text="Hora Ini Envase" />
 						                    <t:template>
 							                    <Text text="{reporteCala>HIEVN}" wrapping="false" />
@@ -287,7 +287,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="FFEVN" defaultFilterOperator="Contains">
+                                        <t:Column width="8rem" filterProperty="FFEVN" defaultFilterOperator="Contains">
 						                    <Label text="Fecha Fin Envase" />
 						                    <t:template>
 							                    <Text text="{reporteCala>FFEVN}" wrapping="false" />
@@ -295,7 +295,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="HFEVN" defaultFilterOperator="Contains">
+                                        <t:Column width="8rem" filterProperty="HFEVN" defaultFilterOperator="Contains">
 						                    <Label text="Hora Fin Envase" />
 						                    <t:template>
 							                    <Text text="{reporteCala>HFEVN}" wrapping="false" />
@@ -303,7 +303,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="8rem" hAlign="End" filterProperty="LTGEO" defaultFilterOperator="EQ" sortProperty="LTGEO">
+                                        <t:Column width="7rem" hAlign="End" filterProperty="LTGEO" defaultFilterOperator="EQ" sortProperty="LTGEO">
 						                    <Label text="Latitud" />
 						                    <t:template>
 							                    <Text text="{reporteCala>LTGEO}" wrapping="false" />
@@ -311,7 +311,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="8rem" hAlign="End" filterProperty="LNGEO" defaultFilterOperator="EQ" sortProperty="LNGEO">
+                                        <t:Column width="7rem" hAlign="End" filterProperty="LNGEO" defaultFilterOperator="EQ" sortProperty="LNGEO">
 						                    <Label text="Longitud" />
 						                    <t:template>
 							                    <Text text="{reporteCala>LNGEO}" wrapping="false" />
@@ -319,7 +319,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="8rem" hAlign="End" filterProperty="TEMAR" defaultFilterOperator="EQ" sortProperty="TEMAR">
+                                        <t:Column width="7rem" hAlign="End" filterProperty="TEMAR" defaultFilterOperator="EQ" sortProperty="TEMAR">
 						                    <Label text="Temperatura" />
 						                    <t:template>
 							                    <Text text="{reporteCala>TEMAR}" wrapping="false" />
@@ -343,7 +343,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="DSSPC" defaultFilterOperator="EQ" sortProperty="DSSPC">
+                                        <t:Column width="9rem" filterProperty="DSSPC" defaultFilterOperator="EQ" sortProperty="DSSPC">
 						                    <Label text="Especie" />
 						                    <t:template>
 							                    <Text text="{reporteCala>DSSPC}" wrapping="false" />

@@ -15,11 +15,12 @@ sap.ui.define([
 	 */
 	function (BaseController, Controller, JSONModel, formatter, BusyIndicator, Filter, FilterOperator, exportLibrary, Spreadsheet, utilities) {
 		"use strict";
+		var oGlobalBusyDialog = new sap.m.BusyDialog();
 
 		var EdmType = exportLibrary.EdmType;
 
-		const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'; //utilities.getHostService();
-		const HOST = "https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com";
+		//const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'; //utilities.getHostService();
+		//const HOST = "https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com";
 		return BaseController.extend("com.tasa.reportetdcchd.controller.Main", {
 			dataTableKeys: [
 				'NRMAR',
@@ -53,6 +54,44 @@ sap.ui.define([
 				this.currentPage = "";
 				this.lastPage = "";
 			},
+			onAfterRendering: async function(){
+				this.userOperation =await this.getCurrentUser();
+				console.log(this.userOperation);	
+	
+				this.objetoHelp =  this._getHelpSearch();
+				this.parameter= this.objetoHelp[0].parameter;
+				this.url= this.objetoHelp[0].url;
+				console.log(this.parameter)
+				console.log(this.url)
+				console.log(this.userOperation);
+				this.callConstantes();
+			},
+	
+			callConstantes: function(){
+				oGlobalBusyDialog.open();
+				var body={
+					"nombreConsulta": "CONSGENCONST",
+					"p_user": this.userOperation,
+					"parametro1": this.parameter,
+					"parametro2": "",
+					"parametro3": "",
+					"parametro4": "",
+					"parametro5": ""
+				}
+				fetch(`${this.onLocation()}General/ConsultaGeneral/`,
+					  {
+						  method: 'POST',
+						  body: JSON.stringify(body)
+					  })
+					  .then(resp => resp.json()).then(data => {
+						
+						console.log(data.data);
+						this.HOST_HELP=this.url+data.data[0].LOW;
+						console.log(this.HOST_HELP);
+							oGlobalBusyDialog.close();
+					  }).catch(error => console.log(error)
+				);
+			},
 
 			loadData: function () {
 				BusyIndicator.show(0);
@@ -74,7 +113,7 @@ sap.ui.define([
 					]
 				};
 
-				fetch(`${mainUrlServices}dominios/Listar`,
+				fetch(`${this.onLocation()}dominios/Listar`,
 					{
 						method: 'POST',
 						body: JSON.stringify(bodyDominios)
@@ -92,7 +131,7 @@ sap.ui.define([
 					"p_user": this.getCurrentUser()
 				};
 
-				fetch(`${mainUrlServices}General/AyudasBusqueda/`,
+				fetch(`${this.onLocation()}General/AyudasBusqueda/`,
 					{
 						method: 'POST',
 						body: JSON.stringify(bodyAyudaPlantas)
@@ -124,7 +163,7 @@ sap.ui.define([
 					"p_user": "BUSQEMB"
 				};
 
-				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
+				fetch(`${this.onLocation()}embarcacion/ConsultarEmbarcacion/`,
 					{
 						method: 'POST',
 						body: JSON.stringify(objectRT)
@@ -243,7 +282,7 @@ sap.ui.define([
 					rowcount: numAciertos
 				};
 
-				fetch(`${mainUrlServices}reportepesca/ConsultarMareas`, {
+				fetch(`${this.onLocation()}reportepesca/ConsultarMareas`, {
 					method: 'POST',
 					body: JSON.stringify(body)
 				})
@@ -479,7 +518,7 @@ sap.ui.define([
 					//"p_pag": "1" //por defecto la primera parte
 				};
 
-				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
+				fetch(`${this.onLocation()}embarcacion/ConsultarEmbarcacion/`,
 					{
 						method: 'POST',
 						body: JSON.stringify(body)
@@ -580,7 +619,7 @@ sap.ui.define([
 					"p_pag": this.currentPage
 				};
 
-				fetch(`${mainUrlServices}embarcacion/ConsultarEmbarcacion/`,
+				fetch(`${this.onLocation()}embarcacion/ConsultarEmbarcacion/`,
 					{
 						method: 'POST',
 						body: JSON.stringify(body)
@@ -637,14 +676,14 @@ sap.ui.define([
 			},
 
 			getCurrentUser: function () {
-				return "FGARCIA"; //utilities.getCurrentUser();
+				return this.userOperation; //utilities.getCurrentUser();
 			},
 			onSearchHelp:function(oEvent){
 				let sIdInput = oEvent.getSource().getId(),
 				oModel = this.getModel(),
 				nameComponent="busqembarcaciones",
 				idComponent="busqembarcaciones",
-				urlComponent=HOST+"/9acc820a-22dc-4d66-8d69-bed5b2789d3c.AyudasBusqueda.busqembarcaciones-1.0.0",
+				urlComponent=this.HOST_HELP+".AyudasBusqueda.busqembarcaciones-1.0.0",
 				oView = this.getView(),
 		
 					oInput = this.getView().byId(sIdInput);	
