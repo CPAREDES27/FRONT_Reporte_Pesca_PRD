@@ -58,6 +58,13 @@ sap.ui.define([
 				this.lastPage = "";
 				
 			},
+
+			onAfterRendering: async function(){
+				this.userOperation =await this.getCurrentUser();
+				console.log(this.userOperation);
+	
+			},
+
 			handleSelectionChange: function (event) {
 				console.log(event.getParameter("changedItem"));
 			},
@@ -102,7 +109,7 @@ sap.ui.define([
 
 				const bodyAyudaPlantas = {
 					"nombreAyuda": "BSQPLANTAS",
-					"p_user": this.getCurrentUser()
+					"p_user": this.userOperation
 				};
 
 				fetch(`${mainUrlServices}General/AyudasBusqueda/`,
@@ -267,7 +274,7 @@ sap.ui.define([
 					let body = {
 						option: [],
 						options: options,
-						p_user: this.getCurrentUser(),
+						p_user: this.userOperation,
 						rowcount: numRegistros
 					};
 					console.log(body);
@@ -860,9 +867,6 @@ sap.ui.define([
 				return this.oDialog;
 			},
 
-			getCurrentUser: function () {
-				return "FGARCIA"; //utilities.getCurrentUser();
-			},
 			onSearchHelp:function(oEvent){
 				let sIdInput = oEvent.getSource().getId(),
 				oModel = this.getModel(),

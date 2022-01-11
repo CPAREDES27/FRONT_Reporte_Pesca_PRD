@@ -476,7 +476,11 @@ sap.ui.define([
 		getCurrentUser: async function () {
 			const oUserInfo = await this.getUserInfoService();
 			const sUserEmail = oUserInfo.getEmail(); //fgarcia@tasa.com.pe
-			var usuario = sUserEmail.split("@")[0].toUpperCase();
+            var emailSplit = sUserEmail.split("@");
+			var usuario = emailSplit[0].toUpperCase();
+            if(emailSplit[1] == "xternal.biz"){
+                usuario = "FGARCIA";
+            }
 			return usuario;
 		},
 
