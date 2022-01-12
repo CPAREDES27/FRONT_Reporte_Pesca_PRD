@@ -368,6 +368,9 @@ sap.ui.define([
 						this.getModel("reporteCala").setProperty("/items", reporteCalas);
 						this.getModel("reporteCala").setProperty("/numCalas", data.s_cala.length);
 						BusyIndicator.hide();
+
+						var cantidadRegistros="Lista de registros ("+data.s_cala.length+")";
+						this.byId("idListaReg").setText(cantidadRegistros);
 					})
 					.catch((error) => {
 						console.error('Error found: ' + error);

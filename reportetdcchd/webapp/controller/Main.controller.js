@@ -290,6 +290,11 @@ sap.ui.define([
 					.then(data => {
 						this.getModel("listMareas").setProperty("/items", data.s_marea);
 						BusyIndicator.hide();
+
+
+						var cantidadRegistros="Lista de registros ("+data.s_marea.length+")";
+						this.byId("idListaReg").setText(cantidadRegistros);
+
 					});
 
 			},
