@@ -139,7 +139,7 @@
                                             </form:label>
                                             <form:fields>
                                                 <Button text="Buscar" type="Emphasized" press="searchData" icon="sap-icon://search" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
-                                                <Button press="clearFields" text="Limpiar" type="Emphasized" icon="sap-icon://clear-filter" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
+                                                <Button press="clearFields" text="Limpiar"  icon="sap-icon://clear-filter" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
                                             </form:fields>
                                         </form:FormElement>
                                     </form:formElements>

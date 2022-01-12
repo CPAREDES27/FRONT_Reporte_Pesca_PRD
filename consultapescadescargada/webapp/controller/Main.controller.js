@@ -321,6 +321,11 @@ sap.ui.define([
 						tmpData.push(objFooter);
 						this.getModel("consultaPescaDescargada").setProperty("/items", tmpData);
 						BusyIndicator.hide();
+
+
+
+						var title="Lista de registros ("+data.str_des.length+")";
+					this.byId("idListaReg").setText(title);
 					}).catch(error => {
 						console.error(error);
 						BusyIndicator.hide();

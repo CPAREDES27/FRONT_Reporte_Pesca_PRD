@@ -119,7 +119,7 @@
                                             </form:label>
                                             <form:fields>
                                                 <Button press="searchData" text="Buscar" type="Emphasized" icon="sap-icon://search" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
-                                                <Button press="clearFields" text="Limpiar" type="Emphasized" icon="sap-icon://clear-filter" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
+                                                <Button press="clearFields" text="Limpiar" icon="sap-icon://clear-filter" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
                                             </form:fields>
                                         </form:FormElement>
                                     </form:formElements>
@@ -135,7 +135,7 @@
                                 <t:Table id="tableData" rows="{consultaPescaDescargada>/items}" visibleRowCount="8" ariaLabelledBy="title" selectionMode="None">
                                     <t:extension>
 					                    <OverflowToolbar style="Clear">
-						                    <Title id="titulo" text=""/>
+						                    <Title text="Lista de registros {/dataCount}" id="idListaReg"/>
                                             <ToolbarSpacer width=""/>
                                             <Button press='.exportarExcel' text="Exportar" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                                             <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>
