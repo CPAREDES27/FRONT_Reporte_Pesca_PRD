@@ -57,8 +57,11 @@
                             </form:FormElement>
                             <form:FormElement label="Interlocutor alterno" visible="true">
                                 <form:fields>
-                                    <Input value="{consultaPescaDescargada>/mareaSelected/armador}" type="Text" showValueHelp="true" valueHelpRequest="openIterlocutorDialog" enabled="true" visible="true" width="50%" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
-                                    <Text text="" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <Input id="idArmadorIni_R" value="{consultaPescaDescargada>/mareaSelected/armador}"
+                                                showValueHelp="true"
+                                                valueHelpRequest="onShowSearchTrip"/>	
+                                    <!-- <Input value="{consultaPescaDescargada>/mareaSelected/armador}" type="Text" showValueHelp="true" valueHelpRequest="openIterlocutorDialog" enabled="true" visible="true" width="50%" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/> -->
+                                    <Text text="{/helpArma/NAME1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                 </form:fields>
                             </form:FormElement>
                             <form:FormElement label="Standard" visible="true">

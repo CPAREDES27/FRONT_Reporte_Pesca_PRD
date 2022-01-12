@@ -319,6 +319,7 @@ sap.ui.define([
 							}
 						}
 						tmpData.push(objFooter);
+						this.byId("titulo").setText("Lista de Registros: "+tmpData.length);
 						this.getModel("consultaPescaDescargada").setProperty("/items", tmpData);
 						BusyIndicator.hide();
 					}).catch(error => {
@@ -329,6 +330,8 @@ sap.ui.define([
 			},
 
 			openCambiarInterlocutor: async function (event) {
+				this.getView().getModel().setProperty("/helpArma",{});
+				
 				let oContext = event.getSource().getBindingContext("consultaPescaDescargada");
 				let mareaSelected = oContext.getObject();
 				mareaSelected.armador = null;
@@ -368,10 +371,12 @@ sap.ui.define([
 					});
 				}
 				this.cambiarInterlocutorDialog.open();
+				sap.ui.getCore().byId("idArmadorIni_R").setValue("");
 			},
 			cambiarInterlocutor: function (event) {
 				let mareaSelected = this.getModel("consultaPescaDescargada").getProperty("/mareaSelected");
-				let armador = mareaSelected.armador;
+				// let armador = mareaSelected.armador;
+				let armador = sap.ui.getCore().byId("idArmadorIni_R").getValue();
 				console.log(armador)
 
 				const body = {
@@ -1147,6 +1152,47 @@ sap.ui.define([
 			},
 			onCloseDialog:function(oEvent){
 				oEvent.getSource().getParent().close();
-			}
+			},
+			onShowSearchTrip: async function(oEvent){
+				let sIdInput = oEvent.getSource().getId(),
+				oView = this.getView(),
+				oModel = this.getModel(),
+				sUrl =this.HOST_HELP+".AyudasBusqueda.busqarmadores-1.0.0",
+				nameComponent = "busqarmadores",
+				idComponent = "busqarmadores",
+				oInput = sap.ui.getCore().byId(sIdInput);
+				oModel.setProperty("/input",oInput);
+	
+				if(!this.DialogComponent){
+					this.DialogComponent = await Fragment.load({
+						name:"com.tasa.consultapescadescargada.view.fragments.BusqArmadores",
+						controller:this
+					});
+					oView.addDependent(this.DialogComponent);
+				}
+				oModel.setProperty("/idDialogComp",this.DialogComponent.getId());
+				
+				let compCreateOk = function(){
+					BusyIndicator.hide()
+				}
+				if(this.DialogComponent.getContent().length===0){
+					BusyIndicator.show(0);
+					const oContainer = new sap.ui.core.ComponentContainer({
+						id: idComponent,
+						name: nameComponent,
+						url: sUrl,
+						settings: {},
+						componentData: {},
+						propagateModel: true,
+						componentCreated: compCreateOk,
+						height: '100%',
+						// manifest: true,
+						async: false
+					});
+					this.DialogComponent.addContent(oContainer);
+				}
+	
+				this.DialogComponent.open();
+			},
 		});
 	});
