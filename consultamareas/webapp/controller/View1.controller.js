@@ -213,18 +213,41 @@ sap.ui.define([
 
 				let fechaInicio = null;
 				let fechaFin = null;
-				var valueDateRange = this.byId("idDateRangeSelec").getValue();
-				var valDtrIni="";
-				var valDtrFin="";
+				//var valueDateRange = this.byId("idDateRangeSelec").getValue();
+				var valDtrIni=this.byId("fechaProdIni").getValue();
+				var valDtrFin=this.byId("fechaProdFin").getValue();
+
+				
+				var marea1=this.byId("mareaLow").getValue();
+				var marea2=this.byId("mareaHigh").getValue();
+				if(!valDtrIni && !valDtrFin && !marea1 && !marea2){
+
+					var msj="Ingrese una Fecha o una Marea";
+				
+					MessageBox.error(msj);
+					BusyIndicator.hide();
+					return false;
+				}
+				/*
 				if(valueDateRange){
 					 valDtrIni = valueDateRange.split("-")[0].trim();
 					 valDtrFin = valueDateRange.split("-")[1].trim();
-				}
+				}*/
 					
-					if (valDtrIni && valDtrFin) {
+					
+					if (valDtrIni) {							
 						fechaInicio = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
+					}
+					if (valDtrFin) {
 						fechaFin = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
 					}
+					if(valDtrIni && !valDtrFin){
+						fechaFin=fechaInicio;
+					}
+					if(valDtrFin && !valDtrIni){
+						fechaInicio=fechaFin;
+					}
+	
 
 					const input = 'INPUT';
 					const multiinput = 'MULTIINPUT';
@@ -325,6 +348,7 @@ sap.ui.define([
 							//this.getModel("consultaMareas").setProperty("/numCalas", data.s_marea.length);
 							BusyIndicator.hide();
 
+							console.log(data);
 						})
 						.catch(error => console.error(error));
 
@@ -462,11 +486,11 @@ sap.ui.define([
 					workbook: {
 						columns: aCols,
 						context: {
-							sheetName: "CONSULTA DE MAREAS"
+							sheetName: "CONSULTA DE MAREAS CERRADAS"
 						}
 					},
 					dataSource: oRowBinding,
-					fileName: 'Consulta de mareas.xlsx',
+					fileName: 'Consulta de Mareas Cerradas.xlsx',
 					worker: false // We need to disable worker because we are using a Mockserver as OData Service
 				};
 
@@ -880,8 +904,10 @@ sap.ui.define([
 				this.byId("inputId1_R").setValue(null);
 				this.byId("propiedad").setSelectedKey(null);
 				this.byId("motivos").setSelectedKeys(null);
-				this.byId("idDateRangeSelec").setValue(null);
+				//this.byId("idDateRangeSelec").setValue(null);
 				this.getModel("consultaMareas").setProperty("/items", []);
+				this.byId("fechaProdIni").setValue(null);
+				this.byId("fechaProdFin").setValue(null);
 			},
 
 			clearFilterEmba: function () {
@@ -963,7 +989,9 @@ sap.ui.define([
 			},
 			onCloseDialog:function(oEvent){
 				oEvent.getSource().getParent().close();
-			}
+			},
+
+			
 
 		});
 	});

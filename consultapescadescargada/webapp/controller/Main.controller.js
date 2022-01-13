@@ -164,7 +164,11 @@ sap.ui.define([
 
 				let fechaProdIni = null;
 				let fechaProdFin = null;
-				var valueDateRange = this.byId("idDateRangeSelec").getValue();
+				//var valueDateRange = this.byId("idDateRangeSelec").getValue();
+
+				var valDtrIni=this.byId("fechaProdIni").getValue();
+				var valDtrFin=this.byId("fechaProdFin").getValue();
+				/*
 				if (valueDateRange) {
 					var valDtrIni = valueDateRange.split("-")[0].trim();
 					var valDtrFin = valueDateRange.split("-")[1].trim();
@@ -172,7 +176,20 @@ sap.ui.define([
 						fechaProdIni = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
 						fechaProdFin = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
 					}
+				}*/
+				if (valDtrIni) {							
+					fechaProdIni = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
 				}
+				if (valDtrFin) {
+					fechaProdFin = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
+				}
+				if(valDtrIni && !valDtrFin){
+					fechaProdFin=fechaProdIni;
+				}
+				if(valDtrFin && !valDtrIni){
+					fechaProdIni=fechaProdFin;
+				}
+
 
 				const input = 'INPUT';
 				const multiinput = 'MULTIINPUT';
@@ -279,7 +296,7 @@ sap.ui.define([
 					p_rows: numRegistros,
 					p_user: this.userOperation
 				};
-
+				console.log(body);
 				fetch(`${this.onLocation()}reportepesca/ConsultarPescaDescargada`, {
 					method: 'POST',
 					body: JSON.stringify(body)
@@ -771,9 +788,11 @@ sap.ui.define([
 				this.byId("indicadorPropiedad").setSelectedKey(null);
 				this.byId("tipoMarea").setSelectedKey(null);
 				//this.byId("numRegistros").setValue(null);
-				this.byId("idDateRangeSelec").setValue(null);
+				//this.byId("idDateRangeSelec").setValue(null);
 				this.getModel("consultaPescaDescargada").setProperty("/items", []);
 				this.getModel("consultaPescaDescargada").refresh();
+				this.byId("fechaProdIni").setValue(null);
+				this.byId("fechaProdFin").setValue(null);
 			},
 
 			buscarEmbaFiltro: async function (filtro) {

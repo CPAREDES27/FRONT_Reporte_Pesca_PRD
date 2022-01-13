@@ -18,7 +18,7 @@
                                             <form:formElements>
                                                 <form:FormElement visible="true">
                                                     <form:label>
-                                                        <Label text="Marea" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                        <Label text="Marea"  design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                     </form:label>
                                                     <form:fields>
                                                         <Input id="marea" type="Text" showValueHelp="false" enabled="true" visible="true" width="100%" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
@@ -63,10 +63,13 @@
                                                 <form:FormElement visible="true">
                                                     <form:label>
                                                         <Label text="Inicio" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    
                                                     </form:label>
                                                     <form:fields>
-                                                        
-                                                        <DateRangeSelection id="idDateRangeSelec" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>
+                                                        <DatePicker id="fechaProdIni" width="auto" displayFormat="dd/MM/yyyy" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="dd/MM/yyyy"/>
+                                                       <DatePicker id="fechaProdFin" width="auto" displayFormat="dd/MM/yyyy" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="dd/MM/yyyy"/>
+                                                
+                                                        <!--<DateRangeSelection id="idDateRangeSelec" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>-->
                                                     </form:fields>
                                                 </form:FormElement>
                                                 <form:FormElement visible="true">
@@ -95,7 +98,7 @@
                                     </form:layout>
                                 </form:Form>
                          
-                        <t:Table id="tableData" rows="{listMareas>/items}" visibleRowCount="8" ariaLabelledBy="title" selectionMode="None">
+                        <t:Table id="tableData" rows="{listMareas>/items}" visibleRowCount="8" ariaLabelledBy="title" selectionMode="None" class="classTable">
                                     <t:extension>
 					                    <OverflowToolbar style="Clear">
 						                    <Title text="Lista de registros {/dataCount}" id="idListaReg"/>
@@ -105,122 +108,125 @@
 					                    </OverflowToolbar>
 				                    </t:extension>
                                     <t:columns>
-                                        <t:Column width="6rem" filterProperty="NRMAR" defaultFilterOperator="EQ" sortProperty="NRMAR">
+                                        <t:Column width="3.5rem" filterProperty="NRMAR" defaultFilterOperator="EQ" sortProperty="NRMAR"  class="fontLabel">
 						                    <Label text="Marea" />
 						                    <t:template>
-							                    <Text text="{listMareas>NRMAR}" wrapping="false" />
+							                    <Text text="{
+                                                    path: 'listMareas>NRMAR',
+                                                    formatter: '.formatter.formatCodeDigits'
+                                                }" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="5rem" filterProperty="WERKS" defaultFilterOperator="Contains" sortProperty="WERKS">
-						                    <Label text="Centro" />
+                                        <t:Column width="3.5rem" filterProperty="WERKS" defaultFilterOperator="Contains" sortProperty="WERKS">
+						                    <Label text="Centro" class="fontLabel"/>
 						                    <t:template>
-							                    <Text text="{listMareas>WERKS}" wrapping="false" />
+							                    <Text text="{listMareas>WERKS}" wrapping="false"  />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="8rem" filterProperty="DESCR" defaultFilterOperator="Contains" sortProperty="DESCR">
-						                    <Label text="Planta" />
+                                        <t:Column width="5.5rem" filterProperty="DESCR" defaultFilterOperator="Contains" sortProperty="DESCR">
+						                    <Label text="Planta" class="fontLabel"/>
 						                    <t:template>
 							                    <Text text="{listMareas>DESCR}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="10rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
-						                    <Label text="Nombre Embarcación" />
+                                        <t:Column width="5rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
+						                    <Label text="Nomb. Emb." />
 						                    <t:template>
 							                    <Text text="{listMareas>NMEMB}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="FHZAR" defaultFilterOperator="Contains">
-						                    <Label text="Fecha Zarpe"/>
+                                        <t:Column width="6.5rem" filterProperty="FHZAR" defaultFilterOperator="Contains">
+						                    <Label text="Fech. Zarpe"/>
 						                    <t:template>
-							                    <Text text="{listMareas>FHZAR} {listMareas>HRZAR}" wrapping="false" />
+							                    <Text text="{listMareas>FHZAR} {listMareas>HRZAR}" wrapping="false" class="Font2"/>
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="FHLLE" defaultFilterOperator="Contains">
-						                    <Label text="Llegada Zona" />
+                                        <t:Column width="6.5rem" filterProperty="FHLLE" defaultFilterOperator="Contains">
+						                    <Label text="Lleg. Zona" />
 						                    <t:template>
-							                    <Text text="{listMareas>FHLLE} {listMareas>HRLLE}" wrapping="false" />
+							                    <Text text="{listMareas>FHLLE} {listMareas>HRLLE}" wrapping="false" class="Font2"/>
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="FICAL" defaultFilterOperator="Contains">
-						                    <Label text="Inicio Cala" />
+                                        <t:Column width="6.5rem" filterProperty="FICAL" defaultFilterOperator="Contains">
+						                    <Label text="Ini. Cala" />
 						                    <t:template>
-							                    <Text text="{listMareas>FICAL} {listMareas>HICAL}" wrapping="false" />
+							                    <Text text="{listMareas>FICAL} {listMareas>HICAL}" wrapping="false" class="Font2"/>
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="FFCAL" defaultFilterOperator="Contains">
+                                        <t:Column width="6.5rem" filterProperty="FFCAL" defaultFilterOperator="Contains">
 						                    <Label text="Fin Cala" />
 						                    <t:template>
-							                    <Text text="{listMareas>FFCAL} {listMareas>HFCAL}" wrapping="false" />
+							                    <Text text="{listMareas>FFCAL} {listMareas>HFCAL}" wrapping="false" class="Font2"/>
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="FCSAZ" defaultFilterOperator="Contains">
-						                    <Label text="Salida Zona" />
+                                        <t:Column width="6.5rem" filterProperty="FCSAZ" defaultFilterOperator="Contains">
+						                    <Label text="Salid. Zona" />
 						                    <t:template>
-							                    <Text text="{listMareas>FCSAZ} {listMareas>HRSAZ}" wrapping="false" />
+							                    <Text text="{listMareas>FCSAZ} {listMareas>HRSAZ}" wrapping="false" class="Font2"/>
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="FCARP" defaultFilterOperator="Contains">
-						                    <Label text="Arribo Puerto"/>
+                                        <t:Column width="6.5rem" filterProperty="FCARP" defaultFilterOperator="Contains">
+						                    <Label text="Arrib. Puerto"/>
 						                    <t:template>
-							                    <Text text="{listMareas>FCARP} {listMareas>HRARP}" wrapping="false" />
+							                    <Text text="{listMareas>FCARP} {listMareas>HRARP}" wrapping="false" class="Font2"/>
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="FIDES" defaultFilterOperator="Contains">
-						                    <Label text="Inicio Descarga" />
+                                        <t:Column width="6.5rem" filterProperty="FIDES" defaultFilterOperator="Contains">
+						                    <Label text="Inic. Descarga" />
 						                    <t:template>
-							                    <Text text="{listMareas>FIDES} {listMareas>HIDES}" wrapping="false" />
+							                    <Text text="{listMareas>FIDES} {listMareas>HIDES}" wrapping="false" class="Font2"/>
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="FFDES" defaultFilterOperator="Contains">
+                                        <t:Column width="6.5rem" filterProperty="FFDES" defaultFilterOperator="Contains">
 						                    <Label text="Fin Descarga" />
 						                    <t:template>
-							                    <Text text="{listMareas>FFDES} {listMareas>HFDES}" wrapping="false" />
+							                    <Text text="{listMareas>FFDES} {listMareas>HFDES}" wrapping="false" class="Font2"/>
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="6rem" hAlign="End" filterProperty="CNTDS" defaultFilterOperator="EQ" sortProperty="CNTDS">
-						                    <Label text="Descargada" />
+                                        <t:Column width="4.5rem" hAlign="End" filterProperty="CNTDS" defaultFilterOperator="EQ" sortProperty="CNTDS">
+						                    <Label text="Descarg." />
 						                    <t:template>
 							                    <Text text="{listMareas>CNTDS}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                      <t:columns>
-                                        <t:Column width="6rem" hAlign="End" filterProperty="CNPDC" defaultFilterOperator="EQ" sortProperty="CNPDC">
-						                    <Label text="Declarada" />
+                                        <t:Column width="4.5rem" hAlign="End" filterProperty="CNPDC" defaultFilterOperator="EQ" sortProperty="CNPDC">
+						                    <Label text="Declar." />
 						                    <t:template>
 							                    <Text text="{listMareas>CNPDC}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="7rem">
+                                        <t:Column width="6rem">
 						                    <Label text="" />
 						                    <t:template>
-							                    <Button text="Detalle" press="showDetalle" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+							                    <Button text="Detalle" press="showDetalle" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>

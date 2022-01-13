@@ -22,6 +22,7 @@ sap.ui.define([
 		//const mainUrlServices = 'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'; //utilities.getHostService();
 		//const HOST = "https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com";
 		return BaseController.extend("com.tasa.reportetdcchd.controller.Main", {
+			formatter: formatter,
 			dataTableKeys: [
 				'NRMAR',
 				'WERKS',
@@ -194,6 +195,7 @@ sap.ui.define([
 
 				let fechaInicio = null;
 				let fechaFin = null;
+				/*
 				var valueDateRange = this.byId("idDateRangeSelec").getValue();
 				if (valueDateRange) {
 					var valDtrIni = valueDateRange.split("-")[0].trim();
@@ -202,12 +204,43 @@ sap.ui.define([
 						fechaInicio = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
 						fechaFin = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
 					}
+				}*/
+
+				var valDtrIni=this.byId("fechaProdIni").getValue();
+				var valDtrFin=this.byId("fechaProdFin").getValue();
+				if (valDtrIni) {							
+					fechaInicio = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
+				}
+				if (valDtrFin) {
+					fechaFin = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
+				}
+				if(valDtrIni && !valDtrFin){
+					fechaFin=fechaInicio;
+				}
+				if(valDtrFin && !valDtrIni){
+					fechaInicio=fechaFin;
 				}
 
 				const input = 'INPUT';
 				const multiinput = 'MULTIINPUT';
 				const comboBox = "COMBOBOX";
 				const multiComboBox = "MULTICOMBOBOX";
+
+				options.push({
+					cantidad: '10',
+					control: comboBox,
+					key: 'INPRP',
+					valueHigh: "",
+					valueLow: "P"
+				});
+
+				options.push({
+					cantidad: '10',
+					control: comboBox,
+					key: 'CDMMA',
+					valueHigh: "",
+					valueLow: "1"
+				});
 
 				if (marea) {
 					options.push({
@@ -281,6 +314,7 @@ sap.ui.define([
 					p_user: this.getCurrentUser(),
 					rowcount: numAciertos
 				};
+				console.log(body);
 
 				fetch(`${this.onLocation()}reportepesca/ConsultarMareas`, {
 					method: 'POST',
@@ -288,6 +322,14 @@ sap.ui.define([
 				})
 					.then(resp => resp.json())
 					.then(data => {
+
+						var listaMareas=data.s_marea;
+
+
+						for(var i=0; i< data.s_marea.length;i++){
+							data.s_marea[i].NRMAR=String(data.s_marea[i].NRMAR);
+						}
+						
 						this.getModel("listMareas").setProperty("/items", data.s_marea);
 						BusyIndicator.hide();
 						
@@ -327,7 +369,7 @@ sap.ui.define([
 							vOperator = FilterOperator.Contains;
 							break;
 						case 'number':
-							vOperator = FilterOperator.Contains;
+							vOperator = FilterOperator.EQ;
 							break;
 					}
 
@@ -787,9 +829,11 @@ sap.ui.define([
 				this.byId("marea").setValue(null);
 				this.byId("planta").setValue(null);
 				this.byId("inputId0_R").setValue(null);
-				this.byId("idDateRangeSelec").setValue(null);
+				//this.byId("idDateRangeSelec").setValue(null);
 				this.getModel("listMareas").setProperty("/items", []);
 				this.getModel("listMareas").refresh();
+				this.byId("fechaProdIni").setValue(null);
+				this.byId("fechaProdFin").setValue(null);
 			},
 
 			clearFilterEmba: function () {

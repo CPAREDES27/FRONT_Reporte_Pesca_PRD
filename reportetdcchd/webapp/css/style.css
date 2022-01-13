@@ -14,4 +14,7 @@
   .title-content-4 {
     font-weight: bolder;
   }
-  
+
+ .classTable td :first-child{
+font-size: 11px;
+  }
