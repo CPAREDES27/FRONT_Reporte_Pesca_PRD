@@ -319,14 +319,14 @@ sap.ui.define([
 							}
 						}
 						tmpData.push(objFooter);
-						this.byId("titulo").setText("Lista de Registros: "+tmpData.length);
+						//this.byId("titulo").setText("Lista de Registros: "+tmpData.length);
 						this.getModel("consultaPescaDescargada").setProperty("/items", tmpData);
 						BusyIndicator.hide();
 
 
 
 						var title="Lista de registros ("+data.str_des.length+")";
-					this.byId("idListaReg").setText(title);
+						this.byId("idListaReg").setText(title);
 					}).catch(error => {
 						console.error(error);
 						BusyIndicator.hide();
@@ -770,7 +770,7 @@ sap.ui.define([
 				this.byId("inputId0_R").setValue(null);
 				this.byId("indicadorPropiedad").setSelectedKey(null);
 				this.byId("tipoMarea").setSelectedKey(null);
-				this.byId("numRegistros").setValue(null);
+				//this.byId("numRegistros").setValue(null);
 				this.byId("idDateRangeSelec").setValue(null);
 				this.getModel("consultaPescaDescargada").setProperty("/items", []);
 				this.getModel("consultaPescaDescargada").refresh();

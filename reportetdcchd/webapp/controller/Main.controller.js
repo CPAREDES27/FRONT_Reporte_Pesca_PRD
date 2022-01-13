@@ -290,7 +290,8 @@ sap.ui.define([
 					.then(data => {
 						this.getModel("listMareas").setProperty("/items", data.s_marea);
 						BusyIndicator.hide();
-
+						
+						console.log(data);
 
 						var cantidadRegistros="Lista de registros ("+data.s_marea.length+")";
 						this.byId("idListaReg").setText(cantidadRegistros);
@@ -326,7 +327,7 @@ sap.ui.define([
 							vOperator = FilterOperator.Contains;
 							break;
 						case 'number':
-							vOperator = FilterOperator.EQ;
+							vOperator = FilterOperator.Contains;
 							break;
 					}
 
@@ -343,6 +344,7 @@ sap.ui.define([
 				 */
 				tableItemsBinding.filter(oFilters, "Application");
 			},
+			
 			createColumnConfig: function () {
 				var aCols = [];
 				const title = [];
@@ -421,6 +423,129 @@ sap.ui.define([
 				oSheet.build().finally(function () {
 					oSheet.destroy();
 				});
+			},
+			createColumnConfig5: function() {
+				return [
+					{
+						label: 'Marea',
+						property: 'NRMAR' ,
+						type: EdmType.Number
+					},
+					{
+						label: 'Centro',
+						property: 'WERKS' ,
+						type: EdmType.String,
+						scale: 2
+					},
+					{
+						label: 'Planta',
+						property: 'DESCR' ,
+						type: EdmType.String,
+						scale: 2
+					},
+					{
+						label: 'Nombre Embarcación',
+						property: 'NMEMB' ,
+						type: EdmType.String,
+						scale: 2
+					},
+					{
+						label: 'Fecha Zarpe',
+						property: 'FHZAR' ,
+						type: EdmType.String,
+						scale: 2
+					},
+					{
+						label: 'Llegada Zona',
+						property: 'FHLLE' ,
+						type: EdmType.String,
+						scale: 2
+					},
+					{
+						label: 'Inicio Cala',
+						property: 'FICAL' ,
+						type: EdmType.String,
+						scale: 2
+					},
+					{
+						label: 'Fin Cala',
+						property: 'FFCAL' ,
+						type: EdmType.String,
+						scale: 2
+					},
+					{
+						label: 'Salida Zona',
+						property: 'FCSAZ' ,
+						type: EdmType.String,
+						scale: 2
+					},
+					{
+						label: 'Arribo Puerto',
+						property: 'FCARP' ,
+						type: EdmType.String,
+						scale: 2
+					},
+					{
+						label: 'Inicio Descarga',
+						property: 'FIDES' ,
+						type: EdmType.String,
+						scale: 2
+					},
+					{
+						label: 'Fin Descarga',
+						property: 'FFDES' ,
+						type: EdmType.String,
+						scale: 2
+					},
+					{
+						label: 'Descargada ',
+						property: 'CNTDS' ,
+						type: EdmType.Number,
+						scale: 3
+					},
+					{
+						label: 'Declarada',
+						property: 'CNPDC' ,
+						type: EdmType.Number,
+						scale: 3
+					}
+
+					
+					];
+			},
+			onExport: function() {
+				oGlobalBusyDialog.open();
+			
+				var aCols, aProducts, oSettings, oSheet;
+	
+				aCols = this.createColumnConfig5();
+		
+				aProducts = this.getView().getModel("listMareas").getProperty('/items');
+	
+				oSettings = {
+					
+					workbook: { 
+						columns: aCols,
+						context: {
+							application: 'Debug Test Application',
+							version: '1.95.0',
+							title: 'Some random title',
+							modifiedBy: 'John Doe',
+							metaSheetName: 'Custom metadata'
+						}
+						
+					},
+					dataSource: aProducts,
+					fileName:"Reporte de TDC CHD"
+				};
+	
+				oSheet = new Spreadsheet(oSettings);
+				oSheet.build()
+					.then( function() {
+						MessageToast.show('El Archivo ha sido exportado correctamente');
+					})
+					.finally(oSheet.destroy);
+					oGlobalBusyDialog.close();
 			},
 
 			onSelectEmba: function (evt) {

@@ -476,6 +476,54 @@ sap.ui.define([
 				 */
 				tableItemsBinding.filter(oFilters, "Application");
 			},
+			onSearch: function (oEvent) {
+				// add filter for search
+				var aFilters = [];
+				var sQuery = oEvent.getSource().getValue();
+				if (sQuery && sQuery.length > 0) {
+					var filter = new Filter([
+						new Filter("DSZPC", FilterOperator.Contains, sQuery),
+							new Filter("WERKS", FilterOperator.Contains, sQuery),
+							new Filter("DESCR", FilterOperator.Contains, sQuery),
+							new Filter("FECCONMOV", FilterOperator.Contains, sQuery),
+							new Filter("NRMAR", FilterOperator.Contains, sQuery),
+							new Filter("NRDES", FilterOperator.Contains, sQuery),
+							new Filter("DESC_TIPOMAREA", FilterOperator.Contains, sQuery),
+							new Filter("NMEMB", FilterOperator.Contains, sQuery),
+							new Filter("MREMB", FilterOperator.Contains, sQuery),
+							new Filter("CPPMS", FilterOperator.Contains, sQuery),
+							new Filter("DESC_INPRP", FilterOperator.Contains, sQuery),
+							new Filter("FIEVN", FilterOperator.Contains, sQuery),
+							new Filter("HIEVN", FilterOperator.Contains, sQuery),
+							new Filter("FFEVN", FilterOperator.Contains, sQuery),
+							new Filter("HFEVN", FilterOperator.Contains, sQuery),
+							new Filter("LTGEO", FilterOperator.Contains, sQuery),
+							new Filter("LNGEO", FilterOperator.Contains, sQuery),
+							new Filter("TEMAR", FilterOperator.Contains, sQuery),
+							new Filter("CNPCM", FilterOperator.Contains, sQuery),
+							new Filter("DTCAL", FilterOperator.Contains, sQuery),
+							new Filter("DSSPC", FilterOperator.Contains, sQuery),
+							new Filter("ZMODA", FilterOperator.Contains, sQuery),
+							new Filter("OBSER", FilterOperator.Contains, sQuery),
+							new Filter("CNPJU", FilterOperator.Contains, sQuery),
+							new Filter("ZMOJU", FilterOperator.Contains, sQuery),
+							new Filter("PORJU", FilterOperator.Contains, sQuery),
+							new Filter("CNPCA", FilterOperator.Contains, sQuery),
+							new Filter("ZMOCA", FilterOperator.Contains, sQuery),
+							new Filter("PORCA", FilterOperator.Contains, sQuery),
+							new Filter("CNPOT", FilterOperator.Contains, sQuery),
+							new Filter("ZMOOT", FilterOperator.Contains, sQuery),
+							new Filter("POROT", FilterOperator.Contains, sQuery)
+					
+					]);
+					aFilters.push(filter);
+				}
+	
+				// update list binding
+				var oList = this.byId("tableReporteCalas");
+				var oBinding = oList.getBinding("rows");
+				oBinding.filter(aFilters, "Application");
+			},
 			createColumnConfig: function () {
 				var aCols = [];
 				const title = [];
