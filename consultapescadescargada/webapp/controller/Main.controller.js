@@ -303,6 +303,9 @@ sap.ui.define([
 				})
 					.then(resp => resp.json())
 					.then(data => {
+
+						console.log(data);
+
 						var sData = data.str_des;
 						var tmpData = [];
 						var sumCnpcm = 0;

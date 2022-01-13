@@ -348,6 +348,10 @@ sap.ui.define([
 							//this.getModel("consultaMareas").setProperty("/numCalas", data.s_marea.length);
 							BusyIndicator.hide();
 
+							for(var i=0; i< data.s_marea.length;i++){
+								data.s_marea[i].NRMAR=String(data.s_marea[i].NRMAR);
+							}
+							
 							console.log(data);
 						})
 						.catch(error => console.error(error));
