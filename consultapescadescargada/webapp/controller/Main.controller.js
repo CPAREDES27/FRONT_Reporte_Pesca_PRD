@@ -40,7 +40,9 @@ sap.ui.define([
 				'CNPDS',
 				'DSSPC',
 				'INPRP',
-				'NMPER'
+				'NMPER',
+				'DESC_CDMMA',
+				'DESC_INPRP'
 			],
 			onInit: function () {
 				let oViewModel = new JSONModel({});

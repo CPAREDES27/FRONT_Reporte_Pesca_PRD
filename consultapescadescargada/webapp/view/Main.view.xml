@@ -159,7 +159,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="6rem" filterProperty="DESC_CDMMA" defaultFilterOperator="EQ" sortProperty="DESC_CDMMA">
+                                        <t:Column width="6rem" filterProperty="DESC_CDMMA"  sortProperty="DESC_CDMMA">
 						                    <Label text="Mot. Marea" />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>DESC_CDMMA}" wrapping="false" />
@@ -248,7 +248,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" filterProperty="DESC_INPRP" defaultFilterOperator="Contains" sortProperty="DESC_INPRP">
+                                        <t:Column width="11rem" filterProperty="DESC_INPRP"  sortProperty="DESC_INPRP">
 						                    <Label text="Ind. Propiedad" />
 						                    <t:template>
 							                    <Text text="{consultaPescaDescargada>DESC_INPRP}" wrapping="false" />
