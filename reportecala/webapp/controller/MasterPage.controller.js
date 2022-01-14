@@ -170,7 +170,7 @@ sap.ui.define([
 
 					const bodyAyudaBusqueda = {
 						"nombreAyuda": "BSQPLANTAS",
-						"p_user": this.getCurrentUser()
+						"p_user": this.userOperation
 					};
 				
 					fetch(`${this.onLocation()}General/AyudasBusqueda/`,
@@ -199,7 +199,7 @@ sap.ui.define([
 				let fechaFinStart = this.byId("dpFechaFinMareaStart").getValue();
 				let fechaFinEnd = this.byId("dpFechaFinMareaEnd").getValue();*/
 				let cantidad = this.byId("txtCantidad").getValue();
-
+				/*
 				let fechaInicioStart = null;
 				let fechaInicioEnd = null;
 				var valueDateRange = this.byId("idDateRangeIniMar").getValue();
@@ -222,6 +222,23 @@ sap.ui.define([
 						fechaFinStart = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
 						fechaFinEnd = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
 					}
+				}*/
+
+				let fechaInicio = null;
+				let fechaFin = null;
+				var valDtrIni=this.byId("fechaInicio").getValue();
+				var valDtrFin=this.byId("fechaFin").getValue();
+				if (valDtrIni) {							
+					fechaInicio = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
+				}
+				if (valDtrFin) {
+					fechaFin = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
+				}
+				if(valDtrIni && !valDtrFin){
+					fechaFin=fechaInicio;
+				}
+				if(valDtrFin && !valDtrIni){
+					fechaInicio=fechaFin;
 				}
 
 				const input = 'INPUT';
@@ -323,19 +340,31 @@ sap.ui.define([
 					});
 				}
 
-				if (fechaInicioStart || fechaInicioEnd) {
-					const isRange = fechaInicioStart && fechaInicioEnd;
-					const fecha = !isRange ? fechaInicioStart ? fechaInicioStart : fechaInicioEnd : null;
+				if (fechaInicio || fechaFin) {
+					const isRange = fechaInicio && fechaFin;
+					const fecha = !isRange ? fechaInicio ? fechaInicio : fechaFin : null;
 
 					options.push({
 						cantidad: '10',
 						control: multiinput,
 						key: 'FIMAR',
-						valueHigh: isRange ? fechaInicioEnd : "",
-						valueLow: isRange ? fechaInicioStart : fecha
+						valueHigh: isRange ? fechaFin : "",
+						valueLow: isRange ? fechaInicio : fecha
 					});
 				}
+				if (fechaInicio || fechaFin) {
+					const isRange = fechaInicio && fechaFin;
+					const fecha = !isRange ? fechaInicio ? fechaInicio : fechaFin : null;
 
+					options.push({
+						cantidad: '10',
+						control: multiinput,
+						key: 'FFMAR',
+						valueHigh: isRange ? fechaFin : "",
+						valueLow: isRange ? fechaInicio : fecha
+					});
+				}
+				/*
 				if (fechaFinStart || fechaFinEnd) {
 					const isRange = fechaFinStart && fechaFinEnd;
 					const fecha = !isRange ? fechaFinStart ? fechaFinStart : fechaFinEnd : null;
@@ -347,16 +376,18 @@ sap.ui.define([
 						valueHigh: isRange ? fechaFinEnd : "",
 						valueLow: isRange ? fechaFinStart : fecha
 					});
-				}
+				}*/
 
 				console.log(options);
 
 				let body = {
 					option: [],
 					options: options,
-					p_user: this.getCurrentUser(),
+					p_user: this.userOperation,
 					rowcount: cantidad
 				};
+
+				console.log(body);
 				let request = fetch(`${this.onLocation()}reportepesca/ConsultarCalas`, {
 					method: 'POST',
 					body: JSON.stringify(body),
@@ -616,10 +647,12 @@ sap.ui.define([
 				this.byId("inputId0_R").setValue(null);
 				this.byId("cbIndicadorPropiedad").setSelectedKey(null);
 				this.byId("cbTipoMarea").setSelectedKey(null);
-				this.byId("idDateRangeIniMar").setValue(null);
-				this.byId("idDateRangeFinMar").setValue(null);
+				//this.byId("idDateRangeIniMar").setValue(null);
+				//this.byId("idDateRangeFinMar").setValue(null);
 				this.getModel("reporteCala").setProperty("/items", []);
 				this.getModel("reporteCala").refresh();
+				this.byId("fechaInicio").setValue(null);
+				this.byId("fechaFin").setValue(null);
 			},
 
 			onAbrirAyudaEmbarcacion: function(){

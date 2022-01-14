@@ -95,14 +95,15 @@
                                         </form:FormElement>
                                         <form:FormElement visible="true">
                                             <form:label>
-                                                <Label text="Fecha inicio marea" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Label text="Fecha marea" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                
-                                                <DateRangeSelection id="idDateRangeIniMar" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>
+                                                <DatePicker id="fechaInicio" width="auto" displayFormat="dd/MM/yyyy" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="dd/MM/yyyy"/>
+                                                <DatePicker id="fechaFin" width="auto" displayFormat="dd/MM/yyyy" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="dd/MM/yyyy"/>
+                                                <!--<DateRangeSelection id="idDateRangeIniMar" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>-->
                                             </form:fields>
                                         </form:FormElement>
-                                        <form:FormElement visible="true">
+                                       <!-- <form:FormElement visible="true">
                                             <form:label>
                                                 <Label text="Fecha fin marea" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
@@ -110,7 +111,7 @@
                                                 
                                                 <DateRangeSelection id="idDateRangeFinMar" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>
                                             </form:fields>
-                                        </form:FormElement>
+                                        </form:FormElement>-->
                                         <form:FormElement visible="true">
                                             <form:label>
                                                 <Label text="Cantidad de aciertos" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
@@ -159,7 +160,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="6rem" filterProperty="WERKS" sortProperty="WERKS" showFilterMenuEntry="true"
+                                        <t:Column width="5rem" filterProperty="WERKS" sortProperty="WERKS" showFilterMenuEntry="true"
 						showSortMenuEntry="true">
 						                    <Label text="Centro" />
 						                    <t:template>
@@ -196,7 +197,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="NRDES" showFilterMenuEntry="true"
+                                        <t:Column width="7rem" filterProperty="NRDES" showFilterMenuEntry="true"
 						showSortMenuEntry="true" sortProperty="NRDES">
 						                    <Label text="Descarga" />
 						                    <t:template>
@@ -223,7 +224,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="9rem" filterProperty="MREMB" showFilterMenuEntry="true"
+                                        <t:Column width="8rem" filterProperty="MREMB" showFilterMenuEntry="true"
 						showSortMenuEntry="true" sortProperty="MREMB">
 						                    <Label text="Matricula"/>
 						                    <t:template>
@@ -250,7 +251,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="8rem" filterProperty="FIEVN" showFilterMenuEntry="true"
+                                        <t:Column width="7rem" filterProperty="FIEVN" showFilterMenuEntry="true"
 						showSortMenuEntry="true">
 						                    <Label text="Fecha Ini Cala" />
 						                    <t:template>
@@ -259,7 +260,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="8rem" filterProperty="HIEVN" showFilterMenuEntry="true"
+                                        <t:Column width="7rem" filterProperty="HIEVN" showFilterMenuEntry="true"
 						showSortMenuEntry="true">
 						                    <Label text="Hora Ini Cala" />
 						                    <t:template>
@@ -268,7 +269,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="8rem" filterProperty="FFEVN" showFilterMenuEntry="true"
+                                        <t:Column width="7rem" filterProperty="FFEVN" showFilterMenuEntry="true"
 						showSortMenuEntry="true">
 						                    <Label text="Fecha Fin Cala" />
 						                    <t:template>
@@ -277,7 +278,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="8rem" filterProperty="HFEVN" showFilterMenuEntry="true"
+                                        <t:Column width="7rem" filterProperty="HFEVN" showFilterMenuEntry="true"
 						showSortMenuEntry="true">
 						                    <Label text="Hora Fin Cala"/>
 						                    <t:template>
@@ -322,7 +323,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="7rem" hAlign="End" filterProperty="LTGEO" showFilterMenuEntry="true"
+                                        <t:Column width="6rem" hAlign="End" filterProperty="LTGEO" showFilterMenuEntry="true"
 						showSortMenuEntry="true" sortProperty="LTGEO">
 						                    <Label text="Latitud" />
 						                    <t:template>
@@ -331,7 +332,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="7rem" hAlign="End" filterProperty="LNGEO" showFilterMenuEntry="true"
+                                        <t:Column width="6rem" hAlign="End" filterProperty="LNGEO" showFilterMenuEntry="true"
 						showSortMenuEntry="true" sortProperty="LNGEO">
 						                    <Label text="Longitud" />
 						                    <t:template>
@@ -340,7 +341,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="7rem" hAlign="End" filterProperty="TEMAR" showFilterMenuEntry="true"
+                                        <t:Column width="6rem" hAlign="End" filterProperty="TEMAR" showFilterMenuEntry="true"
 						showSortMenuEntry="true" sortProperty="TEMAR">
 						                    <Label text="Temperatura" />
 						                    <t:template>
@@ -358,7 +359,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="6rem" filterProperty="DTCAL" showFilterMenuEntry="true"
+                                        <t:Column width="5rem" filterProperty="DTCAL" showFilterMenuEntry="true"
 						showSortMenuEntry="true" sortProperty="DTCAL">
 						                    <Label text="Duración" />
 						                    <t:template>
@@ -376,7 +377,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="6rem" hAlign="End" filterProperty="ZMODA" showFilterMenuEntry="true"
+                                        <t:Column width="4rem" hAlign="End" filterProperty="ZMODA" showFilterMenuEntry="true"
 						showSortMenuEntry="true" sortProperty="ZMODA">
 						                    <Label text="Moda" />
 						                    <t:template>
@@ -403,7 +404,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" hAlign="End" filterProperty="ZMOJU" showFilterMenuEntry="true"
+                                        <t:Column width="9rem" hAlign="End" filterProperty="ZMOJU" showFilterMenuEntry="true"
 						showSortMenuEntry="true" sortProperty="ZMOJU">
 						                    <Label text="Jurel - Moda" wrapping="true"/>
 						                    <t:template>
@@ -412,7 +413,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" hAlign="End" filterProperty="PORJU" showFilterMenuEntry="true"
+                                        <t:Column width="9rem" hAlign="End" filterProperty="PORJU" showFilterMenuEntry="true"
 						showSortMenuEntry="true" sortProperty="PORJU">
 						                    <Label text="Jurel - % Incidencia" wrapping="true"/>
 						                    <t:template>
@@ -430,7 +431,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" hAlign="End" filterProperty="ZMOCA" showFilterMenuEntry="true"
+                                        <t:Column width="9rem" hAlign="End" filterProperty="ZMOCA" showFilterMenuEntry="true"
 						showSortMenuEntry="true" sortProperty="ZMOCA">
 						                    <Label text="Caballa - Moda" wrapping="true"/>
 						                    <t:template>
@@ -439,7 +440,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" hAlign="End" filterProperty="PORCA" showFilterMenuEntry="true"
+                                        <t:Column width="10rem" hAlign="End" filterProperty="PORCA" showFilterMenuEntry="true"
 						showSortMenuEntry="true" sortProperty="PORCA">
 						                    <Label text="Caballa - % Incidencia" wrapping="true"/>
 						                    <t:template>
@@ -457,7 +458,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="11rem" hAlign="End" filterProperty="ZMOOT" showFilterMenuEntry="true"
+                                        <t:Column width="10rem" hAlign="End" filterProperty="ZMOOT" showFilterMenuEntry="true"
 						showSortMenuEntry="true" sortProperty="ZMOOT">
 						                    <Label text="Otras especies - Moda" wrapping="true"/>
 						                    <t:template>
