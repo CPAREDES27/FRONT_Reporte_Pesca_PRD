@@ -308,7 +308,7 @@ sap.ui.define([
 					motivos.forEach(motivo => {
 						options.push({
 							cantidad: "10",
-							control: multiComboBox,
+							control: comboBox,
 							key: "CDMMA",
 							valueHigh: "",
 							valueLow: motivo
