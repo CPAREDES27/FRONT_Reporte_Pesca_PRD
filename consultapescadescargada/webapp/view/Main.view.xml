@@ -67,7 +67,7 @@
                                                 <Label text="Embarcación" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <Input id="inputId0_R" placeholder="Seleccione embarcación" showValueHelp="true"  valueHelpRequest="onSearchHelp"/>
+                                                <Input id="inputId0_R" placeholder="Seleccione embarcación" showValueHelp="true"  valueHelpRequest="onSearchHelp" valueHelpOnly="true"/>
                                                 <!-- <Input id="embarcacion" showValueHelp="true" valueHelpRequest="onAbrirAyudaEmbarcacion" width="100%" valueStateText="Invalid entry"/> -->
                                             </form:fields>
                                         </form:FormElement>
@@ -154,7 +154,7 @@
                                         <t:Column width="6rem" filterProperty="FECCONMOV" defaultFilterOperator="Contains">
 						                    <Label text="F. Producción" />
 						                    <t:template>
-							                    <Text text="{consultaPescaDescargada>FECCONMOV}" wrapping="false" />
+							                    <Text text="{path:'consultaPescaDescargada>FECCONMOV', formatter:'.formatter.formatDate'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -179,7 +179,10 @@
                                         <t:Column width="9rem" filterProperty="FCZAR" defaultFilterOperator="Contains">
 						                    <Label text="F/H Zarpe" />
 						                    <t:template>
-							                    <Text text="{consultaPescaDescargada>FCZAR} - {consultaPescaDescargada>HOZAR}" wrapping="false" />
+							                    <Text text="{parts:[
+                                                {path:'consultaPescaDescargada>FCZAR', formatter:'.formatter.formatDate'},
+                                                {path:'consultaPescaDescargada>HOZAR', formatter:'.formatter.formatHour'}
+                                                ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -187,7 +190,10 @@
                                         <t:Column width="9rem" filterProperty="FCARR" defaultFilterOperator="Contains">
 						                    <Label text="F/H Arribo" />
 						                    <t:template>
-							                    <Text text="{consultaPescaDescargada>FCARR} - {consultaPescaDescargada>HOARR}" wrapping="false" />
+							                    <Text text="{parts:[
+                                                {path:'consultaPescaDescargada>FCARR', formatter:'.formatter.formatDate'},
+                                                {path:'consultaPescaDescargada>HOARR', formatter:'.formatter.formatHour'}
+                                                ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>

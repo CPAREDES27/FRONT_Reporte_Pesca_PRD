@@ -65,7 +65,7 @@
                                                 <Label text="Embarcación" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                            <Input id="inputId0_R" placeholder="Seleccione embarcación" showValueHelp="true"  valueHelpRequest="onSearchHelp"/>
+                                            <Input id="inputId0_R" placeholder="Seleccione embarcación" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onSearchHelp"/>
                                                 <!-- <Input id="embarcacion" showValueHelp="true" valueHelpRequest="onAbrirAyudaEmbarcacion" width="100%" valueStateText="Invalid entry"/> -->
                                             </form:fields>
                                         </form:FormElement>
@@ -182,7 +182,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha producción" />
 						                    <t:template>
-							                    <Text text="{reporteCala>FECCONMOV}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>FECCONMOV', formatter:'.formatter.formatDate'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -255,7 +255,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha Ini Cala" />
 						                    <t:template>
-							                    <Text text="{reporteCala>FIEVN}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>FIEVN', formatter:'.formatter.formatDate'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -264,7 +264,8 @@
 						showSortMenuEntry="true">
 						                    <Label text="Hora Ini Cala" />
 						                    <t:template>
-							                    <Text text="{reporteCala>HIEVN}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>HIEVN', formatter:'.formatter.formatHour'}"
+                                                 wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -273,7 +274,8 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha Fin Cala" />
 						                    <t:template>
-							                    <Text text="{reporteCala>FFEVN}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>FFEVN', formatter:'.formatter.formatDate'}"
+                                                 wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -282,7 +284,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Hora Fin Cala"/>
 						                    <t:template>
-							                    <Text text="{reporteCala>HFEVN}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>HFEVN', formatter:'.formatter.formatHour'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -291,7 +293,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha Ini Envase" />
 						                    <t:template>
-							                    <Text text="{reporteCala>FIEVN}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>FIEVN', formatter:'.formatter.formatDate'}"  wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -300,7 +302,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Hora Ini Envase" />
 						                    <t:template>
-							                    <Text text="{reporteCala>HIEVN}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>HIEVN', formatter:'.formatter.formatHour'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -309,7 +311,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha Fin Envase" />
 						                    <t:template>
-							                    <Text text="{reporteCala>FFEVN}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>FFEVN', formatter:'.formatter.formatDate'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -318,7 +320,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Hora Fin Envase" />
 						                    <t:template>
-							                    <Text text="{reporteCala>HFEVN}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>HFEVN', formatter:'.formatter.formatHour'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>

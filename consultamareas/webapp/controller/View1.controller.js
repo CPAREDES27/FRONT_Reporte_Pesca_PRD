@@ -8,13 +8,12 @@ sap.ui.define([
 	'sap/ui/export/library',
 	'sap/ui/export/Spreadsheet',
 	"sap/ui/core/BusyIndicator",
-	"sap/m/MessageBox",
-	"../model/utilities"
+	"sap/m/MessageBox"
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (BaseController, Controller, JSONModel, formatter, Filter, FilterOperator, exportLibrary, Spreadsheet, BusyIndicator, MessageBox, utilities) {
+	function (BaseController, Controller, JSONModel, formatter, Filter, FilterOperator, exportLibrary, Spreadsheet, BusyIndicator, MessageBox) {
 		"use strict";
 		var oGlobalBusyDialog = new sap.m.BusyDialog();
 
@@ -341,8 +340,9 @@ sap.ui.define([
 					})
 						.then(resp => resp.json())
 						.then(data => {
-							var mssg = "Lista de Registros (" + data.s_marea.length + ")";
-							this.getModel("consultaMareas").setProperty("/titulo", mssg);
+							var title="Lista de registros: "+data.s_marea.length;
+							this.byId("title").setText(title);
+							//this.getModel("consultaMareas").setProperty("/titulo", mssg);
 							this.getModel("consultaMareas").setProperty("/items", data.s_marea);
 							this.getModel("consultaMareas").refresh();
 							//this.getModel("consultaMareas").setProperty("/numCalas", data.s_marea.length);
@@ -912,6 +912,8 @@ sap.ui.define([
 				this.getModel("consultaMareas").setProperty("/items", []);
 				this.byId("fechaProdIni").setValue(null);
 				this.byId("fechaProdFin").setValue(null);
+				var cantidadRegistros="Lista de registros: 0";
+				this.byId("title").setText(cantidadRegistros);
 			},
 
 			clearFilterEmba: function () {

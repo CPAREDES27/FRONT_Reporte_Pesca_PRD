@@ -8,12 +8,13 @@ sap.ui.define([
 	'sap/ui/export/library',
 	'sap/ui/export/Spreadsheet',
 	"sap/ui/core/BusyIndicator",
-	"../model/utilities"
+	"sap/m/MessageBox"
+
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (BaseController, Controller, JSONModel, formatter, Filter, FilterOperator, exportLibrary, Spreadsheet, BusyIndicator, utilities) {
+	function (BaseController, Controller, JSONModel, formatter, Filter, FilterOperator, exportLibrary, Spreadsheet, BusyIndicator, MessageBox) {
 		"use strict";
 
 		var EdmType = exportLibrary.EdmType;
@@ -73,7 +74,7 @@ sap.ui.define([
 
 				let numCalas = 0;
 
-				this.loadReporteCalas();
+				//this.loadReporteCalas();
 
 				oViewModel = new JSONModel();
 				oViewModel.setProperty("/numCalas", numCalas);
@@ -228,6 +229,17 @@ sap.ui.define([
 				let fechaFin = null;
 				var valDtrIni=this.byId("fechaInicio").getValue();
 				var valDtrFin=this.byId("fechaFin").getValue();
+
+
+				if(!centro && !embarcacion && !indicadorPropiedad && !tipoMarea && !valDtrIni && !valDtrFin){
+					var msj="Ingrese una Fecha";
+				
+					MessageBox.error(msj);
+					BusyIndicator.hide();
+					return false;
+				}
+
+
 				if (valDtrIni) {							
 					fechaInicio = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
 				}
@@ -400,7 +412,7 @@ sap.ui.define([
 						this.getModel("reporteCala").setProperty("/numCalas", data.s_cala.length);
 						BusyIndicator.hide();
 
-						var cantidadRegistros="Lista de registros ("+data.s_cala.length+")";
+						var cantidadRegistros="Lista de registros: "+data.s_cala.length;
 						this.byId("idListaReg").setText(cantidadRegistros);
 					})
 					.catch((error) => {
@@ -653,6 +665,8 @@ sap.ui.define([
 				this.getModel("reporteCala").refresh();
 				this.byId("fechaInicio").setValue(null);
 				this.byId("fechaFin").setValue(null);
+				var cantidadRegistros="Lista de registros: 0";
+						this.byId("idListaReg").setText(cantidadRegistros);
 			},
 
 			onAbrirAyudaEmbarcacion: function(){

@@ -179,6 +179,14 @@ sap.ui.define([
 						fechaProdFin = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
 					}
 				}*/
+				if(!planta && !ubicacionPlanta && !embarcacion && !indicadorPropiedad && !tipoMarea && !valDtrIni && !valDtrFin){
+					var msj="Ingrese una Fecha";
+				
+					MessageBox.error(msj);
+					BusyIndicator.hide();
+					return false;
+				}
+
 				if (valDtrIni) {							
 					fechaProdIni = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
 				}
@@ -347,7 +355,7 @@ sap.ui.define([
 
 
 
-						var title="Lista de registros ("+data.str_des.length+")";
+						var title="Lista de registros: "+data.str_des.length;
 						this.byId("idListaReg").setText(title);
 					}).catch(error => {
 						console.error(error);
@@ -798,6 +806,8 @@ sap.ui.define([
 				this.getModel("consultaPescaDescargada").refresh();
 				this.byId("fechaProdIni").setValue(null);
 				this.byId("fechaProdFin").setValue(null);
+				var cantidadRegistros="Lista de registros: 0";
+				this.byId("idListaReg").setText(cantidadRegistros);
 			},
 
 			buscarEmbaFiltro: async function (filtro) {

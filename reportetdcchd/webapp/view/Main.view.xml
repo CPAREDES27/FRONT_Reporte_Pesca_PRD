@@ -56,7 +56,7 @@
                                                         <Label text="Embarcación" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                     </form:label>
                                                     <form:fields>
-                                                    <Input id="inputId0_R" placeholder="Seleccione embarcación" showValueHelp="true"  valueHelpRequest="onSearchHelp"/>
+                                                    <Input id="inputId0_R" placeholder="Seleccione embarcación" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onSearchHelp"/>
                                                         <!-- <Input id="embarcacion" showValueHelp="true" width="100%" valueStateText="Invalid entry" valueHelpRequest="onOpenEmba"/> -->
                                                     </form:fields>
                                                 </form:FormElement>
@@ -146,7 +146,10 @@
                                         <t:Column width="6.5rem" filterProperty="FHZAR" defaultFilterOperator="Contains">
 						                    <Label text="Fech. Zarpe"/>
 						                    <t:template>
-							                    <Text text="{listMareas>FHZAR} {listMareas>HRZAR}" wrapping="false" class="Font2"/>
+							                    <Text text="{parts:[
+                                                {path:'listMareas>FHZAR', formatter:'.formatter.formatDate'},
+                                                {path:'listMareas>HRZAR', formatter:'.formatter.formatHour'}
+                                                ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -154,7 +157,10 @@
                                         <t:Column width="6.5rem" filterProperty="FHLLE" defaultFilterOperator="Contains">
 						                    <Label text="Lleg. Zona" />
 						                    <t:template>
-							                    <Text text="{listMareas>FHLLE} {listMareas>HRLLE}" wrapping="false" class="Font2"/>
+							                    <Text text="{parts:[
+                                                {path:'listMareas>FHLLE', formatter:'.formatter.formatDate'},
+                                                {path:'listMareas>HRLLE', formatter:'.formatter.formatHour'}
+                                                ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -162,7 +168,10 @@
                                         <t:Column width="6.5rem" filterProperty="FICAL" defaultFilterOperator="Contains">
 						                    <Label text="Ini. Cala" />
 						                    <t:template>
-							                    <Text text="{listMareas>FICAL} {listMareas>HICAL}" wrapping="false" class="Font2"/>
+							                    <Text text="{parts:[
+                                                {path:'listMareas>FICAL', formatter:'.formatter.formatDate'},
+                                                {path:'listMareas>HICAL', formatter:'.formatter.formatHour'}
+                                                ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -170,7 +179,10 @@
                                         <t:Column width="6.5rem" filterProperty="FFCAL" defaultFilterOperator="Contains">
 						                    <Label text="Fin Cala" />
 						                    <t:template>
-							                    <Text text="{listMareas>FFCAL} {listMareas>HFCAL}" wrapping="false" class="Font2"/>
+							                    <Text text="{parts:[
+                                                {path:'listMareas>FFCAL', formatter:'.formatter.formatDate'},
+                                                {path:'listMareas>HFCAL', formatter:'.formatter.formatHour'}
+                                                ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -178,7 +190,10 @@
                                         <t:Column width="6.5rem" filterProperty="FCSAZ" defaultFilterOperator="Contains">
 						                    <Label text="Salid. Zona" />
 						                    <t:template>
-							                    <Text text="{listMareas>FCSAZ} {listMareas>HRSAZ}" wrapping="false" class="Font2"/>
+							                    <Text text="{parts:[
+                                                {path:'listMareas>FCSAZ', formatter:'.formatter.formatDate'},
+                                                {path:'listMareas>HRSAZ', formatter:'.formatter.formatHour'}
+                                                ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -186,7 +201,10 @@
                                         <t:Column width="6.5rem" filterProperty="FCARP" defaultFilterOperator="Contains">
 						                    <Label text="Arrib. Puerto"/>
 						                    <t:template>
-							                    <Text text="{listMareas>FCARP} {listMareas>HRARP}" wrapping="false" class="Font2"/>
+							                    <Text text="{parts:[
+                                                {path:'listMareas>FCARP', formatter:'.formatter.formatDate'},
+                                                {path:'listMareas>HRARP', formatter:'.formatter.formatHour'}
+                                                ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -194,7 +212,10 @@
                                         <t:Column width="6.5rem" filterProperty="FIDES" defaultFilterOperator="Contains">
 						                    <Label text="Inic. Descarga" />
 						                    <t:template>
-							                    <Text text="{listMareas>FIDES} {listMareas>HIDES}" wrapping="false" class="Font2"/>
+							                    <Text text="{parts:[
+                                                {path:'listMareas>FIDES', formatter:'.formatter.formatDate'},
+                                                {path:'listMareas>HIDES', formatter:'.formatter.formatHour'}
+                                                ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -202,7 +223,10 @@
                                         <t:Column width="6.5rem" filterProperty="FFDES" defaultFilterOperator="Contains">
 						                    <Label text="Fin Descarga" />
 						                    <t:template>
-							                    <Text text="{listMareas>FFDES} {listMareas>HFDES}" wrapping="false" class="Font2"/>
+							                    <Text text="{parts:[
+                                                {path:'listMareas>FFDES', formatter:'.formatter.formatDate'},
+                                                {path:'listMareas>HFDES', formatter:'.formatter.formatHour'}
+                                                ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>

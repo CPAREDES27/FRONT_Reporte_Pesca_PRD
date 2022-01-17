@@ -82,8 +82,8 @@
                                                 <Label text="Embarcación" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <Input id="inputId0_R" placeholder="Seleccione embarcación" showValueHelp="true"  valueHelpRequest="onSearchHelp"/>
-											    <Input id="inputId1_R" placeholder="Seleccione embarcación" showValueHelp="true"  valueHelpRequest="onSearchHelp"/>
+                                                <Input id="inputId0_R" placeholder="Seleccione embarcación" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onSearchHelp"/>
+											    <Input id="inputId1_R" placeholder="Seleccione embarcación" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onSearchHelp"/>
                                                 <!-- <Input id="embarcacionLow" showValueHelp="true" width="auto" valueStateText="Invalid entry" valueHelpRequest="onOpenEmba"/>
                                                 <Input id="embarcacionHigh" showValueHelp="true" width="auto" valueStateText="Invalid entry" valueHelpRequest="onOpenEmba"/> -->
                                             </form:fields>
@@ -155,7 +155,7 @@
                                 <t:Table id="tableData" rows="{consultaMareas>/items}" visibleRowCount="8" ariaLabelledBy="title" selectionMode="None">
                                     <t:extension>
 					                    <OverflowToolbar style="Clear">
-						                    <Title id="title" text="{consultaMareas>/titulo}"/>
+						                    <Title id="title" text="Lista de Registros"/>
                                             <ToolbarSpacer width=""/>
                                             <Button press='.exportarExcel' text="Exportar" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                                             <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>                                            
@@ -189,7 +189,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="18rem" filterProperty="DSEMP" defaultFilterOperator="Contains" sortProperty="DSEMP">
+                                        <t:Column width="16rem" filterProperty="DSEMP" defaultFilterOperator="Contains" sortProperty="DSEMP">
 						                    <Label text="Empresa" />
 						                    <t:template>
 							                    <Text text="{consultaMareas>DSEMP}" wrapping="false" />
@@ -197,10 +197,34 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="10rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
-						                    <Label text="Nombre Embarcación" />
+                                        <t:Column width="6rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
+						                    <Label text="Nomb. Emb." />
 						                    <t:template>
 							                    <Text text="{consultaMareas>NMEMB}" wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="9rem" filterProperty="FICAL" defaultFilterOperator="Contains" >
+						                    <Label text="Inicio Envase" />
+						                    <t:template>
+							                    <Text text="{parts:[
+                                                {path:'consultaMareas>FICAL', formatter:'.formatter.formatDate'},
+                                                {path:'consultaMareas>HICAL', formatter:'.formatter.formatHour'}
+                                                ]}"
+                                                 wrapping="false" />
+						                    </t:template>
+					                    </t:Column>       
+                                    </t:columns>
+                                    <t:columns>
+                                        <t:Column width="9rem" filterProperty="FFCAL" defaultFilterOperator="Contains" >
+						                    <Label text="Fin Envase" />
+						                    <t:template>
+							                    <Text text="{parts:[
+                                                {path:'consultaMareas>FFCAL', formatter:'.formatter.formatDate'},
+                                                {path:'consultaMareas>HFCAL', formatter:'.formatter.formatHour'}
+                                                ]}"
+                                                 wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -221,7 +245,7 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="8rem" filterProperty="DESC_CDMMA" defaultFilterOperator="Contains" sortProperty="DESC_CDMMA">
+                                        <t:Column width="6rem" filterProperty="DESC_CDMMA" defaultFilterOperator="Contains" sortProperty="DESC_CDMMA">
 						                    <Label text="Motivo" />
 						                    <t:template>
 							                    <Text text="{consultaMareas>DESC_CDMMA}" wrapping="false" />
@@ -232,7 +256,11 @@
                                         <t:Column width="9rem" filterProperty="FEMAR" defaultFilterOperator="Contains" >
 						                    <Label text="Apertura Marea" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>FEMAR} {consultaMareas>HAMAR}" wrapping="false" />
+							                    <Text text="{parts:[
+                                                {path:'consultaMareas>FEMAR', formatter:'.formatter.formatDate'},
+                                                {path:'consultaMareas>HAMAR', formatter:'.formatter.formatHour'}
+                                                ]}"
+                                                 wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -240,7 +268,11 @@
                                         <t:Column width="9rem" filterProperty="FXMAR" defaultFilterOperator="Contains" >
 						                    <Label text="Cierre Marea" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>FXMAR} {consultaMareas>HXMAR}" wrapping="false" />
+							                    <Text text="{parts:[
+                                                {path:'consultaMareas>FXMAR', formatter:'.formatter.formatDate'},
+                                                {path:'consultaMareas>HXMAR', formatter:'.formatter.formatHour'}
+                                                ]}"
+                                                  wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -248,7 +280,11 @@
                                         <t:Column width="9rem" filterProperty="FHZAR" defaultFilterOperator="Contains" >
 						                    <Label text="Fecha Zarpe" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>FHZAR} {consultaMareas>HRZAR}" wrapping="false" />
+							                    <Text text="{parts:[
+                                                {path:'consultaMareas>FHZAR', formatter:'.formatter.formatDate'},
+                                                {path:'consultaMareas>HRZAR', formatter:'.formatter.formatHour'}
+                                                ]}"
+                                                 wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -256,31 +292,23 @@
                                         <t:Column width="9rem" filterProperty="FHLLE" defaultFilterOperator="Contains" >
 						                    <Label text="Llega Zona" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>FHLLE} {consultaMareas>HRLLE}" wrapping="false" />
+							                    <Text text="{parts:[
+                                                {path:'consultaMareas>FHLLE', formatter:'.formatter.formatDate'},
+                                                {path:'consultaMareas>HRLLE', formatter:'.formatter.formatHour'}
+                                                ]}"
+                                                 wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
-                                    </t:columns>
-                                    <t:columns>
-                                        <t:Column width="9rem" filterProperty="FICAL" defaultFilterOperator="Contains" >
-						                    <Label text="Inicio Envase" />
-						                    <t:template>
-							                    <Text text="{consultaMareas>FICAL} {consultaMareas>HICAL}" wrapping="false" />
-						                    </t:template>
-					                    </t:Column>       
-                                    </t:columns>
-                                    <t:columns>
-                                        <t:Column width="9rem" filterProperty="FFCAL" defaultFilterOperator="Contains" >
-						                    <Label text="Fin Envase" />
-						                    <t:template>
-							                    <Text text="{consultaMareas>FFCAL} {consultaMareas>HFCAL}" wrapping="false" />
-						                    </t:template>
-					                    </t:Column>       
-                                    </t:columns>
+                                    </t:columns>                                  
                                     <t:columns>
                                         <t:Column width="9rem" filterProperty="FCSAZ" defaultFilterOperator="Contains" >
 						                    <Label text="Salida Zona" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>FCSAZ} {consultaMareas>HRSAZ}" wrapping="false" />
+							                    <Text text="{parts:[
+                                                {path:'consultaMareas>FCSAZ', formatter:'.formatter.formatDate'},
+                                                {path:'consultaMareas>HRSAZ', formatter:'.formatter.formatHour'}
+                                                ]}"
+                                                 wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -288,7 +316,11 @@
                                         <t:Column width="9rem" filterProperty="FCARP" defaultFilterOperator="Contains" >
 						                    <Label text="Arribo Puerto" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>FCARP} {consultaMareas>HRARP}" wrapping="false" />
+							                    <Text text="{parts:[
+                                                {path:'consultaMareas>FCARP', formatter:'.formatter.formatDate'},
+                                                {path:'consultaMareas>HRARP', formatter:'.formatter.formatHour'}
+                                                ]}"
+                                                 wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -296,7 +328,11 @@
                                         <t:Column width="9rem" filterProperty="FIDES" defaultFilterOperator="Contains" >
 						                    <Label text="Inicio Descarga" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>FIDES} {consultaMareas>HIDES}" wrapping="false" />
+							                    <Text text="{parts:[
+                                                {path:'consultaMareas>FIDES', formatter:'.formatter.formatDate'},
+                                                {path:'consultaMareas>HIDES', formatter:'.formatter.formatHour'}
+                                                ]}"
+                                                 wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -304,7 +340,11 @@
                                         <t:Column width="9rem" filterProperty="FFDES" defaultFilterOperator="Contains">
 						                    <Label text="Fin Descarga" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>FFDES} {consultaMareas>HFDES}" wrapping="false" />
+							                    <Text text="{parts:[
+                                                {path:'consultaMareas>FFDES', formatter:'.formatter.formatDate'},
+                                                {path:'consultaMareas>HFDES', formatter:'.formatter.formatHour'}
+                                                ]}"
+                                                 wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>

@@ -8,12 +8,12 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator",
 	'sap/ui/export/library',
 	'sap/ui/export/Spreadsheet',
-	"../model/utilities"
+	"sap/m/MessageBox"
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (BaseController, Controller, JSONModel, formatter, BusyIndicator, Filter, FilterOperator, exportLibrary, Spreadsheet, utilities) {
+	function (BaseController, Controller, JSONModel, formatter, BusyIndicator, Filter, FilterOperator, exportLibrary, Spreadsheet, MessageBox) {
 		"use strict";
 		var oGlobalBusyDialog = new sap.m.BusyDialog();
 
@@ -208,6 +208,15 @@ sap.ui.define([
 
 				var valDtrIni=this.byId("fechaProdIni").getValue();
 				var valDtrFin=this.byId("fechaProdFin").getValue();
+
+				if(!marea && !embarcacion && !planta && !valDtrIni && !valDtrFin){
+					var msj="Ingrese una Fecha";
+				
+					MessageBox.error(msj);
+					BusyIndicator.hide();
+					return false;
+				}
+
 				if (valDtrIni) {							
 					fechaInicio = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
 				}
@@ -335,7 +344,7 @@ sap.ui.define([
 						
 						console.log(data);
 
-						var cantidadRegistros="Lista de registros ("+data.s_marea.length+")";
+						var cantidadRegistros="Lista de registros: "+data.s_marea.length;
 						this.byId("idListaReg").setText(cantidadRegistros);
 
 					});
@@ -834,6 +843,8 @@ sap.ui.define([
 				this.getModel("listMareas").refresh();
 				this.byId("fechaProdIni").setValue(null);
 				this.byId("fechaProdFin").setValue(null);
+				var cantidadRegistros="Lista de registros: 0";
+				this.byId("idListaReg").setText(cantidadRegistros);
 			},
 
 			clearFilterEmba: function () {
