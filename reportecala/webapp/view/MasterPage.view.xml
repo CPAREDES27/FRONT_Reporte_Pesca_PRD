@@ -143,7 +143,7 @@
                             <t:Table id="tableReporteCalas" rows="{reporteCala>/items}" visibleRowCount="8" ariaLabelledBy="title" selectionMode="None">
                                     <t:extension>
 					                    <OverflowToolbar style="Clear">
-						                    <Title text="Lista de registros {/dataCount}" id="idListaReg"/>
+						                    <Title text="Lista de registros: 0" id="idListaReg"/>
                                             <ToolbarSpacer width=""/>
                                             <Button press='.exportarExcel' text="Exportar" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                                             <Button press='.exportBiometriaToExcel' text="Exportar Biometria" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
