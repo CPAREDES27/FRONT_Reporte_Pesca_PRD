@@ -219,9 +219,9 @@ sap.ui.define([
 				
 				var marea1=this.byId("mareaLow").getValue();
 				var marea2=this.byId("mareaHigh").getValue();
-				if(!valDtrIni && !valDtrFin && !marea1 && !marea2){
+				if(!valDtrIni && !valDtrFin && !marea1 && !marea2 && !propiedad && motivos.length==0 && !embarcacionLow && !embarcacionHigh && !plantaLow && !plantaHigh){
 
-					var msj="Ingrese una Fecha o una Marea";
+					var msj="Ingrese una Fecha";
 				
 					MessageBox.error(msj);
 					BusyIndicator.hide();

@@ -11,7 +11,7 @@
 	
 		<App id="app">
 			<pages>
-                <Page showHeader="true" title="Consulta de Calas" >
+                <Page showHeader="true" title="Consulta de Calas" class="sapUiResponsiveContentPadding">
                     <content>
                         <form:Form width="100%" editable="true" visible="true">
                             <form:formContainers>
@@ -86,7 +86,7 @@
                                                 <Label text="Tipo marea" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <ComboBox id="cbTipoMarea" items="{reporteCala>/zdoTipoMareaDom}" editable="true" enabled="true" visible="true" width="100%" valueState="None">
+                                                <ComboBox id="cbTipoMarea" items="{reporteCala>/zdoTipoMareaDom}" selectedKey="2" editable="true" enabled="true" visible="true" width="100%" valueState="None">
                                                     <items>
                                                         <core:Item text="{reporteCala>descripcion}" enabled="true" key="{reporteCala>id}"/>
                                                     </items>

@@ -10,7 +10,7 @@
 	
 		<App id="app">
 			<pages>
-				<Page id="page" title="{i18n>title}">
+				<Page id="page" title="{i18n>title}" class="sapUiResponsiveContentPadding">
 					<content>
                         <form:Form width="100%" editable="true" visible="true" >
                             <form:title>
