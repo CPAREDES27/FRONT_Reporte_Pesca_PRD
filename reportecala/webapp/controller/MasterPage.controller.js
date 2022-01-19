@@ -232,7 +232,7 @@ sap.ui.define([
 
 
 				if(!centro && !embarcacion && !indicadorPropiedad && !tipoMarea && !valDtrIni && !valDtrFin){
-					var msj="Ingrese una Fecha";
+					var msj="Por favor ingrese un dato de selección";
 				
 					MessageBox.error(msj);
 					BusyIndicator.hide();

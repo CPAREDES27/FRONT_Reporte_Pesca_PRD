@@ -210,7 +210,7 @@ sap.ui.define([
 				var valDtrFin=this.byId("fechaProdFin").getValue();
 
 				if(!marea && !embarcacion && !planta && !valDtrIni && !valDtrFin){
-					var msj="Ingrese una Fecha";
+					var msj="Por favor ingrese un dato de selección";
 				
 					MessageBox.error(msj);
 					BusyIndicator.hide();

@@ -1,6 +1,7 @@
 <mvc:View
     controllerName="com.tasa.consultamareas.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
+     xmlns:semantic="sap.f.semantic"
     displayBlock="true"
     xmlns="sap.m"
 	xmlns:form="sap.ui.layout.form" 
