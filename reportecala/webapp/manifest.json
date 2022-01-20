@@ -30,7 +30,7 @@
     "sap.ui": {
         "technology": "UI5",
         "icons": {
-            "icon": "sap-icon://crm-service-manager",
+            "icon": "sap-icon://manager-insight",
             "favIcon": "",
             "phone": "",
             "phone@2": "",
