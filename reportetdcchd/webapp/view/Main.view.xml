@@ -101,7 +101,13 @@
                                     </form:layout>
                                 </form:Form>
                          
-                        <t:Table id="tableData" rows="{listMareas>/items}" visibleRowCount="8" ariaLabelledBy="title" selectionMode="None" class="classTable">
+                        <t:Table id="tableData" 
+                        rows="{listMareas>/items}"
+                         visibleRowCount="8" 
+                         rowActionCount="1"
+                         ariaLabelledBy="title"
+                          selectionMode="None" 
+                          class="classTable">
                                     <t:extension>
 					                    <OverflowToolbar style="Clear">
 						                    <Title text="Lista de registros: 0" id="idListaReg"/>
@@ -234,29 +240,44 @@
 					                    </t:Column>       
                                     </t:columns>
                                     <t:columns>
-                                        <t:Column width="4.5rem" hAlign="End" filterProperty="CNTDS" defaultFilterOperator="EQ" sortProperty="CNTDS">
-						                    <Label text="Descarg." />
+                                        <t:Column width="4rem" hAlign="End" filterProperty="CNTDS" defaultFilterOperator="EQ" sortProperty="CNTDS">
+						                    <Label text="Descar." />
 						                    <t:template>
 							                    <Text text="{listMareas>CNTDS}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
                                      <t:columns>
-                                        <t:Column width="4.5rem" hAlign="End" filterProperty="CNPDC" defaultFilterOperator="EQ" sortProperty="CNPDC">
-						                    <Label text="Declar." />
+                                        <t:Column width="4rem" hAlign="End" filterProperty="CNPDC" defaultFilterOperator="EQ" sortProperty="CNPDC">
+						                    <Label text="Decla." />
 						                    <t:template>
 							                    <Text text="{listMareas>CNPDC}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
-                                    <t:columns>
+                                 <!-- <t:columns>
                                         <t:Column width="6rem">
 						                    <Label text="" />
 						                    <t:template>
 							                    <Button text="Detalle" press="showDetalle" type="Default" icon="sap-icon://detail-view" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" />
 						                    </t:template>
 					                    </t:Column>       
-                                    </t:columns>
+                                    </t:columns>-->
+                                        <t:rowActionTemplate>
+                                            <t:RowAction>
+                                                <t:items >
+                                                    <t:RowActionItem
+                                                        type="Navigation"
+                                                        press="showDetalle">
+                                                    </t:RowActionItem>
+                                                </t:items>
+                                            </t:RowAction>
+                                        </t:rowActionTemplate> 
+                                        <t:rowSettingsTemplate>
+                                            <t:RowSettings
+                                                highlight="Success"
+                                            />
+                                        </t:rowSettingsTemplate>                               
                                 </t:Table>
                     </content>
                    
