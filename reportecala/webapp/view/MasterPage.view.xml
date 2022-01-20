@@ -14,6 +14,9 @@
                 <Page showHeader="true" title="Consulta de Calas" class="sapUiResponsiveContentPadding">
                     <content>
                         <form:Form width="100%" editable="true" visible="true">
+                        <form:title>
+                                <core:Title text="Datos de selección" level="Auto" icon="sap-icon://filter"/>
+                            </form:title>
                             <form:formContainers>
                                 <form:FormContainer visible="true">
                                     <form:formElements>

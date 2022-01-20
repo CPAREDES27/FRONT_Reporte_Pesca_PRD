@@ -4,6 +4,7 @@
     displayBlock="true"
     xmlns="sap.m"
 	xmlns:form="sap.ui.layout.form"
+        xmlns:core="sap.ui.core"
     xmlns:t="sap.ui.table"
 >
 		<App id="app">
@@ -12,7 +13,9 @@
 					<content>
                        
                                 <form:Form width="100%" editable="true" visible="true">
-                                    <form:title/>
+                                    <form:title>
+                                <core:Title text="Datos de selección" level="Auto" icon="sap-icon://filter"/>
+                              </form:title>
                                     <form:formContainers>
                                         <form:FormContainer visible="true">
                                             <form:formElements>
