@@ -44,7 +44,7 @@ sap.ui.define([
 
 				this.setModel(oViewModel, "listMareas");
 
-				this.loadData();
+				//this.loadData();
 
 				// this.router = this.getRouter().getTarget("TargetMain").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
 				this.router = sap.ui.core.UIComponent.getRouterFor(this);
@@ -94,6 +94,7 @@ sap.ui.define([
 				);
 			},
 
+			/*
 			loadData: function () {
 				BusyIndicator.show(0);
 				let plantas = [];
@@ -178,7 +179,7 @@ sap.ui.define([
 					}).catch(error => console.log(error));
 
 
-			},
+			},*/
 
 			handleRouteMatched: function () { },
 			searchData: function () {
