@@ -156,8 +156,8 @@
 						                    <Label text="Fech. Zarpe"/>
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'listMareas>FHZAR', formatter:'.formatter.formatDate'},
-                                                {path:'listMareas>HRZAR', formatter:'.formatter.formatHour'}
+                                                {path:'listMareas>FHZAR'},
+                                                {path:'listMareas>HRZAR'}
                                                 ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
@@ -167,8 +167,8 @@
 						                    <Label text="Lleg. Zona" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'listMareas>FHLLE', formatter:'.formatter.formatDate'},
-                                                {path:'listMareas>HRLLE', formatter:'.formatter.formatHour'}
+                                                {path:'listMareas>FHLLE'},
+                                                {path:'listMareas>HRLLE'}
                                                 ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
@@ -178,8 +178,8 @@
 						                    <Label text="Ini. Cala" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'listMareas>FICAL', formatter:'.formatter.formatDate'},
-                                                {path:'listMareas>HICAL', formatter:'.formatter.formatHour'}
+                                                {path:'listMareas>FICAL'},
+                                                {path:'listMareas>HICAL'}
                                                 ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
@@ -189,8 +189,8 @@
 						                    <Label text="Fin Cala" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'listMareas>FFCAL', formatter:'.formatter.formatDate'},
-                                                {path:'listMareas>HFCAL', formatter:'.formatter.formatHour'}
+                                                {path:'listMareas>FFCAL'},
+                                                {path:'listMareas>HFCAL'}
                                                 ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
@@ -200,8 +200,8 @@
 						                    <Label text="Salid. Zona" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'listMareas>FCSAZ', formatter:'.formatter.formatDate'},
-                                                {path:'listMareas>HRSAZ', formatter:'.formatter.formatHour'}
+                                                {path:'listMareas>FCSAZ'},
+                                                {path:'listMareas>HRSAZ'}
                                                 ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
@@ -211,8 +211,8 @@
 						                    <Label text="Arrib. Puerto"/>
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'listMareas>FCARP', formatter:'.formatter.formatDate'},
-                                                {path:'listMareas>HRARP', formatter:'.formatter.formatHour'}
+                                                {path:'listMareas>FCARP'},
+                                                {path:'listMareas>HRARP'}
                                                 ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
@@ -222,8 +222,8 @@
 						                    <Label text="Inic. Descarga" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'listMareas>FIDES', formatter:'.formatter.formatDate'},
-                                                {path:'listMareas>HIDES', formatter:'.formatter.formatHour'}
+                                                {path:'listMareas>FIDES'},
+                                                {path:'listMareas>HIDES'}
                                                 ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
@@ -233,8 +233,8 @@
 						                    <Label text="Fin Descarga" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'listMareas>FFDES', formatter:'.formatter.formatDate'},
-                                                {path:'listMareas>HFDES', formatter:'.formatter.formatHour'}
+                                                {path:'listMareas>FFDES'},
+                                                {path:'listMareas>HFDES'}
                                                 ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       

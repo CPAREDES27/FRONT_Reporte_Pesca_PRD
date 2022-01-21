@@ -154,7 +154,7 @@
                                         <t:Column width="6rem" filterProperty="FECCONMOV" defaultFilterOperator="Contains">
 						                    <Label text="F. Producción" />
 						                    <t:template>
-							                    <Text text="{path:'consultaPescaDescargada>FECCONMOV', formatter:'.formatter.formatDate'}" wrapping="false" />
+							                    <Text text="{path:'consultaPescaDescargada>FECCONMOV'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -180,8 +180,8 @@
 						                    <Label text="F/H Zarpe" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'consultaPescaDescargada>FCZAR', formatter:'.formatter.formatDate'},
-                                                {path:'consultaPescaDescargada>HOZAR', formatter:'.formatter.formatHour'}
+                                                {path:'consultaPescaDescargada>FCZAR'},
+                                                {path:'consultaPescaDescargada>HOZAR'}
                                                 ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
@@ -191,8 +191,8 @@
 						                    <Label text="F/H Arribo" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'consultaPescaDescargada>FCARR', formatter:'.formatter.formatDate'},
-                                                {path:'consultaPescaDescargada>HOARR', formatter:'.formatter.formatHour'}
+                                                {path:'consultaPescaDescargada>FCARR'},
+                                                {path:'consultaPescaDescargada>HOARR'}
                                                 ]}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       

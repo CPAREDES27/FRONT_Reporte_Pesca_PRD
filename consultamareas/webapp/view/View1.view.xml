@@ -210,8 +210,8 @@
 						                    <Label text="Inicio Envase" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'consultaMareas>FICAL', formatter:'.formatter.formatDate'},
-                                                {path:'consultaMareas>HICAL', formatter:'.formatter.formatHour'}
+                                                {path:'consultaMareas>FICAL'},
+                                                {path:'consultaMareas>HICAL'}
                                                 ]}"
                                                  wrapping="false" />
 						                    </t:template>
@@ -222,8 +222,8 @@
 						                    <Label text="Fin Envase" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'consultaMareas>FFCAL', formatter:'.formatter.formatDate'},
-                                                {path:'consultaMareas>HFCAL', formatter:'.formatter.formatHour'}
+                                                {path:'consultaMareas>FFCAL'},
+                                                {path:'consultaMareas>HFCAL'}
                                                 ]}"
                                                  wrapping="false" />
 						                    </t:template>
@@ -258,8 +258,8 @@
 						                    <Label text="Apertura Marea" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'consultaMareas>FEMAR', formatter:'.formatter.formatDate'},
-                                                {path:'consultaMareas>HAMAR', formatter:'.formatter.formatHour'}
+                                                {path:'consultaMareas>FEMAR'},
+                                                {path:'consultaMareas>HAMAR'}
                                                 ]}"
                                                  wrapping="false" />
 						                    </t:template>
@@ -270,8 +270,8 @@
 						                    <Label text="Cierre Marea" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'consultaMareas>FXMAR', formatter:'.formatter.formatDate'},
-                                                {path:'consultaMareas>HXMAR', formatter:'.formatter.formatHour'}
+                                                {path:'consultaMareas>FXMAR'},
+                                                {path:'consultaMareas>HXMAR'}
                                                 ]}"
                                                   wrapping="false" />
 						                    </t:template>
@@ -282,8 +282,8 @@
 						                    <Label text="Fecha Zarpe" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'consultaMareas>FHZAR', formatter:'.formatter.formatDate'},
-                                                {path:'consultaMareas>HRZAR', formatter:'.formatter.formatHour'}
+                                                {path:'consultaMareas>FHZAR'},
+                                                {path:'consultaMareas>HRZAR'}
                                                 ]}"
                                                  wrapping="false" />
 						                    </t:template>
@@ -294,8 +294,8 @@
 						                    <Label text="Llega Zona" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'consultaMareas>FHLLE', formatter:'.formatter.formatDate'},
-                                                {path:'consultaMareas>HRLLE', formatter:'.formatter.formatHour'}
+                                                {path:'consultaMareas>FHLLE'},
+                                                {path:'consultaMareas>HRLLE'}
                                                 ]}"
                                                  wrapping="false" />
 						                    </t:template>
@@ -306,8 +306,8 @@
 						                    <Label text="Salida Zona" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'consultaMareas>FCSAZ', formatter:'.formatter.formatDate'},
-                                                {path:'consultaMareas>HRSAZ', formatter:'.formatter.formatHour'}
+                                                {path:'consultaMareas>FCSAZ'},
+                                                {path:'consultaMareas>HRSAZ'}
                                                 ]}"
                                                  wrapping="false" />
 						                    </t:template>
@@ -318,8 +318,8 @@
 						                    <Label text="Arribo Puerto" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'consultaMareas>FCARP', formatter:'.formatter.formatDate'},
-                                                {path:'consultaMareas>HRARP', formatter:'.formatter.formatHour'}
+                                                {path:'consultaMareas>FCARP'},
+                                                {path:'consultaMareas>HRARP'}
                                                 ]}"
                                                  wrapping="false" />
 						                    </t:template>
@@ -330,8 +330,8 @@
 						                    <Label text="Inicio Descarga" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'consultaMareas>FIDES', formatter:'.formatter.formatDate'},
-                                                {path:'consultaMareas>HIDES', formatter:'.formatter.formatHour'}
+                                                {path:'consultaMareas>FIDES'},
+                                                {path:'consultaMareas>HIDES'}
                                                 ]}"
                                                  wrapping="false" />
 						                    </t:template>
@@ -342,8 +342,8 @@
 						                    <Label text="Fin Descarga" />
 						                    <t:template>
 							                    <Text text="{parts:[
-                                                {path:'consultaMareas>FFDES', formatter:'.formatter.formatDate'},
-                                                {path:'consultaMareas>HFDES', formatter:'.formatter.formatHour'}
+                                                {path:'consultaMareas>FFDES'},
+                                                {path:'consultaMareas>HFDES'}
                                                 ]}"
                                                  wrapping="false" />
 						                    </t:template>

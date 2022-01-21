@@ -185,7 +185,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha producción" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>FECCONMOV', formatter:'.formatter.formatDate'}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>FECCONMOV'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -258,7 +258,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha Ini Cala" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>FIEVN', formatter:'.formatter.formatDate'}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>FIEVN'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -267,7 +267,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Hora Ini Cala" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>HIEVN', formatter:'.formatter.formatHour'}"
+							                    <Text text="{path:'reporteCala>HIEVN'}"
                                                  wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
@@ -277,7 +277,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha Fin Cala" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>FFEVN', formatter:'.formatter.formatDate'}"
+							                    <Text text="{path:'reporteCala>FFEVN'}"
                                                  wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
@@ -287,7 +287,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Hora Fin Cala"/>
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>HFEVN', formatter:'.formatter.formatHour'}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>HFEVN'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -296,7 +296,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha Ini Envase" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>FIEVN', formatter:'.formatter.formatDate'}"  wrapping="false" />
+							                    <Text text="{path:'reporteCala>FIEVN'}"  wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -305,7 +305,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Hora Ini Envase" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>HIEVN', formatter:'.formatter.formatHour'}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>HIEVN'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -314,7 +314,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha Fin Envase" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>FFEVN', formatter:'.formatter.formatDate'}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>FFEVN'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -323,7 +323,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Hora Fin Envase" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>HFEVN', formatter:'.formatter.formatHour'}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>HFEVN'}" wrapping="false" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
