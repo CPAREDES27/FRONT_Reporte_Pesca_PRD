@@ -63,7 +63,13 @@
                                                         <!-- <Input id="embarcacion" showValueHelp="true" width="100%" valueStateText="Invalid entry" valueHelpRequest="onOpenEmba"/> -->
                                                     </form:fields>
                                                 </form:FormElement>
-                                                <form:FormElement visible="true">
+                                              
+                                            </form:formElements>
+                                            <form:title/>
+                                        </form:FormContainer>
+                                        <form:FormContainer visible="true">
+                                        <form:formElements>
+                                          <form:FormElement visible="true">
                                                     <form:label>
                                                         <Label text="Inicio" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                     
@@ -93,12 +99,26 @@
                                                     </form:fields>
                                                 </form:FormElement>
                                             </form:formElements>
-                                            <form:title/>
                                         </form:FormContainer>
                                     </form:formContainers>
                                     <form:layout>
-                                        <form:ResponsiveGridLayout adjustLabelSpan="true" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12" singleContainerFullSize="true"/>
-                                    </form:layout>
+                                        <!--<form:ResponsiveGridLayout adjustLabelSpan="true" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12" singleContainerFullSize="true"/>-->
+                                   
+                                   <form:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="4"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="0"
+						emptySpanL="0"
+						emptySpanM="0"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="2"
+						columnsM="1"
+						singleContainerFullSize="false"  />
+                         </form:layout>
                                 </form:Form>
                          
                         <t:Table id="tableData" 

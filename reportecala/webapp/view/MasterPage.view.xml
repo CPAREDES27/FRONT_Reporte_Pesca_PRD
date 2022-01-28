@@ -84,7 +84,22 @@
                                                 </ComboBox>
                                             </form:fields>
                                         </form:FormElement>
-                                        <form:FormElement visible="true">
+                                       
+                                       <!-- <form:FormElement visible="true">
+                                            <form:label>
+                                                <Label text="Fecha fin marea" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </form:label>
+                                            <form:fields>
+                                                
+                                                <DateRangeSelection id="idDateRangeFinMar" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>
+                                            </form:fields>
+                                        </form:FormElement>-->
+                                       
+                                    </form:formElements>
+                                    <form:title/>
+                                </form:FormContainer>
+                                <form:FormContainer visible="true">
+                                 <form:FormElement visible="true">
                                             <form:label>
                                                 <Label text="Tipo marea" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
@@ -106,16 +121,7 @@
                                                 <!--<DateRangeSelection id="idDateRangeIniMar" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>-->
                                             </form:fields>
                                         </form:FormElement>
-                                       <!-- <form:FormElement visible="true">
-                                            <form:label>
-                                                <Label text="Fecha fin marea" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            </form:label>
-                                            <form:fields>
-                                                
-                                                <DateRangeSelection id="idDateRangeFinMar" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>
-                                            </form:fields>
-                                        </form:FormElement>-->
-                                        <form:FormElement visible="true">
+                                         <form:FormElement visible="true">
                                             <form:label>
                                                 <Label text="Cantidad de aciertos" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
@@ -133,12 +139,24 @@
                                                 <Button press="clearFields" text="Limpiar"  icon="sap-icon://clear-filter" iconFirst="true" width="100%" enabled="true" visible="true" iconDensityAware="false"/>
                                             </form:fields>
                                         </form:FormElement>
-                                    </form:formElements>
-                                    <form:title/>
-                                </form:FormContainer>
+                                 </form:FormContainer>
                             </form:formContainers>
                             <form:layout>
-                                <form:ResponsiveGridLayout adjustLabelSpan="true" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12" singleContainerFullSize="true" />
+                              <!--<form:ResponsiveGridLayout adjustLabelSpan="true" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12" singleContainerFullSize="true" />-->
+                           <form:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="4"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="0"
+						emptySpanL="0"
+						emptySpanM="0"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="2"
+						columnsM="1"
+						singleContainerFullSize="false"  />
                             </form:layout>
                         </form:Form>
 

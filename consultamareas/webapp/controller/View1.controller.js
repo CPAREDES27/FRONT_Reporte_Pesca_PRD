@@ -502,6 +502,11 @@ sap.ui.define([
 				});
 			},*/
 			onExportExcel: function() {
+				var d=Date();
+				var date=this.castDate(d);
+				var hour=this.castHour(d);
+				console.log(hour);
+
 				var aCols, aProducts, oSettings, oSheet;
 	
 				aCols = this.createColumnConsultaMareas();
@@ -522,7 +527,7 @@ sap.ui.define([
 						
 					},
 					dataSource: aProducts,
-					fileName:'Consulta de Mareas Cerradas.xlsx'
+					fileName:'Consulta de Mareas Cerradas_'+date+'_'+hour+'.xlsx'
 				};
 	
 				oSheet = new Spreadsheet(oSettings);
@@ -540,17 +545,20 @@ sap.ui.define([
 						property: 'NRMAR',
 						type: EdmType.Number,
 						scale:3,
-						delimiter: true
+						delimiter: true,
+						width:16
 					},
 					{
 						label: 'Planta',
 						property: 'DESCR',
-						type: EdmType.String
+						type: EdmType.String,
+						width:12
 					},
 					{
 						label: 'Empresa',
 						property: 'DSEMP',
-						type: EdmType.String
+						type: EdmType.String,
+						width:35
 					},
 					{
 						label: 'Nombre de Embarcacion',
@@ -560,77 +568,90 @@ sap.ui.define([
 					{
 						label: 'Sistema Pesca',
 						property: 'DSSPE',
-						type: EdmType.String
+						type: EdmType.String,
+						width:14
 					},
 					{
 						label: 'Propiedad',
 						property: 'DESC_INPRP',
-						type: EdmType.String
+						type: EdmType.String,
+						width:12
 					},
 					{
 						label: 'Motivo',
 						property: 'DESC_CDMMA',
-						type: EdmType.String
+						type: EdmType.String,
+						width:12
 					},
 					{
 						label: 'Inicio Marea',
 						property: ["FEMAR","HAMAR"],
 						type: EdmType.String,
-						template: "{0} {1}"
+						template: "{0} {1}",
+						width:16
 					},
 					{
 						label: 'Cierre Marea',
 						property: ["FXMAR","HXMAR"],
 						type: EdmType.String,
-						template: "{0} {1}"
+						template: "{0} {1}",
+						width:16
 					},
 					{
 						label: 'Zarpe',
 						property: ["FHZAR","HRZAR"],
 						type: EdmType.String,
-						template: "{0} {1}"
+						template: "{0} {1}",
+						width:16
 					},
 					{
 						label: 'Lleg. zona',
 						property: ["FHLLE","HRLLE"],
 						type: EdmType.String,
-						template: "{0} {1}"
+						template: "{0} {1}",
+						width:16
 					},
 					{
 						label: 'Inicio Envase',
 						property: ["FICAL","HICAL"],
 						type: EdmType.String,
-						template: "{0} {1}"
+						template: "{0} {1}",
+						width:16
 					},
 					{
 						label: 'Fin Envase',
 						property: ["FFCAL","HFCAL"],
 						type: EdmType.String,
-						template: "{0} {1}"
+						template: "{0} {1}",
+						width:16
 					},
 					{
 						label: 'Salid. zona',
 						property: ["FCSAZ","HRSAZ"],
 						type: EdmType.String,
-						template: "{0} {1}"
+						template: "{0} {1}",
+						width:16
 					},
 					{
 						label: 'Arrib. Puerto',
 						property: ["FCARP","HRARP"],
 						type: EdmType.String,
-						template: "{0} {1}"
+						template: "{0} {1}",
+						width:16
 					},
 					{
 						label: 'Ini. Descarga',
 						property: ["FIDES","HIDES"],
 						type: EdmType.String,
-						template: "{0} {1}"
+						template: "{0} {1}",
+						width:16
 					},
 					{
 						label: 'Fin Descarga',
 						property: ["FFDES","HFDES"],
 						type: EdmType.String,
-						template: "{0} {1}"
+						template: "{0} {1}",
+						width:16
 					},
 					{
 						label: 'Descarg',
@@ -648,8 +669,46 @@ sap.ui.define([
 					}
 					];
 			},
+			castDate: function (date) {
+				var d = new Date(date),
+					month = '' + (d.getMonth() + 1),
+					day = '' + d.getDate(),
+					year = d.getFullYear();
+	
+				if (month.length < 2)
+					month = '0' + month;
+				if (day.length < 2)
+					day = '0' + day;
+	
+				return day+""+month+""+year;
+			},
+			castHour: function(date){
+				var d = new Date(date),
 
-
+					 hora = d.getHours(),
+					 minutos = d.getMinutes(),
+					 segundos = d.getSeconds(),
+					 strHor = "";
+					if(hora > 0 && hora < 10){
+						strHor = "0" + hora;
+					}else{
+						strHor = hora;
+					}
+					let strMin = "";
+					if(minutos > 0 && minutos < 10){
+						strMin = "0" + minutos;
+					}else{
+						strMin = minutos;
+					}
+					let strSec = "";
+					if(segundos > 0 && segundos < 10){
+						strSec = "0" + segundos;
+					}else{
+						strSec = segundos;
+					}
+					return strHor + "" + strMin + "" + strSec;
+				
+			},
 			onSelectEmba: function (evt) {
 				var objeto = evt.getParameter("rowContext").getObject();
 				if (objeto) {
