@@ -158,7 +158,7 @@
 					                    <OverflowToolbar style="Clear">
 						                    <Title id="title" text="Lista de Registros: 0"/>
                                             <ToolbarSpacer width=""/>
-                                            <Button press='.exportarExcel' text="Exportar" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                            <Button press='.onExportExcel' text="Exportar" icon="sap-icon://excel-attachment" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                                             <SearchField value="{ui>/globalFilter}" liveChange=".filterGlobally" placeholder="Búsqueda rápida" width="auto"/>                                            
 					                    </OverflowToolbar>
 				                    </t:extension>

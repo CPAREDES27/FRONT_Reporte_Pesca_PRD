@@ -419,6 +419,7 @@ sap.ui.define([
 				 */
 				tableItemsBinding.filter(oFilters, "Application");
 			},
+			/*
 			createColumnConfig: function () {
 				var aCols = [];
 				const title = [];
@@ -426,9 +427,7 @@ sap.ui.define([
 				let tableColumns = table.getColumns();
 				const dataTable = table.getBinding('items').oList;
 
-				/**
-				 * Obtener solo las opciones que se exportarán
-				 */
+				
 				for (let i = 0; i < tableColumns.length; i++) {
 					let header = tableColumns[i].getAggregation('header');
 					if (header) {
@@ -442,9 +441,7 @@ sap.ui.define([
 
 				title.pop();
 
-				/**
-				 * Combinar los títulos y los campos de la cabecera
-				 */
+				
 				const properties = title.map((t, i) => {
 					return {
 						column: t,
@@ -475,6 +472,7 @@ sap.ui.define([
 
 				return aCols;
 			},
+			
 			exportarExcel: function (event) {
 				var aCols, oRowBinding, oSettings, oSheet, oTable;
 
@@ -502,8 +500,154 @@ sap.ui.define([
 				oSheet.build().finally(function () {
 					oSheet.destroy();
 				});
+			},*/
+			onExportExcel: function() {
+				var aCols, aProducts, oSettings, oSheet;
+	
+				aCols = this.createColumnConsultaMareas();
+				aProducts = this.getView().getModel("consultaMareas").getProperty('/items');
+	
+				oSettings = {
+					
+					workbook: { 
+						columns: aCols,
+						context: {
+							application: 'Debug Test Application',
+							version: '1.95.0',
+							title: 'Some random title',
+							modifiedBy: 'John Doe',
+							metaSheetName: 'Custom metadata',
+							sheetName: "CONSULTA DE MAREAS CERRADAS"
+						}
+						
+					},
+					dataSource: aProducts,
+					fileName:'Consulta de Mareas Cerradas.xlsx'
+				};
+	
+				oSheet = new Spreadsheet(oSettings);
+				oSheet.build()
+					.then( function() {
+						MessageToast.show('El Archivo ha sido exportado correctamente');
+					})
+					.finally(oSheet.destroy);
 			},
-
+			createColumnConsultaMareas: function() {
+				return [
+					
+					{
+						label: 'Num. Marea',
+						property: 'NRMAR',
+						type: EdmType.Number,
+						scale:3,
+						delimiter: true
+					},
+					{
+						label: 'Planta',
+						property: 'DESCR',
+						type: EdmType.String
+					},
+					{
+						label: 'Empresa',
+						property: 'DSEMP',
+						type: EdmType.String
+					},
+					{
+						label: 'Nombre de Embarcacion',
+						property: 'NMEMB',
+						type: EdmType.String
+					},
+					{
+						label: 'Sistema Pesca',
+						property: 'DSSPE',
+						type: EdmType.String
+					},
+					{
+						label: 'Propiedad',
+						property: 'DESC_INPRP',
+						type: EdmType.String
+					},
+					{
+						label: 'Motivo',
+						property: 'DESC_CDMMA',
+						type: EdmType.String
+					},
+					{
+						label: 'Inicio Marea',
+						property: ["FEMAR","HAMAR"],
+						type: EdmType.String,
+						template: "{0} {1}"
+					},
+					{
+						label: 'Cierre Marea',
+						property: ["FXMAR","HXMAR"],
+						type: EdmType.String,
+						template: "{0} {1}"
+					},
+					{
+						label: 'Zarpe',
+						property: ["FHZAR","HRZAR"],
+						type: EdmType.String,
+						template: "{0} {1}"
+					},
+					{
+						label: 'Lleg. zona',
+						property: ["FHLLE","HRLLE"],
+						type: EdmType.String,
+						template: "{0} {1}"
+					},
+					{
+						label: 'Inicio Envase',
+						property: ["FICAL","HICAL"],
+						type: EdmType.String,
+						template: "{0} {1}"
+					},
+					{
+						label: 'Fin Envase',
+						property: ["FFCAL","HFCAL"],
+						type: EdmType.String,
+						template: "{0} {1}"
+					},
+					{
+						label: 'Salid. zona',
+						property: ["FCSAZ","HRSAZ"],
+						type: EdmType.String,
+						template: "{0} {1}"
+					},
+					{
+						label: 'Arrib. Puerto',
+						property: ["FCARP","HRARP"],
+						type: EdmType.String,
+						template: "{0} {1}"
+					},
+					{
+						label: 'Ini. Descarga',
+						property: ["FIDES","HIDES"],
+						type: EdmType.String,
+						template: "{0} {1}"
+					},
+					{
+						label: 'Fin Descarga',
+						property: ["FFDES","HFDES"],
+						type: EdmType.String,
+						template: "{0} {1}"
+					},
+					{
+						label: 'Descarg',
+						property: 'CNTDS',
+						type: EdmType.Number,
+						scale:3,
+						delimiter: true
+					},
+					{
+						label: 'Declar.',
+						property: 'CNPDC',
+						type: EdmType.Number,
+						scale:3,
+						delimiter: true
+					}
+					];
+			},
 
 
 			onSelectEmba: function (evt) {
