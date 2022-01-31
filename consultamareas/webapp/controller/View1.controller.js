@@ -360,7 +360,7 @@ sap.ui.define([
 				
 			},
 			detalleMarea: async function (event) {
-				BusyIndicator.show(0);
+				//BusyIndicator.show(0); @pprincipe comment
 				var obj = event.getSource().getParent().getBindingContext("consultaMareas").getObject();
 				if (obj) {
 					var cargarMarea = await this.cargarDatosMarea(obj);
@@ -369,8 +369,20 @@ sap.ui.define([
 						var modeloConsultaMarea = this.getModel("consultaMareas");
 						var dataModelo = modelo.getData();
 						var dataConsultaMarea = modeloConsultaMarea.getData();
-						var oStore = jQuery.sap.storage(jQuery.sap.storage.Type.Session);
-						oStore.put("DataModelo", dataModelo);
+						//var oStore = jQuery.sap.storage(jQuery.sap.storage.Type.Session); @pprincipe
+                        //@pprincipe Inicio add
+                        this.getOwnerComponent().setModel(modelo, "DataModelo");
+                        this.getOwnerComponent().setModel(modeloConsultaMarea, "ConsultaMarea");
+                        var objAppOrigin = {};
+                        objAppOrigin.AppOrigin = 'consultamareas';
+                        var modelAppOrigin = new JSONModel();
+                        modelAppOrigin.setData(objAppOrigin);
+                        this.getOwnerComponent().setModel(modelAppOrigin, "AppOrigin");
+
+                        //@pprincipe Fin add
+
+                        //@pprincipe Inicio coment
+						/*oStore.put("DataModelo", dataModelo);
 						oStore.put("ConsultaMarea", dataConsultaMarea);
 						oStore.put("AppOrigin", "consultamareas");
 						BusyIndicator.hide();
@@ -380,11 +392,19 @@ sap.ui.define([
 								semanticObject: "mareaevento",
 								action: "display"
 							}
-						});
+						});*/
+                        //@pprincipe Fin coment
 					}else{
-						BusyIndicator.hide();
+						//BusyIndicator.hide();@pprincipe comment
 					}
 				}
+                //pprincipe Inicio
+                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			
+			oRouter.navTo('RouteDetalle', {
+				aux: 'X'
+			});
+                //pprincipe Fin
 			},
 			filterGlobally: function (oEvent) {
 				let sQuery = oEvent.getSource().getValue();
