@@ -143,7 +143,7 @@
 							                    <Text text="{
                                                     path: 'listMareas>NRMAR',
                                                     formatter: '.formatter.formatCodeDigits'
-                                                }" wrapping="false" />
+                                                }" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -151,7 +151,7 @@
                                         <t:Column width="3.5rem" filterProperty="WERKS" defaultFilterOperator="Contains" sortProperty="WERKS">
 						                    <Label text="Centro" class="fontLabel"/>
 						                    <t:template>
-							                    <Text text="{listMareas>WERKS}" wrapping="false"  />
+							                    <Text text="{listMareas>WERKS}" wrapping="true"  />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -159,7 +159,7 @@
                                         <t:Column width="5.5rem" filterProperty="DESCR" defaultFilterOperator="Contains" sortProperty="DESCR">
 						                    <Label text="Planta" class="fontLabel"/>
 						                    <t:template>
-							                    <Text text="{listMareas>DESCR}" wrapping="false" />
+							                    <Text text="{listMareas>DESCR}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -167,7 +167,7 @@
                                         <t:Column width="5rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
 						                    <Label text="Nomb. Emb." />
 						                    <t:template>
-							                    <Text text="{listMareas>NMEMB}" wrapping="false" />
+							                    <Text text="{listMareas>NMEMB}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -178,7 +178,7 @@
 							                    <Text text="{parts:[
                                                 {path:'listMareas>FHZAR'},
                                                 {path:'listMareas>HRZAR'}
-                                                ]}" wrapping="false" />
+                                                ]}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -189,7 +189,7 @@
 							                    <Text text="{parts:[
                                                 {path:'listMareas>FHLLE'},
                                                 {path:'listMareas>HRLLE'}
-                                                ]}" wrapping="false" />
+                                                ]}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -200,7 +200,7 @@
 							                    <Text text="{parts:[
                                                 {path:'listMareas>FICAL'},
                                                 {path:'listMareas>HICAL'}
-                                                ]}" wrapping="false" />
+                                                ]}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -211,7 +211,7 @@
 							                    <Text text="{parts:[
                                                 {path:'listMareas>FFCAL'},
                                                 {path:'listMareas>HFCAL'}
-                                                ]}" wrapping="false" />
+                                                ]}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -222,7 +222,7 @@
 							                    <Text text="{parts:[
                                                 {path:'listMareas>FCSAZ'},
                                                 {path:'listMareas>HRSAZ'}
-                                                ]}" wrapping="false" />
+                                                ]}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -233,7 +233,7 @@
 							                    <Text text="{parts:[
                                                 {path:'listMareas>FCARP'},
                                                 {path:'listMareas>HRARP'}
-                                                ]}" wrapping="false" />
+                                                ]}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -244,7 +244,7 @@
 							                    <Text text="{parts:[
                                                 {path:'listMareas>FIDES'},
                                                 {path:'listMareas>HIDES'}
-                                                ]}" wrapping="false" />
+                                                ]}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -255,7 +255,7 @@
 							                    <Text text="{parts:[
                                                 {path:'listMareas>FFDES'},
                                                 {path:'listMareas>HFDES'}
-                                                ]}" wrapping="false" />
+                                                ]}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -263,7 +263,7 @@
                                         <t:Column width="4rem" hAlign="End" filterProperty="CNTDS" defaultFilterOperator="EQ" sortProperty="CNTDS">
 						                    <Label text="Descar." />
 						                    <t:template>
-							                    <Text text="{listMareas>CNTDS}" wrapping="false" />
+							                    <Text text="{listMareas>CNTDS}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -271,7 +271,7 @@
                                         <t:Column width="4rem" hAlign="End" filterProperty="CNPDC" defaultFilterOperator="EQ" sortProperty="CNPDC">
 						                    <Label text="Decla." />
 						                    <t:template>
-							                    <Text text="{listMareas>CNPDC}" wrapping="false" />
+							                    <Text text="{listMareas>CNPDC}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>

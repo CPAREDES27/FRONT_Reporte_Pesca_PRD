@@ -176,7 +176,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Zona pesca" />
 						                    <t:template>
-							                    <Text text="{reporteCala>DSZPC}" wrapping="false" />
+							                    <Text text="{reporteCala>DSZPC}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -185,7 +185,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Centro" />
 						                    <t:template>
-							                    <Text text="{reporteCala>WERKS}" wrapping="false" />
+							                    <Text text="{reporteCala>WERKS}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -194,7 +194,7 @@
 						showSortMenuEntry="true" sortProperty="DESCR">
 						                    <Label text="Planta" />
 						                    <t:template>
-							                    <Text text="{reporteCala>DESCR}" wrapping="false" />
+							                    <Text text="{reporteCala>DESCR}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -203,7 +203,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha producción" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>FECCONMOV'}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>FECCONMOV'}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -213,7 +213,7 @@
 						                showSortMenuEntry="true" defaultFilterOperator="Contains">
 						                    <Label text="Marea" />
 						                    <t:template>
-							                    <Text text="{reporteCala>NRMAR}" type="Text" wrapping="false" />
+							                    <Text text="{reporteCala>NRMAR}" type="Text" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -222,7 +222,7 @@
 						showSortMenuEntry="true" sortProperty="NRDES">
 						                    <Label text="Descarga" />
 						                    <t:template>
-							                    <Text text="{reporteCala>NRDES}" wrapping="false" />
+							                    <Text text="{reporteCala>NRDES}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -231,7 +231,7 @@
 						showSortMenuEntry="true" sortProperty="DESC_TIPOMAREA">
 						                    <Label text="Tipo marea" />
 						                    <t:template>
-							                    <Text text="Pesca {reporteCala>DESC_TIPOMAREA}" wrapping="false" />
+							                    <Text text="Pesca {reporteCala>DESC_TIPOMAREA}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -249,7 +249,7 @@
 						showSortMenuEntry="true" sortProperty="MREMB">
 						                    <Label text="Matricula"/>
 						                    <t:template>
-							                    <Text text="{reporteCala>MREMB}" wrapping="false" />
+							                    <Text text="{reporteCala>MREMB}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -258,7 +258,7 @@
 						showSortMenuEntry="true" sortProperty="CPPMS">
 						                    <Label text="Cbod"/>
 						                    <t:template>
-							                    <Text text="{reporteCala>CPPMS}" wrapping="false" />
+							                    <Text text="{reporteCala>CPPMS}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -267,7 +267,7 @@
 						showSortMenuEntry="true" sortProperty="DESC_INPRP">
 						                    <Label text="Indicador propiedad" />
 						                    <t:template>
-							                    <Text text="{reporteCala>DESC_INPRP}" wrapping="false" />
+							                    <Text text="{reporteCala>DESC_INPRP}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -276,7 +276,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha Ini Cala" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>FIEVN'}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>FIEVN'}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -286,7 +286,7 @@
 						                    <Label text="Hora Ini Cala" />
 						                    <t:template>
 							                    <Text text="{path:'reporteCala>HIEVN'}"
-                                                 wrapping="false" />
+                                                 wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -296,7 +296,7 @@
 						                    <Label text="Fecha Fin Cala" />
 						                    <t:template>
 							                    <Text text="{path:'reporteCala>FFEVN'}"
-                                                 wrapping="false" />
+                                                 wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -305,7 +305,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Hora Fin Cala"/>
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>HFEVN'}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>HFEVN'}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -314,7 +314,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha Ini Envase" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>FIEVN'}"  wrapping="false" />
+							                    <Text text="{path:'reporteCala>FIEVN'}"  wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -323,7 +323,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Hora Ini Envase" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>HIEVN'}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>HIEVN'}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -332,7 +332,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Fecha Fin Envase" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>FFEVN'}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>FFEVN'}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -341,7 +341,7 @@
 						showSortMenuEntry="true">
 						                    <Label text="Hora Fin Envase" />
 						                    <t:template>
-							                    <Text text="{path:'reporteCala>HFEVN'}" wrapping="false" />
+							                    <Text text="{path:'reporteCala>HFEVN'}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -350,7 +350,7 @@
 						showSortMenuEntry="true" sortProperty="LTGEO">
 						                    <Label text="Latitud" />
 						                    <t:template>
-							                    <Text text="{reporteCala>LTGEO}" wrapping="false" />
+							                    <Text text="{reporteCala>LTGEO}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -359,7 +359,7 @@
 						showSortMenuEntry="true" sortProperty="LNGEO">
 						                    <Label text="Longitud" />
 						                    <t:template>
-							                    <Text text="{reporteCala>LNGEO}" wrapping="false" />
+							                    <Text text="{reporteCala>LNGEO}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -368,7 +368,7 @@
 						showSortMenuEntry="true" sortProperty="TEMAR">
 						                    <Label text="Temperatura" />
 						                    <t:template>
-							                    <Text text="{reporteCala>TEMAR}" wrapping="false" />
+							                    <Text text="{reporteCala>TEMAR}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -377,7 +377,7 @@
 						showSortMenuEntry="true" sortProperty="CNPCM">
 						                    <Label text="Pesca declarada" />
 						                    <t:template>
-							                    <Text text="{reporteCala>CNPCM}" wrapping="false" />
+							                    <Text text="{reporteCala>CNPCM}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -386,7 +386,7 @@
 						showSortMenuEntry="true" sortProperty="DTCAL">
 						                    <Label text="Duración" />
 						                    <t:template>
-							                    <Text text="{reporteCala>DTCAL}" wrapping="false" />
+							                    <Text text="{reporteCala>DTCAL}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -395,7 +395,7 @@
 						showSortMenuEntry="true" sortProperty="DSSPC">
 						                    <Label text="Especie" />
 						                    <t:template>
-							                    <Text text="{reporteCala>DSSPC}" wrapping="false" />
+							                    <Text text="{reporteCala>DSSPC}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -404,7 +404,7 @@
 						showSortMenuEntry="true" sortProperty="ZMODA">
 						                    <Label text="Moda" />
 						                    <t:template>
-							                    <Text text="{reporteCala>ZMODA}" wrapping="false" />
+							                    <Text text="{reporteCala>ZMODA}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -413,7 +413,7 @@
 						showSortMenuEntry="true" sortProperty="OBSER">
 						                    <Label text="Observaciones"/>
 						                    <t:template>
-							                    <Text text="{reporteCala>OBSER}" wrapping="false" />
+							                    <Text text="{reporteCala>OBSER}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -422,7 +422,7 @@
 						showSortMenuEntry="true" sortProperty="CNPJU">
 						                    <Label text="Jurel - Pesca declarada" wrapping="true"/>
 						                    <t:template>
-							                    <Text text="{reporteCala>CNPJU}" wrapping="false" />
+							                    <Text text="{reporteCala>CNPJU}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -431,7 +431,7 @@
 						showSortMenuEntry="true" sortProperty="ZMOJU">
 						                    <Label text="Jurel - Moda" wrapping="true"/>
 						                    <t:template>
-							                    <Text text="{reporteCala>ZMOJU}" wrapping="false" />
+							                    <Text text="{reporteCala>ZMOJU}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -440,7 +440,7 @@
 						showSortMenuEntry="true" sortProperty="PORJU">
 						                    <Label text="Jurel - % Incidencia" wrapping="true"/>
 						                    <t:template>
-							                    <Text text="{reporteCala>PORJU}" wrapping="false" />
+							                    <Text text="{reporteCala>PORJU}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -449,7 +449,7 @@
 						showSortMenuEntry="true" sortProperty="CNPCA">
 						                    <Label text="Caballa - Pesca declarada" wrapping="true"/>
 						                    <t:template>
-							                    <Text text="{reporteCala>CNPCA}" wrapping="false" />
+							                    <Text text="{reporteCala>CNPCA}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -458,7 +458,7 @@
 						showSortMenuEntry="true" sortProperty="ZMOCA">
 						                    <Label text="Caballa - Moda" wrapping="true"/>
 						                    <t:template>
-							                    <Text text="{reporteCala>ZMOCA}" wrapping="false" />
+							                    <Text text="{reporteCala>ZMOCA}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -467,7 +467,7 @@
 						showSortMenuEntry="true" sortProperty="PORCA">
 						                    <Label text="Caballa - % Incidencia" wrapping="true"/>
 						                    <t:template>
-							                    <Text text="{reporteCala>PORCA}" wrapping="false" />
+							                    <Text text="{reporteCala>PORCA}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -476,7 +476,7 @@
 						showSortMenuEntry="true" sortProperty="CNPOT">
 						                    <Label text="Otras especies - Pesca declarada" wrapping="true"/>
 						                    <t:template>
-							                    <Text text="{reporteCala>CNPOT}" wrapping="false" />
+							                    <Text text="{reporteCala>CNPOT}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -485,7 +485,7 @@
 						showSortMenuEntry="true" sortProperty="ZMOOT">
 						                    <Label text="Otras especies - Moda" wrapping="true"/>
 						                    <t:template>
-							                    <Text text="{reporteCala>ZMOOT}" wrapping="false" />
+							                    <Text text="{reporteCala>ZMOOT}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -494,7 +494,7 @@
 					            	showSortMenuEntry="true" sortProperty="POROT">
 						                    <Label text="Otras especies - % Incidencia" wrapping="true"/>
 						                    <t:template>
-							                    <Text text="{reporteCala>POROT}" wrapping="false" />
+							                    <Text text="{reporteCala>POROT}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>

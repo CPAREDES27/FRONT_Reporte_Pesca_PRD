@@ -164,7 +164,7 @@
                                         <t:Column width="5rem" filterProperty="WERKS" defaultFilterOperator="Contains" sortProperty="WERKS">
 						                    <Label text="Centro" />
 						                    <t:template>
-							                    <Text text="{consultaPescaDescargada>WERKS}" wrapping="false" />
+							                    <Text text="{consultaPescaDescargada>WERKS}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -172,7 +172,7 @@
                                         <t:Column width="6rem" filterProperty="FECCONMOV" defaultFilterOperator="Contains">
 						                    <Label text="F. Producción" />
 						                    <t:template>
-							                    <Text text="{path:'consultaPescaDescargada>FECCONMOV'}" wrapping="false" />
+							                    <Text text="{path:'consultaPescaDescargada>FECCONMOV'}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -180,7 +180,7 @@
                                         <t:Column width="6rem" filterProperty="DESC_CDMMA"  sortProperty="DESC_CDMMA">
 						                    <Label text="Mot. Marea" />
 						                    <t:template>
-							                    <Text text="{consultaPescaDescargada>DESC_CDMMA}" wrapping="false" />
+							                    <Text text="{consultaPescaDescargada>DESC_CDMMA}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -188,7 +188,7 @@
                                         <t:Column width="9rem" filterProperty="NRDES" defaultFilterOperator="Contains" sortProperty="NRDES">
 						                    <Label text="Nro. Descarga" />
 						                    <t:template>
-							                    <Text text="{consultaPescaDescargada>NRDES}" wrapping="false" />
+							                    <Text text="{consultaPescaDescargada>NRDES}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -200,7 +200,7 @@
 							                    <Text text="{parts:[
                                                 {path:'consultaPescaDescargada>FCZAR'},
                                                 {path:'consultaPescaDescargada>HOZAR'}
-                                                ]}" wrapping="false" />
+                                                ]}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -211,7 +211,7 @@
 							                    <Text text="{parts:[
                                                 {path:'consultaPescaDescargada>FCARR'},
                                                 {path:'consultaPescaDescargada>HOARR'}
-                                                ]}" wrapping="false" />
+                                                ]}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -219,7 +219,7 @@
                                         <t:Column width="9rem" filterProperty="MREMB" defaultFilterOperator="Contains" sortProperty="MREMB">
 						                    <Label text="Matrícula" />
 						                    <t:template>
-							                    <Text text="{consultaPescaDescargada>MREMB}" wrapping="false" />
+							                    <Text text="{consultaPescaDescargada>MREMB}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -235,7 +235,7 @@
                                         <t:Column width="6rem" hAlign="End" filterProperty="CPPMS" defaultFilterOperator="EQ" sortProperty="CPPMS">
 						                    <Label text="CBOD"/>
 						                    <t:template>
-							                    <Text text="{consultaPescaDescargada>CPPMS}" wrapping="false" />
+							                    <Text text="{consultaPescaDescargada>CPPMS}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -243,7 +243,7 @@
                                         <t:Column width="13rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
 						                    <Label text="Armador" />
 						                    <t:template>
-							                    <Text text="{consultaPescaDescargada>DSEMP}" wrapping="false" />
+							                    <Text text="{consultaPescaDescargada>DSEMP}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -251,7 +251,7 @@
                                         <t:Column width="6rem" hAlign="End" filterProperty="CNPCM" defaultFilterOperator="EQ" sortProperty="CNPCM">
 						                    <Label text="Pesca Decla." />
 						                    <t:template>
-							                    <Text text="{consultaPescaDescargada>CNPCM}" wrapping="false" />
+							                    <Text text="{consultaPescaDescargada>CNPCM}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -259,7 +259,7 @@
                                         <t:Column width="6rem" hAlign="End" filterProperty="CNPDS" defaultFilterOperator="EQ" sortProperty="CNPDS">
 						                    <Label text="Pesca Desc." />
 						                    <t:template>
-							                    <Text text="{consultaPescaDescargada>CNPDS}" wrapping="false" />
+							                    <Text text="{consultaPescaDescargada>CNPDS}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -267,7 +267,7 @@
                                         <t:Column width="10rem" filterProperty="DSSPC" defaultFilterOperator="Contains" sortProperty="DSSPC">
 						                    <Label text="Especie" />
 						                    <t:template>
-							                    <Text text="{consultaPescaDescargada>DSSPC}" wrapping="false" />
+							                    <Text text="{consultaPescaDescargada>DSSPC}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -275,7 +275,7 @@
                                         <t:Column width="11rem" filterProperty="DESC_INPRP"  sortProperty="DESC_INPRP">
 						                    <Label text="Ind. Propiedad" />
 						                    <t:template>
-							                    <Text text="{consultaPescaDescargada>DESC_INPRP}" wrapping="false" />
+							                    <Text text="{consultaPescaDescargada>DESC_INPRP}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>

@@ -191,7 +191,7 @@
 							                    <Text text="{
                                                     path: 'consultaMareas>NRMAR',
                                                     formatter: '.formatter.formatCodeDigits'
-                                                }" wrapping="false" />
+                                                }" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -199,7 +199,7 @@
                                         <t:Column width="5rem" filterProperty="WERKS" defaultFilterOperator="Contains" sortProperty="WERKS"> 
 						                    <Label text="Centro" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>WERKS}" wrapping="false" />
+							                    <Text text="{consultaMareas>WERKS}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -207,7 +207,7 @@
                                         <t:Column width="8rem" filterProperty="DESCR" defaultFilterOperator="Contains" sortProperty="DESCR" >
 						                    <Label text="Planta" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>DESCR}" wrapping="false" />
+							                    <Text text="{consultaMareas>DESCR}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -215,7 +215,7 @@
                                         <t:Column width="16rem" filterProperty="DSEMP" defaultFilterOperator="Contains" sortProperty="DSEMP">
 						                    <Label text="Empresa" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>DSEMP}"  wrapping="false" />
+							                    <Text text="{consultaMareas>DSEMP}"  wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -223,7 +223,7 @@
                                         <t:Column width="6rem" filterProperty="NMEMB" defaultFilterOperator="Contains" sortProperty="NMEMB">
 						                    <Label text="Nomb. Emb." />
 						                    <t:template>
-							                    <Text text="{consultaMareas>NMEMB}" wrapping="false" />
+							                    <Text text="{consultaMareas>NMEMB}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -235,7 +235,7 @@
                                                 {path:'consultaMareas>FICAL'},
                                                 {path:'consultaMareas>HICAL'}
                                                 ]}"
-                                                 wrapping="false" />
+                                                 wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -247,7 +247,7 @@
                                                 {path:'consultaMareas>FFCAL'},
                                                 {path:'consultaMareas>HFCAL'}
                                                 ]}"
-                                                 wrapping="false" />
+                                                 wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -263,7 +263,7 @@
                                         <t:Column width="6rem" filterProperty="DESC_INPRP" defaultFilterOperator="Contains" sortProperty="DESC_INPRP">
 						                    <Label text="Propiedad"/>
 						                    <t:template>
-							                    <Text text="{consultaMareas>DESC_INPRP}" wrapping="false" />
+							                    <Text text="{consultaMareas>DESC_INPRP}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -271,7 +271,7 @@
                                         <t:Column width="6rem" filterProperty="DESC_CDMMA" defaultFilterOperator="Contains" sortProperty="DESC_CDMMA">
 						                    <Label text="Motivo" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>DESC_CDMMA}" wrapping="false" />
+							                    <Text text="{consultaMareas>DESC_CDMMA}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -283,7 +283,7 @@
                                                 {path:'consultaMareas>FEMAR'},
                                                 {path:'consultaMareas>HAMAR'}
                                                 ]}"
-                                                 wrapping="false" />
+                                                 wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -295,7 +295,7 @@
                                                 {path:'consultaMareas>FXMAR'},
                                                 {path:'consultaMareas>HXMAR'}
                                                 ]}"
-                                                  wrapping="false" />
+                                                  wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -307,7 +307,7 @@
                                                 {path:'consultaMareas>FHZAR'},
                                                 {path:'consultaMareas>HRZAR'}
                                                 ]}"
-                                                 wrapping="false" />
+                                                 wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -319,7 +319,7 @@
                                                 {path:'consultaMareas>FHLLE'},
                                                 {path:'consultaMareas>HRLLE'}
                                                 ]}"
-                                                 wrapping="false" />
+                                                 wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>                                  
@@ -331,7 +331,7 @@
                                                 {path:'consultaMareas>FCSAZ'},
                                                 {path:'consultaMareas>HRSAZ'}
                                                 ]}"
-                                                 wrapping="false" />
+                                                 wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -343,7 +343,7 @@
                                                 {path:'consultaMareas>FCARP'},
                                                 {path:'consultaMareas>HRARP'}
                                                 ]}"
-                                                 wrapping="false" />
+                                                 wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -355,7 +355,7 @@
                                                 {path:'consultaMareas>FIDES'},
                                                 {path:'consultaMareas>HIDES'}
                                                 ]}"
-                                                 wrapping="false" />
+                                                 wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -367,7 +367,7 @@
                                                 {path:'consultaMareas>FFDES'},
                                                 {path:'consultaMareas>HFDES'}
                                                 ]}"
-                                                 wrapping="false" />
+                                                 wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -375,7 +375,7 @@
                                         <t:Column width="6rem" hAlign="End" filterProperty="CNTDS" defaultFilterOperator="Contains" sortProperty="CNTDS">
 						                    <Label text="Descargada" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>CNTDS}" wrapping="false" />
+							                    <Text text="{consultaMareas>CNTDS}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
@@ -383,7 +383,7 @@
                                         <t:Column width="6rem" hAlign="End" filterProperty="CNPDC" defaultFilterOperator="Contains" sortProperty="CNPDC">
 						                    <Label text="Declarada" />
 						                    <t:template>
-							                    <Text text="{consultaMareas>CNPDC}" wrapping="false" />
+							                    <Text text="{consultaMareas>CNPDC}" wrapping="true" />
 						                    </t:template>
 					                    </t:Column>       
                                     </t:columns>
