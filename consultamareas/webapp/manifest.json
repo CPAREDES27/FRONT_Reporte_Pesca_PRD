@@ -92,7 +92,10 @@
                 "viewPath": "com.tasa.consultamareas.view",
                 "controlAggregation": "pages",
                 "controlId": "app",
-                "clearControlAggregation": false
+                "clearControlAggregation": false,
+                "bypassed": {
+                    "target": "TargetView1"
+                }
             },
             "routes": [
                 {
@@ -101,16 +104,28 @@
                     "target": [
                         "TargetView1"
                     ]
-                }
+                },
+                {
+					"pattern": "RouteDetalle/:aux:",
+					"name": "RouteDetalle",
+					"target": [
+						"TargetDetalle"
+					]
+				}
             ],
             "targets": {
-                "TargetView1": {
-                    "viewType": "XML",
-                    "transition": "slide",
-                    "clearControlAggregation": false,
-                    "viewId": "View1",
-                    "viewName": "View1"
-                }
+                "TargetView1": {  
+                    "controlAggregation": "pages",
+					"viewName": "View1",					
+					"viewLevel": 1,
+					"transition": "slide"
+                },
+                "TargetDetalle": {
+					"controlAggregation": "pages",
+					"viewName": "Detalle",					
+					"viewLevel": 2,
+					"transition": "slide"
+				}
             }
         }
     },

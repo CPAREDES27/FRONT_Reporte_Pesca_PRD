@@ -579,25 +579,25 @@ sap.ui.define([
 			if(oRouter.indexOf("localhost") !== -1){
 				service.push({
 					url:"https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com/",
-					parameter:"IDH4_QAS"
+					parameter:"IDEVT_QAS"
 				})
 			}
 			if(oRouter.indexOf("tasadev")!== -1){
 				service.push({
 					url:"https://tasadev.launchpad.cfapps.us10.hana.ondemand.com/",
-					parameter:"IDH4_DEV"
+					parameter:"IDEVT_DEV"
 				})
 			}
 			if(oRouter.indexOf("tasaprd")!==-1){
 				service.push({
 					url:"https://tasaprd.launchpad.cfapps.us10.hana.ondemand.com/",
-					parameter:"IDH4_PRD"
+					parameter:"IDEVT_PRD"
 				})
 			}
 			if(oRouter.indexOf("tasaqas")!==-1){
 				service.push({
 					url:"https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com/",
-					parameter:"IDH4_QAS"
+					parameter:"IDEVT_QAS"
 				})
 			}
 			return service;
