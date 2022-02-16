@@ -105,8 +105,8 @@
                                                 <Label text="Fecha de producción" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <DatePicker id="fechaProdIni" width="auto" displayFormat="dd/MM/yyyy" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="dd/MM/yyyy"/>
-                                                <DatePicker id="fechaProdFin" width="auto" displayFormat="dd/MM/yyyy" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="dd/MM/yyyy"/>
+                                                <DatePicker id="fechaProdIni" width="auto" displayFormat="dd/MM/yyyy" required="false" valueState="" valueStateText="Fecha no válida" enabled="true" visible="true" valueFormat="dd/MM/yyyy"/>
+                                                <DatePicker id="fechaProdFin" width="auto" displayFormat="dd/MM/yyyy" required="false" valueState="" valueStateText="Fecha no válida" enabled="true" visible="true" valueFormat="dd/MM/yyyy"/>
                                                 <!--<DateRangeSelection id="idDateRangeSelec" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>-->
                                             </form:fields>
                                         </form:FormElement>

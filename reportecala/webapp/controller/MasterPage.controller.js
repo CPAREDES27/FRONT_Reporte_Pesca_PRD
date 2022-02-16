@@ -195,36 +195,9 @@ sap.ui.define([
 				let embarcacion = this.byId("inputId0_R").getValue();
 				let indicadorPropiedad = this.byId("cbIndicadorPropiedad").getSelectedKey();
 				let tipoMarea = this.byId("cbTipoMarea").getSelectedKey();
-				/*let fechaInicioStart = this.byId("dpFechaInicioMareaStart").getValue();
-				let fechaInicioEnd = this.byId("dpFechaInicioMareaEnd").getValue();
-				let fechaFinStart = this.byId("dpFechaFinMareaStart").getValue();
-				let fechaFinEnd = this.byId("dpFechaFinMareaEnd").getValue();*/
+				
 				let cantidad = this.byId("txtCantidad").getValue();
-				/*
-				let fechaInicioStart = null;
-				let fechaInicioEnd = null;
-				var valueDateRange = this.byId("idDateRangeIniMar").getValue();
-				if(valueDateRange){
-					var valDtrIni = valueDateRange.split("-")[0].trim();
-					var valDtrFin = valueDateRange.split("-")[1].trim();
-					if(valDtrIni && valDtrFin){
-						fechaInicioStart = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
-						fechaInicioEnd = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
-					}
-				}
-
-				let fechaFinStart = null;
-				let fechaFinEnd = null;
-				var valueDateRange = this.byId("idDateRangeFinMar").getValue();
-				if(valueDateRange){
-					var valDtrIni = valueDateRange.split("-")[0].trim();
-					var valDtrFin = valueDateRange.split("-")[1].trim();
-					if(valDtrIni && valDtrFin){
-						fechaFinStart = valDtrIni.split("/")[2].concat(valDtrIni.split("/")[1], valDtrIni.split("/")[0]);
-						fechaFinEnd = valDtrFin.split("/")[2].concat(valDtrFin.split("/")[1], valDtrFin.split("/")[0]);
-					}
-				}*/
-
+			
 				let fechaInicio = null;
 				let fechaFin = null;
 				var valDtrIni=this.byId("fechaInicio").getValue();
@@ -238,6 +211,30 @@ sap.ui.define([
 					BusyIndicator.hide();
 					return false;
 				}
+				if(!this.existeFecha(valDtrIni) && valDtrIni){
+
+					MessageBox.error("Ingrese un formato de fecha correcto");
+	  
+					this.getView().byId("fechaInicio").setValueState("Error");
+	  
+					BusyIndicator.hide();
+	  
+					return false;
+	  
+				  }
+				  this.getView().byId("fechaInicio").setValueState("None");
+				  if(!this.existeFecha(valDtrFin) && valDtrFin){
+
+					MessageBox.error("Ingrese un formato de fecha correcto");
+	  
+					this.getView().byId("fechaFin").setValueState("Error");
+	  
+					BusyIndicator.hide();
+	  
+					return false;
+	  
+				  }
+				  this.getView().byId("fechaFin").setValueState("None");
 
 
 				if (valDtrIni) {							
@@ -1177,6 +1174,19 @@ sap.ui.define([
 			},
 			onCloseDialog:function(oEvent){
 				oEvent.getSource().getParent().close();
-			}
+			},
+			existeFecha: function(fecha) {
+
+				var fechaf = fecha.split("/");
+	
+				var d = fechaf[0];
+	
+				var m = fechaf[1];
+	
+				var y = fechaf[2];
+	
+				return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0)).getDate();
+	
+			},
 		});
 	});

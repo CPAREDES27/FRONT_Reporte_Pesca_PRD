@@ -75,8 +75,8 @@
                                                     
                                                     </form:label>
                                                     <form:fields>
-                                                        <DatePicker id="fechaProdIni" width="auto" displayFormat="dd/MM/yyyy" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="dd/MM/yyyy"/>
-                                                       <DatePicker id="fechaProdFin" width="auto" displayFormat="dd/MM/yyyy" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="dd/MM/yyyy"/>
+                                                        <DatePicker id="fechaProdIni" width="auto" displayFormat="dd/MM/yyyy" required="false" valueState="" valueStateText="Fecha no válida" enabled="true" visible="true" valueFormat="dd/MM/yyyy"/>
+                                                       <DatePicker id="fechaProdFin" width="auto" displayFormat="dd/MM/yyyy" required="false" valueState="" valueStateText="Fecha no válida" enabled="true" visible="true" valueFormat="dd/MM/yyyy"/>
                                                 
                                                         <!--<DateRangeSelection id="idDateRangeSelec" valueFormat="yyyyMMdd" displayFormat="dd/MM/yyyy" width="100%"/>-->
                                                     </form:fields>

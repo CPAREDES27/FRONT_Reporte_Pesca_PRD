@@ -216,7 +216,32 @@ sap.ui.define([
 				var valDtrIni=this.byId("fechaProdIni").getValue();
 				var valDtrFin=this.byId("fechaProdFin").getValue();
 
-				
+				if(!this.existeFecha(valDtrIni) && valDtrIni){
+
+					MessageBox.error("Ingrese un formato de fecha correcto");
+	  
+					this.getView().byId("fechaProdIni").setValueState("Error");
+	  
+					BusyIndicator.hide();
+	  
+					return false;
+	  
+				  }
+				  this.getView().byId("fechaProdIni").setValueState("None");
+				  if(!this.existeFecha(valDtrFin) && valDtrFin){
+
+					MessageBox.error("Ingrese un formato de fecha correcto");
+	  
+					this.getView().byId("fechaProdFin").setValueState("Error");
+	  
+					BusyIndicator.hide();
+	  
+					return false;
+	  
+				  }
+				  this.getView().byId("fechaProdFin").setValueState("None");
+
+
 				var marea1=this.byId("mareaLow").getValue();
 				var marea2=this.byId("mareaHigh").getValue();
 				if(!valDtrIni && !valDtrFin && !marea1 && !marea2 && !propiedad && motivos.length==0 && !embarcacionLow && !embarcacionHigh && !plantaLow && !plantaHigh){
@@ -1219,7 +1244,19 @@ sap.ui.define([
 			onCloseDialog:function(oEvent){
 				oEvent.getSource().getParent().close();
 			},
+			existeFecha: function(fecha) {
 
+				var fechaf = fecha.split("/");
+	
+				var d = fechaf[0];
+	
+				var m = fechaf[1];
+	
+				var y = fechaf[2];
+	
+				return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0)).getDate();
+	
+			},
 			
 
 		});
