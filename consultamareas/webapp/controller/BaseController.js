@@ -544,7 +544,7 @@ sap.ui.define([
 	
 			if(oRouter.indexOf("localhost") !== -1){
 	
-				service='https://cf-nodejs-cheerful-bat-js.cfapps.us10.hana.ondemand.com/api/'
+				service='https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'
 				//service='https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/'
 
 			}
@@ -579,25 +579,25 @@ sap.ui.define([
 			if(oRouter.indexOf("localhost") !== -1){
 				service.push({
 					url:"https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com/",
-					parameter:"IDEVT_QAS"
+					parameter:"IDH4_QAS"
 				})
 			}
 			if(oRouter.indexOf("tasadev")!== -1){
 				service.push({
 					url:"https://tasadev.launchpad.cfapps.us10.hana.ondemand.com/",
-					parameter:"IDEVT_DEV"
+					parameter:"IDH4_DEV"
 				})
 			}
 			if(oRouter.indexOf("tasaprd")!==-1){
 				service.push({
 					url:"https://tasaprd.launchpad.cfapps.us10.hana.ondemand.com/",
-					parameter:"IDEVT_PRD"
+					parameter:"IDH4_PRD"
 				})
 			}
 			if(oRouter.indexOf("tasaqas")!==-1){
 				service.push({
 					url:"https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com/",
-					parameter:"IDEVT_QAS"
+					parameter:"IDH4_QAS"
 				})
 			}
 			return service;
