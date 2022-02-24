@@ -390,21 +390,48 @@ sap.ui.define([
 				if (obj) {
 					var cargarMarea = await this.cargarDatosMarea(obj);
 					if (cargarMarea) {
-						var modelo = this.getOwnerComponent().getModel("DetalleMarea");
-						var modeloConsultaMarea = this.getModel("consultaMareas");
-						var dataModelo = modelo.getData();
-						var dataConsultaMarea = modeloConsultaMarea.getData();
-						//var oStore = jQuery.sap.storage(jQuery.sap.storage.Type.Session); @pprincipe
-                        //@pprincipe Inicio add
-                        this.getOwnerComponent().setModel(modelo, "DataModelo");
-                        this.getOwnerComponent().setModel(modeloConsultaMarea, "ConsultaMarea");
-                        var objAppOrigin = {};
-                        objAppOrigin.AppOrigin = 'consultamareas';
-                        var modelAppOrigin = new JSONModel();
-                        modelAppOrigin.setData(objAppOrigin);
-                        this.getOwnerComponent().setModel(modelAppOrigin, "AppOrigin");
 
-                        //@pprincipe Fin add
+						let oCrossAppNavigator = await sap.ushell.Container.getServiceAsync("CrossApplicationNavigation"); 
+						oCrossAppNavigator.isIntentSupported(["mareaevento-display"])
+						.done(function(aResponses) { 
+
+						}) 
+						.fail(function() { 
+							new sap.m.MessageToast("Provide corresponding intent to navigate"); 
+						}); 
+						// generate the Hash to display a employee Id 
+						var hash = (oCrossAppNavigator && oCrossAppNavigator.hrefForExternal({ 
+							target: { 
+								semanticObject: "mareaevento", 
+								action: "display" 
+							} ,
+							params: {
+								appName : "ConsultaMareas",
+								marea: obj.NRMAR,
+								soloLectura : true,
+								mareaReabierta :true
+							}
+						})) || "";
+						//Generate a URL for the second application 
+						var url = window.location.href.split('#')[0] + hash; 
+						//Navigate to second app 
+						sap.m.URLHelper.redirect(url, true);
+
+						// var modelo = this.getOwnerComponent().getModel("DetalleMarea");
+						// var modeloConsultaMarea = this.getModel("consultaMareas");
+						// var dataModelo = modelo.getData();
+						// var dataConsultaMarea = modeloConsultaMarea.getData();
+						// //var oStore = jQuery.sap.storage(jQuery.sap.storage.Type.Session); @pprincipe
+                        // //@pprincipe Inicio add
+                        // this.getOwnerComponent().setModel(modelo, "DataModelo");
+                        // this.getOwnerComponent().setModel(modeloConsultaMarea, "ConsultaMarea");
+                        // var objAppOrigin = {};
+                        // objAppOrigin.AppOrigin = 'consultamareas';
+                        // var modelAppOrigin = new JSONModel();
+                        // modelAppOrigin.setData(objAppOrigin);
+                        // this.getOwnerComponent().setModel(modelAppOrigin, "AppOrigin");
+
+                        // //@pprincipe Fin add
 
                         //@pprincipe Inicio coment
 						/*oStore.put("DataModelo", dataModelo);
@@ -424,11 +451,11 @@ sap.ui.define([
 					}
 				}
                 //pprincipe Inicio
-                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            //     var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			
-			oRouter.navTo('RouteDetalle', {
-				aux: 'X'
-			});
+			// oRouter.navTo('RouteDetalle', {
+			// 	aux: 'X'
+			// });
                 //pprincipe Fin
 			},
 			filterGlobally: function (oEvent) {
