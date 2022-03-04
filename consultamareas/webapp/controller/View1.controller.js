@@ -47,7 +47,7 @@ sap.ui.define([
 				'CNTDS',
 				'CNPDC'
 			],
-			onInit: function () {
+			onInit: async function () {
 				let oViewModel = new JSONModel({});
 				this.currentInputEmba = "";
 				this.setModel(oViewModel, "consultaMareas");
@@ -56,7 +56,22 @@ sap.ui.define([
 				this.segundoOption = [];
 				this.currentPage = "";
 				this.lastPage = "";
+				this.IsAdmin = false;
+				await this.obtenerRoles();
 				
+				
+			},
+
+			obtenerRoles : async function () {
+				let obterRoles = TasaBackendService.obtenerRolesUsuarios((await this.getCurrentUser()));
+                let that = this;
+                let lstRoles =[];
+                await Promise.resolve(obterRoles).then(values => {
+                    lstRoles =  values;
+                }).catch(reason => {
+                    console.log(reason);
+                });
+				this.IsAdmin = lstRoles.NOROLFLOTA ? lstRoles.NOROLFLOTA : false
 			},
 
 			onAfterRendering: async function(){
@@ -392,7 +407,7 @@ sap.ui.define([
 					if (cargarMarea) {
 
 						let oCrossAppNavigator = await sap.ushell.Container.getServiceAsync("CrossApplicationNavigation"); 
-						oCrossAppNavigator.isIntentSupported(["mareaevento-display"])
+						oCrossAppNavigator.isIntentSupported(["detallemarea-display"])
 						.done(function(aResponses) { 
 
 						}) 
@@ -402,14 +417,13 @@ sap.ui.define([
 						// generate the Hash to display a employee Id 
 						var hash = (oCrossAppNavigator && oCrossAppNavigator.hrefForExternal({ 
 							target: { 
-								semanticObject: "mareaevento", 
+								semanticObject: "detallemarea", 
 								action: "display" 
 							} ,
 							params: {
 								appName : "ConsultaMareas",
 								marea: obj.NRMAR,
-								soloLectura : true,
-								mareaReabierta :true
+								isAdmin : this.IsAdmin
 							}
 						})) || "";
 						//Generate a URL for the second application 

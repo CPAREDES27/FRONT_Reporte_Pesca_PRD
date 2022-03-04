@@ -260,6 +260,13 @@ sap.ui.define([
                 "p_marea": ""
             };
             return sBody;
+        },
+        getBodyConsRol : function(){
+            var sBody = {
+                aplicacion : "",
+                usuario : ""
+            };
+            return sBody;
         }
 
     }

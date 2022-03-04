@@ -500,6 +500,21 @@ sap.ui.define([
 
             return usuario;
         },
+        getCurrentCorreo: async function(){
+            let oUshell = sap.ushell,
+            oUser={},
+            correo = "";
+            if(oUshell){
+                let  oUserInfo =await sap.ushell.Container.getServiceAsync("UserInfo");
+                let sEmail = oUserInfo.getEmail().toUpperCase(),
+                correo = sEmail;
+                
+            }else{
+                correo = "FGARCIA@TASA.COM.PE"
+            }
+
+            return correo;
+        },
 
         getUserInfoService: function () {
             return new Promise(resolve => sap.ui.require([
